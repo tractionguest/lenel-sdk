@@ -1,0 +1,3317 @@
+swagger: "2.0"
+info:
+  title: OpenAccess
+  version: "7.5"
+  description: |
+    This document describes the OpenAccess REST API. OpenAccess provides access to OnGuard via a
+    RESTful web service.
+
+    ## Security / licensing headers
+
+    Each authenticated request must include the following HTTP headers:
+      - `Application-Id` - Each application using the OpenAccess API must have a unique application ID.
+      - `Session-Token` - A session token is retrieved by logging in via the `POST /authentication` operation.
+
+    ## Input parameter location - Query string or request body?
+
+    Input parameters can be placed either in the request body or in the URL, as a query
+    parameter. The API makes no distinction and will handle them in either location. In the API
+    specification, some parameters are described as being in the request body, and others are
+    described as being in the query string. This is done simply for clarity in each situation, but
+    clients of the API are free to include parameters wherever it is most convenient. **Sensitive data should always be placed in the request body and not exposed in the URL.**
+
+    ### **POST /instances** example
+
+    ```
+    POST /instances?type_name=Lnl_Cardholder&version=1.0
+    {
+      "property_value_map": {
+        ...
+      }
+    }
+    ```
+
+    ...is equivalent to this...
+
+    ```
+    POST /instances&version=1.0
+    {
+      "type_name": "Lnl_Cardholder",
+      "property_value_map": {
+        ...
+      }
+    }
+    ```
+
+    ## Task queuing - dealing with long running requests
+
+    Some requests might take a long time, especially requests that access external systems, such as
+    Active Directory. Standard OpenAccess requests will time out after 30 seconds if the HTTP
+    request doesn't time out sooner, depending on the client. Any request that you expect to run long can
+    be queued as a task by adding a `queue` property to the request, set to `true`. For example:
+    ```
+    GET /directory_accounts_matching_cardholders?directory_id=id1
+    &cardholder_ids=[1,2,3,4,5,6,7,8,9,10]
+    &filter=displayname has 'firstname' and displayname has 'lastname'
+    &queue=true
+    &version=1.0
+    ```
+
+    When a request is queued in this way, OpenAccess will queue a task for execution and return
+    a 202 (Accepted) HTTP status code and a response identical to `GET /queue/{id}`. For example:
+    ```
+    {
+      "id": "5c4b7890-ee73-4199-b3d3-366003eb8ca1",
+      "status": "pending",
+      "version": "1.0"
+    }
+    ```
+
+    The `id` property indicates the ID of the queued task, which can be used to check the status of the task:
+    ```
+    GET /queue/5c4b7890-ee73-4199-b3d3-366003eb8ca1?version=1.0
+    ```
+    
+    When the task is complete, the response will include the response to the queued request:
+    ```
+    {
+      "id": "5c4b7890-ee73-4199-b3d3-366003eb8ca1",
+      "response": {
+        ...
+      },
+      "status": "complete",
+      "version": "1.0"
+    }
+    ```
+    
+    The response can be retrieved any number of times until the task is deleted. A completed task can be
+    deleted with `DELETE /queue/{id}` or it will be deleted automatically after 1 hour.
+
+    **Note:** Even though you can queue any request, it's only recommended when a request is expected
+    to run long, like `GET /directory_accounts` and `GET /directory_accounts_matching_cardholders`.
+
+    ## Samples
+
+    There are several sample applications that demonstrate various aspects of the API.
+
+    ### [Cardholder Search](/api/access/onguard/openaccess/samples/Cardholder Search)
+    - Getting directories used for authentication - `GET /directories`
+    - Login and logout - `POST /authentication` and `DELETE /authentication`
+    - Getting cardholders and photos - `GET /instances`
+
+    ### [Command and Control](/api/access/onguard/openaccess/samples/Command and Control)
+    - Getting directories used for authentication - `GET /directories`
+    - Login and logout - `POST /authentication` and `DELETE /authentication`
+    - Getting panels and readers - `GET /instances`
+    - Updating hardware status, getting/setting reader mode, and opening doors - `POST /execute_method`
+
+    ### [Event Subscriber](/api/access/onguard/openaccess/samples/Event Subscriber)
+    - Getting directories used for authentication - `GET /directories` (not used within every event subscriber sample)
+    - Login and logout - `POST /authentication` and `DELETE /authentication`
+    - Adding/modifying/disabling event subscriptions - `POST /event_subscriptions`, `PUT /event_subscriptions`, and `DELETE /event_subscriptions`
+    - Using the Web Event Bridge to receive events via WebSocket
+
+basePath: /api/access/onguard/openaccess
+tags:
+  - name: api
+    description: General OpenAccess API calls
+  - name: authentication
+    description: Login and logout
+  - name: users
+    description: Users
+  - name: instances
+    description: Manage instances of data classes
+  - name: events
+    description: Receive events
+  - name: cardholders
+    description: Cardholders
+  - name: settings
+    description: OnGuard settings
+  - name: console
+    description: Console settings
+consumes:
+  - application/json
+produces:
+  - application/json
+security:
+  - ApplicationId: []
+  - SessionToken: []
+paths:
+  /keepalive:
+    get:
+      tags:
+        - api
+      summary: Renew idle timeout countdown.
+      description: Used to prevent idle session timeout.
+      operationId: keepalive
+      parameters:
+        - $ref: "#/parameters/Version"
+      responses:
+        200:
+          description: Success/failure
+          schema:
+            $ref: "#/definitions/SharedResponseDefinition"
+        default:
+          $ref: "#/responses/Error"
+  /version:
+    get:
+      tags:
+        - api
+      summary: Get the OnGuard API version
+      description: |
+        Used to retrieve the OnGuard product name and version information. An unauthenticated
+        operation.
+      operationId: getVersion
+      parameters:
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: Version information.
+          schema:
+            properties:
+              product_name:
+                type: string
+              product_version:
+                type: string
+              version:
+                type: string
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+
+  /queue/{id}:
+    get:
+      tags:
+        - api
+      summary: Get queued task
+      description: |
+        Gets the queued task with the given ID, which will include the response when the task is
+        complete. Users can only view their own queued tasks.
+      operationId: getQueuedTask
+      parameters:
+        - name: id
+          description: ID of the task to return.
+          in: path
+          required: true
+          type: string
+          format: uuid
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: The queued task.
+          schema:
+            $ref: "#/definitions/QueuedTask"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+    delete:
+      tags:
+        - api
+      summary: Delete queued task
+      description: |
+        Deletes the queued task with the given ID. All queued tasks will be deleted after 1 hour if not explicitly deleted. Only complete tasks can be deleted, and users can only delete their own queued tasks.
+      operationId: deleteQueuedTask
+      parameters:
+        - name: id
+          description: ID of the task to delete.
+          in: path
+          required: true
+          type: string
+          format: uuid
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: success
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+  /queue:
+    get:
+      tags:
+        - api
+      summary: Get queued tasks
+      description: |
+        Gets the queued tasks created by the user. This method is only intended to check the status
+        of multiple tasks. It will not include responses, even for complete tasks. Request a
+        specific task to get the response. Users can only view their own queued tasks.
+      operationId: getQueuedTasks
+      parameters:
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: The queued tasks created by the user.
+          schema:
+            $ref: "#/definitions/QueuedTasks"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+  /feature_availability:
+    get:
+      tags:
+        - api
+      summary: Get the OnGuard license feature
+      description: Used to retrieve the OnGuard license feature information.
+      operationId: getFeatureAvailability
+      parameters:
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: Feature information.
+          schema:
+            properties:
+              is_available:
+                type: boolean
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+  /partner_values:
+    post:
+      tags:
+        - api
+      summary: Partners can use this to set their unique values.
+      description: Partners can use this to set their unique values
+      operationId: postPartnerValues
+      parameters:
+        - name: partner_values
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+                partner_value_1:
+                    type: integer
+                partner_value_2:
+                    type: integer
+                partner_value_3:
+                    type: integer
+                partner_value_4:
+                    type: integer
+                partner_value_5:
+                    type: integer
+        - $ref: '#/parameters/Version'
+        - $ref: '#/parameters/Queue'
+      responses:
+        '200':
+          description: Feature information.
+          schema:
+            properties:
+              result:
+                type: boolean
+        '202':
+          $ref: '#/responses/QueuedTask'
+        default:
+          $ref: '#/responses/Error'
+    put:
+      tags:
+        - api
+      summary: Partners can use this to set their unique values.
+      description: Partners can use this to set their unique values
+      operationId: putPartnerValues
+      parameters:
+        - name: partner_values
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+                partner_value_1:
+                    type: integer
+                partner_value_2:
+                    type: integer
+                partner_value_3:
+                    type: integer
+                partner_value_4:
+                    type: integer
+                partner_value_5:
+                    type: integer
+        - $ref: '#/parameters/Version'
+        - $ref: '#/parameters/Queue'
+      responses:
+        '200':
+          description: Feature information.
+          schema:
+            properties:
+              result:
+                type: boolean
+        '202':
+          $ref: '#/responses/QueuedTask'
+        default:
+          $ref: '#/responses/Error'
+  /directories:
+    get:
+      tags:
+        - authentication
+      summary: Get directories
+      description: Gets the authentication directories configured.
+      operationId: getDirectories
+      parameters:
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: The authentication directories.
+          schema:
+            $ref: "#/definitions/Directories"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+  /identity_provider_url:
+    get:
+      tags:
+        - authentication
+      summary: Get identity provider URL.
+      description: Get login URL for the selected OpenID Connect identity provider.
+      operationId: getIdentityProviderURL
+      parameters:
+        - name: directory_id
+          description: The directory ID of the selected identity provider.
+          in: query
+          type: string
+          required: true
+        - name: redirect_url
+          description: The URL to which the identity provider should send its response.
+          in: query
+          type: string
+          required: true
+        - name: response_mode
+          description: The mode the identity provider should use to respond. Valid values are "form_post" and "fragment". With "form_post", the identity provider responds with an HTTP POST to the redirect_url, with the content in the message body. With "fragment", the response is contained in the redirect URL.
+          in: query
+          type: string
+          required: true
+        - $ref: '#/parameters/Version'
+        - $ref: '#/parameters/Queue'
+      responses:
+        '200':
+          description: The URL to send the user to when logging in.
+          schema:
+            properties:
+              url:
+                type: string
+        '202':
+          $ref: '#/responses/QueuedTask'
+        default:
+          $ref: '#/responses/Error'
+  /logged_in_user:
+    get:
+      tags:
+        - users
+      summary: Get logged in user
+      description: Gets details about the logged in user.
+      operationId: getLoggedInUser
+      parameters:
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: Details about the logged in user.
+          schema:
+            $ref: "#/definitions/LoggedInUser"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+  /editable_segments:
+    get:
+      tags:
+        - users
+      summary: Get editable segments
+      description: Returns a list of segments for which the logged-in user has editable permission, if segmentation is enabled. 
+      operationId: getEditableSegments
+      parameters:
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: The editable segments.
+          schema:
+            $ref: "#/definitions/Segments"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+  /user_preferences:
+    get:
+      tags:
+        - users
+      summary: Get user preferences
+      description: Returns user preferences for the current user and application type
+      operationId: get_user_preferences
+      parameters:
+        - name: client_name
+          description: The application client name
+          in: query
+          type: string
+          required: true
+        - name: setting_type
+          description: Type of settings to be queried
+          in: query
+          type: string
+        - name: is_global
+          description: A flag indicating whether the preference is global
+          in: query
+          type: boolean
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: List of user preferences.
+          schema:
+            $ref: "#/definitions/GetUserPreferences"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+    post:
+      tags:
+        - users
+      summary: Add user preference
+      description: Adds a user preference.
+      operationId: add_user_preferences
+      parameters:
+        - name: UserPreferences
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+            - client_name
+            - preference_settings
+            - setting_type
+            properties:
+                client_name:
+                    type: string
+                preference_settings:
+                    type: string
+                setting_type:
+                    type: string
+                is_global:
+                    type: boolean
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: user preference.
+          schema:
+            $ref: "#/definitions/AddUserPreferences"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+    put:
+      tags:
+        - users
+      summary: Modify user preference
+      description: Modify the existing user preference with the given ID.
+      operationId: modify_user_preferences
+      parameters:
+        - name: UserPreferences
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+            - preference_id
+            - preference_settings
+            properties:
+                preference_id:
+                    type: integer
+                    format: int32
+                preference_settings:
+                    type: string
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: Success/failure
+          schema:
+            $ref: "#/definitions/ModifyUserPreferences"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+    delete:
+      tags:
+        - users
+      summary: Delete user preference
+      description: Deletes specified preference from the existing user preferences.
+      operationId: delete_user_preferences
+      parameters:
+        - name: preference_id
+          description: ID of user preference to be deleted.
+          in: query
+          required: true
+          type: integer
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: Success/failure
+          schema:
+            $ref: "#/definitions/SharedResponseDefinition"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+  /user_password:
+    put:
+      tags:
+        - users
+      summary: Modify user password
+      description: Modify the user's password.
+      operationId: modify_user_password
+      parameters:
+        - name: parameter_name
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+            - user_name
+            - current_password
+            - new_password
+            properties:
+              user_name:
+                type: string
+              current_password:
+                type: string
+              new_password:
+                type: string
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: Success/failure
+          schema:
+            $ref: "#/definitions/SharedResponseDefinition"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+  /cardholder_from_directory:
+    get:
+      tags:
+        - cardholders
+      summary: Get cardholder ID from their linked directory account
+      description: Returns the internal cardholder ID of a cardholder who has a linked directory account with the given credentials.
+      operationId: getCardholderFromDirectory
+      parameters:
+        - name: user_name
+          description: Directory account username of the cardholder whose internal ID you want to look up in OnGuard.
+          in: query
+          required: true
+          type: string
+        - name: password
+          description: Directory account password of the cardholder whose internal ID you want to look up in OnGuard.
+          in: query
+          required: true
+          type: string
+        - name: directory_id
+          description: Directory ID for the directory containing the cardholder's account that you want to look up.
+          in: query
+          required: true
+          type: string
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: The internal cardholder ID.
+          schema:
+            $ref: "#/definitions/CardholderFromDirectory"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+  /directory_accounts:
+    get:
+      tags:
+        - cardholders
+      summary: Search directory accounts
+      description: |
+        Gets directory accounts matching the provided filter.
+
+        **Note:** Depending on the Active Directory server configuration, number of users in the directory, and uniqueness of search criteria, this method may time out.
+      operationId: getActiveDirectoryAccounts
+      parameters:
+        - name: directory_id
+          description: Directory ID for the directory containing the active directory accounts you want to find.
+          in: query
+          required: true
+          type: string
+        - name: filter
+          description: |
+            Filter format -`<ADattr> <condition> '<value>'`. EX: `displayname has 'smith'`
+            -  Support Conditions - `eq`, `has`. One specific case is `<ADattr> <eq> ''` which means AD attribute's value is empty.  EX: `displayname eq ''`
+            -  Support negative conditions - 
+              `not(<ADattr.> <has> '<value>')` means AD attribute's value does not contain the input value. EX: `not(samaccountname has 'smith')`
+              `not(<ADattr.> <eq> '')` means AD attribute's value is not empty. 
+          in: query
+          required: true
+          type: string
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: A filtered list of directory accounts.
+          schema:
+            $ref: "#/definitions/DirectoryAccounts"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+  /directory_accounts_matching_cardholders:
+    get:
+      tags:
+        - cardholders
+      summary: Get directory accounts matching the given cardholders
+      description: |
+        Gets directory accounts matching the given cardholders, based on the property pairs specified by the filter.
+
+        **Note:** Depending on the Active Directory server configuration, number of users in the directory, and uniqueness of search criteria, this method may time out. On larger systems (>5000 directory accounts), restrict the number of cardholders searched to under 100 per request.
+      operationId: getDirectoryAccountsMatchingCardholders
+      parameters:
+        - name: directory_id
+          description: Directory ID for the directory containing the active directory accounts that you want to find.
+          in: query
+          required: true
+          type: string
+        - name: cardholder_ids
+          description: List of cardholder IDs in the format `[1,2,3,...]`.
+          in: query
+          required: true
+          type: array
+          items:
+            type: integer
+            format: int32
+        - name: filter
+          description: |
+            Filter format -`<ADattr> <condition> '<CardholderAttr>'`. EX: `displayname has 'firstname' `
+            -  Support Condition - `eq`, `has`. The condition compares AD attribute's value with Cardholder attribute's value.
+            -  Support negative condition - 
+              `not(<ADattr.> <has> '<CardholderAttr>')` mean AD attribute's value doesn't contain the Cardholder attribute's value. EX: `not(displayname has 'lastname')`.
+          in: query
+          required: true
+          type: string
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: A list of successful and failed matches.
+          schema:
+            $ref: "#/definitions/DirectoryAccountsMatchingCardholders"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error" 
+  /update_cardholder_with_directory_account_property:
+    put:
+      tags:
+        - cardholders
+      summary: Update the cardholder with a directory account property
+      description: Updates the given cardholder with the given directory account property.
+      operationId: UpdateCardholderWithDirectoryAccountProperty
+      parameters:
+        - name: cardholder_id
+          description: cardholder ID.
+          in: query
+          required: true
+          type: integer
+          format: int32
+        - name: parameter_name
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              directory_account_property:
+                type: string
+              cardholder_property:
+                type: string
+              can_overwrite:
+                type: boolean
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: An indication of whether the cardholder property was actually written. An existing value will not be overwritten unless `can_overwrite` was set to `true` in the request.
+          schema:
+            $ref: "#/definitions/UpdateCardholderWithDirectoryAccountProperty"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"                 
+  /badge/{badgekey}/mobile_devices:
+    get:
+      tags:
+        - instances
+      summary: A list of mobile devices for a badge.
+      description: Gets a list of mobile devices for a person associated with a badge. This list comes from the mobile credentialing services associated with the badge type of this badge.
+      operationId: getMobileDevices
+      parameters:
+        - name: badgekey
+          description: The badgekey of the badge assigned to the mobile devices you want to get from OnGuard.
+          in: path
+          required: true
+          type: integer
+          format: int32
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: A list of device descriptions, IDs, and their status.
+          schema:
+            $ref: "#/definitions/BadgeMobileDevices"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"      
+  /badge/{badgekey}/issue_mobile_credential:
+    post:
+      tags:
+        - instances
+      summary: Issues mobile credential
+      description: Issues a credential to a mobile device of the person with the given badge.
+      operationId: issueMobileCredential
+      parameters:
+        - name: badgekey
+          in: path
+          required: true
+          type: integer
+          format: int32
+        - name: in_parameter_value_map
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              mobile_device_id:
+                type: string
+              send_email:
+                type: boolean
+              mobile_issuance_method:
+                type: string
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: Unique code for activating the mobile device.
+          schema:
+            $ref: "#/definitions/IssueMobileCredential"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+  /badge/{badge_print_request_id}/print_request:
+    get:
+      tags:
+        - instances
+      summary: Retrieve a specific badge print request
+      description: Get the status of a print request for the badge.
+      operationId: getPrintRequest
+      parameters:
+        - name: badge_print_request_id
+          description: The badge print request ID represents a unique identifier associated with a badge print request.
+          in: path
+          required: true
+          type: string
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: The status of a print request associated with the badge.
+          schema:
+            $ref: "#/definitions/BadgePrintRequestResponse"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+    delete:
+      tags:
+        - instances
+      summary: Delete a specific badge print request
+      description: Delete a request to print the badge.
+      operationId: deletePrintRequest
+      parameters:
+        - name: badge_print_request_id
+          description: The badge print request ID represents a unique identifier associated with a badge print request.
+          in: path
+          required: true
+          type: string
+        - name: request body
+          description: Pass an empty request body.
+          in: body
+          required: false
+          schema:
+            type: object
+            properties:
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: Success.
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+  /badge/{badgekey}/print_request:
+    post:
+      tags:
+        - instances
+      summary: Submit print request for a given badge
+      description: Submit a request to print the badge.
+      operationId: printRequest
+      parameters:
+        - name: badgekey
+          description: The badge key of the badge associated with an OnGuard cardholder.
+          in: path
+          required: true
+          type: integer
+          format: int32
+        - name: print request
+          description: Additional parameters associated with a badge print request.
+          in: body
+          required: false
+          schema:
+            type: object
+            properties:
+              workstation:
+                type: string
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: Success.
+          schema:
+            $ref: "#/definitions/BadgePrintRequestResponse"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+  /badge_printers:
+    get:
+      tags:
+        - instances
+      summary: Retrieve a list of badge printers
+      description: Retrieve a list of badge printers.
+      operationId: getBadgePrinters
+      parameters:
+        - name: badge_type_id
+          description: The ID associated with a given badge type.
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: Success.
+          schema:
+            $ref: "#/definitions/BadgePrinters"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+  /settings/authorization_warning:
+    get:
+      tags:
+        - settings
+      summary: Get authorization warning settings
+      description: Returns the authorization warning text, display settings, and Yes/No button text.
+      operationId: getAuthorizationWarningSettings
+      parameters:
+        - $ref: '#/parameters/Version'
+        - $ref: '#/parameters/Queue'
+      responses:
+        '200':
+          description: The authorization warning text and options.
+          schema:
+            properties:
+              version:
+                type: string
+              display_authorization_warning:
+                description: Indicates if the client should display the authorization warning.
+                type: boolean
+              authorization_warning_options:
+                $ref: '#/definitions/AuthorizationWarningOptions'
+        '202':
+          $ref: '#/responses/QueuedTask'
+        default:
+          $ref: '#/responses/Error'
+  /settings/cardholder:
+    get:
+      tags:
+        - settings
+      summary: Get cardholder settings
+      description: Returns cardholder and badge-related information for the system.
+      operationId: getCardholderSettings
+      parameters:
+        - name: segment_id
+          description: ID of the segment from which to get badge-related information, if segmentation is enabled.
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: The cardholder options.
+          schema:
+            $ref: "#/definitions/CardholderOptions"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+  /settings/enterprise:
+    get:
+      tags:
+        - settings
+      summary: Get enterprise settings
+      description: Returns enterprise information for the system.
+      operationId: getEnterpriseSettings
+      parameters:
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: The enterprise options.
+          schema:
+            $ref: "#/definitions/EnterpriseOptions"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+  /settings/segmentation:
+    get:
+      tags:
+        - settings
+      summary: Get segment related settings
+      description: Gets the current segment settings of the system.
+      operationId: getSegmentationSettings
+      parameters:
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: The current settings.
+          schema:
+            $ref: "#/definitions/SegmentationSettings"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+  /settings/visit:
+    get:
+      tags:
+        - settings
+      summary: Get visit settings
+      description: Gets the current visit settings of the system.
+      operationId: getVisitSettings
+      parameters:
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: The visit settings.
+          schema:
+            $ref: "#/definitions/VisitSettings"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+    put:
+      tags:
+        - settings
+      summary: Modify visit settings
+      description: Modifies system visit settings.
+      operationId: modify_visit_setting
+      parameters:
+        - name: VisitSettings
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+            - default_visitor_badge_type_id
+            properties:
+                default_visitor_badge_type_id:
+                    type: integer
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: Success/failure
+          schema:
+            $ref: "#/definitions/SharedResponseDefinition"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+  /settings/password_policy:
+    get:
+      tags:
+        - settings
+      summary: Get password policy settings
+      description: Gets the current password policy settings of the system.
+      operationId: getPasswordPolicySettings
+      parameters:
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: The password policy settings.
+          schema:
+            $ref: "#/definitions/PasswordPolicySettings"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+    put:
+      tags:
+        - settings
+      summary: Modify password policy settings
+      description: Modifies the system password policy settings.
+      operationId: modifyPasswordPolicySettings
+      parameters:
+        - name: modifiedPasswordPolicySettings
+          description: The modified password policy settings.
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/PasswordPolicySettings"
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: Success/failure
+          schema:
+            $ref: "#/definitions/SharedResponseDefinition"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+  /cardholders:
+    get:
+      tags:
+        - instances
+      summary: Advanced cardholder search
+      description: Performs an advanced cardholder search, optionally searching on Badge fields.
+      operationId: getCardholderSearch
+      parameters:
+        - name: cardholder_filter
+          description: The filter based on Cardholder properties.
+          in: query
+          type: string
+        - name: badge_filter
+          description: The filter based on Badge properties.
+          in: query
+          type: string
+        - name: has_badges
+          description: Boolean search for the presence of a Badge.
+          in: query
+          type: boolean
+        - name: has_photo
+          description: Boolean search for the presence of a cardholder photo.
+          in: query
+          type: boolean
+        - name: has_signature
+          description: Boolean search for the presence of a cardholder signature.
+          in: query
+          type: boolean
+        - name: has_any_directory_account
+          description: Boolean search for the presence of a cardholder directory account.
+          in: query
+          type: boolean
+        - name: access_level_list
+          description: |
+            A list of access level IDs for which to search cardholders. For example: `[1,2,3]`.
+            This parameter is interpreted based on `access_level_search_type`.
+          in: query
+          type: string
+        - name: access_level_search_type
+          description: |
+            The type of access level search to apply. This parameter describes how to interpret
+            `access_level_list`.
+            - `"any_of"` - Finds cardholders with ***any of*** the access levels in
+              `access_level_list` (at least one).
+            - `"none_of"` - Finds cardholders with ***none of*** the access levels in
+              `access_level_list`.
+            - `"all_of"` - Finds cardholders with ***all of*** the access levels in
+              `access_level_list`.
+            - `"exactly"` - Finds cardholders with ***exactly*** the access levels in
+              `access_level_list` (all of the access levels and no others).
+          in: query
+          type: string
+          default: "any_of"
+          enum: ["any_of", "none_of", "all_of", "exactly"]
+        - $ref: "#/parameters/PageNumber"
+        - $ref: "#/parameters/PageSize"
+        - $ref: "#/parameters/OrderBy"
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: The requested page of instances.
+          schema:
+            $ref: "#/definitions/PagedInstances"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+  /logged_events:
+    get:
+      tags:
+        - instances
+      summary: Get logged events
+      description: Used to retrieve a page of logged events and their relevant properties.
+      operationId: getLoggedEvents
+      parameters:
+        - name: filter
+          description: The filter based on logged event properties.
+          in: query
+          required: true
+          type: string
+        - $ref: "#/parameters/PageNumber"
+        - $ref: "#/parameters/PageSize"
+        - $ref: "#/parameters/OrderBy"
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: The requested page of logged events and their relevant properties.
+          schema:
+            $ref: "#/definitions/GetLoggedEvents"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+  /user/{id}/managed_access_levels:
+    get:
+      tags:
+        - users
+      summary: Get managed access levels
+      description: Returns a list of access levels a user can manage and a flag indicating whether the user has AAM view-only access.
+      operationId: getManagedAccessLevels
+      parameters:
+        - name: id
+          description: ID of user for whom you want a list of access levels the user can manage. If this parameter is not provided, the access level list is provided for the logged in user.
+          required: true
+          in: path
+          type: string
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: The access levels a user can manage.
+          schema:
+            $ref: "#/definitions/ManagedAccessLevels"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+    post:
+      tags:
+        - users
+      summary: Add managed access levels
+      description: Adds to the existing list of access levels a user can manage.
+      operationId: addManagedAccessLevels
+      parameters:
+        - name: id
+          description: ID of user to which access level management will be added.
+          in: path
+          required: true
+          type: string
+        - name: levels
+          description: A list of access level IDs the user can manage.
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              access_level_list:
+                type: array
+                items:
+                  type: integer
+                  format: int32
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: Success/failure
+          schema:
+            $ref: "#/definitions/SharedResponseDefinition"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+    delete:
+      tags:
+        - users
+      summary: Delete managed access levels
+      description: Deletes specific access levels from the access levels a user can manage.
+      operationId: deleteManagedAccessLevels
+      parameters:
+        - name: id
+          description: ID of user from which to remove access level management.
+          in: path
+          required: true
+          type: string
+        - name: levels
+          description: A list of access level IDs the user cannot manage.
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              access_level_list:
+                type: array
+                items:
+                  type: integer
+                  format: int32
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: Success/failure
+          schema:
+            $ref: "#/definitions/SharedResponseDefinition"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+  /managers_of_access_level:
+    get:
+      tags:
+        - users
+      summary: Get managers of access level
+      description: Returns a list of user IDs for users who can manage the access level.
+      operationId: getManagersOfAccessLevel
+      parameters:
+        - name: access_level_id
+          description: ID of the access level for which to retrieve users who can manage that access level.
+          in: query
+          required: true
+          type: integer
+          format: int32
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: List of users.
+          schema:
+            $ref: "#/definitions/AccessLevelManagerIds"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+  /user/{id}:
+    get:
+      tags:
+        - users
+      summary: Get extended properties for a user
+      description: Gets extended properties for a user.
+      operationId: getuser
+      parameters:
+        - name: id
+          description: ID of user for which to retrieve the extended properties.
+          in: path
+          required: true
+          type: string
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: The current settings.
+          schema:
+            $ref: "#/definitions/UserExtendedProperties"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+    put:
+      tags:
+        - users
+      summary: Sets the extended properties for a user
+      description: Sets the extended properties for a user.
+      operationId: modifyuser
+      parameters:
+        - name: id
+          description: ID of user for which to set the extended properties.
+          in: path
+          required: true
+          type: string
+        - name: properties
+          description: The updated properties
+          in: body
+          required: false
+          schema:
+            $ref: "#/definitions/UserExtendedPropertiesPut"
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: Success/failure
+          schema:
+            $ref: "#/definitions/SharedResponseDefinition"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+  /user/{id}/segments:
+    get:
+      tags:
+        - users
+      summary: Get user segments
+      description: Returns a list of segments assigned to a user.
+      operationId: getUserSegments
+      parameters:
+        - name: id
+          description: ID of the user for whom you want to retrieve segments.
+          required: true
+          in: path
+          type: string
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: The segments assigned to the user.
+          schema:
+            $ref: "#/definitions/Segments"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+    post:
+      tags:
+        - users
+      summary: Add user segments
+      description: Adds to the existing list of segments assigned to a user.
+      operationId: addUserSegments
+      parameters:
+        - name: id
+          description: ID of the user to which segment assignment will be added.
+          in: path
+          required: true
+          type: string
+        - name: segments
+          description: A list of segment IDs that indicate which segments to assign to the user.
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              segment_list:
+                type: array
+                items:
+                  type: integer
+                  format: int32
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: Success/failure
+          schema:
+            $ref: "#/definitions/SharedResponseDefinition"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+    delete:
+      tags:
+        - users
+      summary: Delete user segments
+      description: Deletes specific segments from the segments assigned to a user.
+      operationId: deleteUserSegments
+      parameters:
+        - name: id
+          description: ID of user from which to remove segment assignment.
+          in: path
+          required: true
+          type: string
+        - name: segments
+          description: A list of segment IDs that indicate which segments to remove from the user.
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              segment_list:
+                type: array
+                items:
+                  type: integer
+                  format: int32
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: Success/failure
+          schema:
+            $ref: "#/definitions/SharedResponseDefinition"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+  /authentication:
+    post:
+      tags:
+        - authentication
+      summary: Login
+      description: |
+        Login to the API, retrieving a session token. This method expects the **Application-Id**
+        HTTP header, but does not require **Session-Token**.
+      operationId: addAuthentication
+      security:
+        - ApplicationId: []
+      parameters:
+        - name: credentials
+          description: Either username and password must be present, or the oidc_token must be present.
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              user_name:
+                type: string
+              password:
+                type: string
+                format: password
+              directory_id:
+                type: string
+              oidc_token:
+                type: string
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: An authenticated session token and expiration time.
+          schema:
+            properties:
+              session_token:
+                type: string
+              token_expiration_time:
+                type: string
+                format: date-time
+              version:
+                type: string
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+    delete:
+      tags:
+        - authentication
+      summary: Logout
+      description: Logout of the API, invalidating the session token.
+      operationId: deleteAuthentication
+      parameters:
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: success
+          schema:
+            $ref: "#/definitions/SharedResponseDefinition"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+  /session:
+    get:
+      tags:
+        - authentication
+      summary: Get the session data for a session token
+      description: |
+        Used to retrieve the session data associated with a session token.
+      operationId: getSession
+      parameters:
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: Version information.
+          schema:
+            properties:
+              token_expiration_time:
+                type: string
+                format: date-time
+              token_start_time:
+                type: string
+                format: date-time
+              user_id:
+                type: string
+              version:
+                type: string
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+  /types:
+    get:
+      tags:
+        - instances
+      summary: Get type list
+      description: Gets a list of the supported instance types.
+      operationId: getTypes
+      parameters:
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: The supported instance types and their parent-child relationships.
+          schema:
+            $ref: "#/definitions/Types"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+  /type:
+    get:
+      tags:
+        - instances
+      summary: Get type details
+      description: Gets the details of a specific type.
+      operationId: getType
+      parameters:
+        - name: type_name
+          in: query
+          required: true
+          type: string
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: The type details.
+          schema:
+            $ref: "#/definitions/Type"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+  /count:
+    get:
+      tags:
+        - instances
+      summary: Get count
+      description: Gets the number of instances of a given type.
+      operationId: getCount
+      parameters:
+        - name: type_name
+          in: query
+          required: true
+          type: string
+        - name: filter
+          in: query
+          type: string
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: The number of instances.
+          schema:
+            properties:
+              total_items:
+                type: integer
+                format: int32
+              version:
+                type: string
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+  /instances:
+    get:
+      tags:
+        - instances
+      summary: Get instances
+      description: Gets instances of the given type.
+      operationId: getInstances
+      parameters:
+        - name: type_name
+          in: query
+          required: true
+          type: string
+        - name: filter
+          in: query
+          type: string
+        - $ref: "#/parameters/PageNumber"
+        - $ref: "#/parameters/PageSize"
+        - $ref: "#/parameters/OrderBy"
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: The requested page of instances.
+          schema:
+            $ref: "#/definitions/PagedInstances"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+    post:
+      tags:
+        - instances
+      summary: Add an instance
+      description: Adds an instance of the given type.
+      operationId: addInstance
+      parameters:
+        - name: type_name
+          in: query
+          required: true
+          type: string
+        - name: instance
+          description: The new instance.
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/InstanceDefinition"
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: The new instance.
+          schema:
+            $ref: "#/definitions/Instance"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+    put:
+      tags:
+        - instances
+      summary: Modify an instance
+      description: Modifies an instance of the given type.
+      operationId: modifyInstance
+      parameters:
+        - name: type_name
+          in: query
+          required: true
+          type: string
+        - name: instance
+          description: The updated instance.
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/InstanceDefinition"
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: The updated instance.
+          schema:
+            $ref: "#/definitions/Instance"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+    delete:
+      tags:
+        - instances
+      summary: Delete an instance
+      description: Deletes an instance of the given type.
+      operationId: deleteInstance
+      parameters:
+        - name: type_name
+          in: query
+          required: true
+          type: string
+        - name: instance
+          description: The instance to delete, with only key properties required.
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/InstanceDefinition"
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: success
+          schema:
+            $ref: "#/definitions/SharedResponseDefinition"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+  /execute_method:
+    post:
+      tags:
+        - instances
+      summary: Execute method
+      description: Executes a method on an instance.
+      operationId: executeMethod
+      parameters:
+        - name: type_name
+          description: The type for which to execute a method.
+          in: query
+          required: true
+          type: string
+        - name: method_name
+          description: The name of the method to execute.
+          in: query
+          required: true
+          type: string
+        - name: executeMethodParameters
+          description: The execute method parameters.
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/ExecuteMethodParameters"
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: The method results.
+          schema:
+            $ref: "#/definitions/ExecuteMethodResults"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+  /event_subscriptions/{id}:
+    get:
+      tags:
+        - events
+      summary: Get event subscription
+      description: |
+        Gets the event subscription with the given ID. Non-SA users can only view subscriptions they
+        created.
+      operationId: getEventSubscription
+      parameters:
+        - name: id
+          description: ID of the event subscription to return.
+          in: path
+          required: true
+          type: integer
+          format: int32
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: The event subscription.
+          schema:
+            $ref: "#/definitions/EventSubscription"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+    put:
+      tags:
+        - events
+      summary: Modify event subscription
+      description: |
+        Modifies the event subscription with the given ID. Non-SA users can only modify
+        subscriptions they created.
+      operationId: modifyEventSubscription
+      parameters:
+        - name: id
+          description: Id of the event subscription to modify.
+          in: path
+          required: true
+          type: integer
+          format: int32
+        - name: modifiedEventSubscription
+          description: The modified event subscription.
+          in: body
+          schema:
+            $ref: "#/definitions/ModifiedEventSubscription"
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: The updated event subscription.
+          schema:
+            $ref: "#/definitions/EventSubscription"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+    delete:
+      tags:
+        - events
+      summary: Disable event subscription
+      description: |
+        Disables the event subscription with the given ID. Non-SA users can only disable
+        subscriptions they created.
+      operationId: disableEventSubscription
+      parameters:
+        - name: id
+          description: Id of the event subscription to disable.
+          in: path
+          required: true
+          type: integer
+          format: int32
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: The disabled event subscription.
+          schema:
+            $ref: "#/definitions/EventSubscription"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+  /event_subscriptions:
+    get:
+      tags:
+        - events
+      summary: Get event subscriptions
+      description: |
+        Gets event subscriptions. Non-SA users can only view subscriptions they created.
+      operationId: getEventSubscriptions
+      parameters:
+        - $ref: "#/parameters/PageNumber"
+        - $ref: "#/parameters/PageSize"
+        - $ref: "#/parameters/OrderBy"
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: The requested page of event subscriptions.
+          schema:
+            $ref: "#/definitions/PagedEventSubscriptions"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+    post:
+      tags:
+        - events
+      summary: Add event subscription
+      description: Adds an event subscription.
+      operationId: addEventSubscription
+      parameters:
+        - name: newEventSubscription
+          description: The new event subscription.
+          in: body
+          schema:
+            $ref: "#/definitions/NewEventSubscription"
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: The new event subscription.
+          schema:
+            $ref: "#/definitions/EventSubscription"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+
+  /video_recorders:
+    get:
+      tags:
+        - instances
+      summary: Get video recorders
+      description: |
+        Used to retrieve a page of video recorders and their relevant properties.
+      operationId: getVideoRecorders
+      parameters:
+        - $ref: "#/parameters/PageNumber"
+        - $ref: "#/parameters/PageSize"
+        - $ref: "#/parameters/OrderBy"
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"       
+      responses:
+        200:
+          description: The requested page of video recorders and their relevant properties.
+          schema:
+            $ref: "#/definitions/GetVideoRecorders"
+        202:
+          $ref: "#/responses/QueuedTask"       
+        default:
+          $ref: "#/responses/Error"          
+  /video_recorder/{id}/auth_data:
+    get:
+      tags:
+        - instances
+      summary: Get video recorder authentication data
+      description: Retrieves the authentication token for a Lenel NVR. This token is used for authentication and authorization against LNVR Services.
+      operationId: getVideoRecorderAuthenticationData
+      parameters:
+        - name: id
+          description: The panel ID of the recorder for which the authentication data is being requested.
+          required: true
+          in: path
+          type: integer
+          format: int32
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: The authentication token for the specified LNVR.
+          schema:
+            $ref: "#/definitions/VideoRecorderAuthenticationData"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+  /property_bulk_update:
+    put:
+      tags:
+        - instances
+      summary: Bulk update the instance property
+      description: Bulk update the instance property with the given instance ids.
+      operationId: modify_property_bulk_update
+      parameters:
+        - name: type_name
+          description: Type name.
+          in: query
+          required: true
+          type: string
+        - name: id_list
+          description: List of instance IDs in the format `[1,2,3,...]`. If no list is provided, all instances will be affected.
+          in: query
+          required: false
+          type: array
+          items:
+            type: integer
+            format: int32
+        - name: parameter_name
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              property_name:
+                type: string
+              property_value:
+                type: string
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: Success/failure
+          schema:
+            $ref: "#/definitions/SharedResponseDefinition"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+  /access_level/{id}:
+    put:
+      tags:
+        - instances
+      summary: Modify an access level
+      description: |
+        Modifies the access level with the given ID.
+      operationId: modifyAccessLevel
+      parameters:
+        - name: id
+          description: Id of the access level to modify.
+          in: path
+          required: true
+          type: integer
+          format: int32
+        - name: modifiedAccessLevel
+          description: The modified access level.
+          in: body
+          schema:
+            $ref: "#/definitions/AccessLevel"
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          schema:
+            $ref: "#/definitions/SharedResponseDefinition"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+  /console/cards:
+    post:
+      tags:
+        - console
+      summary: Add or modify console card
+      description: Adds a console card to all layouts or modifies a console card in system console layout.
+      operationId: add_or_modify_console_card
+      parameters:
+        - name: console_card
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/ConsoleCard"
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: console card.
+          schema:
+            $ref: "#/definitions/ConsoleCard"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+    delete:
+      tags:
+        - console
+      summary: Delete console card
+      description: Deletes specified console card from all layouts.
+      operationId: delete_console_card
+      parameters:
+        - name: card_id
+          description: The ID of console card to be deleted.
+          in: query
+          required: true
+          type: string
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: Success/failure
+          schema:
+            $ref: "#/definitions/SharedResponseDefinition"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+  /console/layouts:
+    get:
+      tags:
+        - console
+      summary: Get system console layout
+      description: Returns specific system console layout
+      operationId: get_console_layout
+      parameters:
+        - name: layout_id
+          description: The ID of the system console layout
+          in: query
+          type: string
+          required: true
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: The system console layout.
+          schema:
+            $ref: "#/definitions/ConsoleLayout"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+    put:
+      tags:
+        - console
+      summary: Modify or add system console layout
+      description: Modify the existing system console layout or add if not exist.
+      operationId: modify_console_layout
+      parameters:
+        - name: console_layout
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/ConsoleLayout"
+        - $ref: "#/parameters/Version"
+        - $ref: "#/parameters/Queue"
+      responses:
+        200:
+          description: Success/failure
+          schema:
+            $ref: "#/definitions/AddConsoleLayout"
+        202:
+          $ref: "#/responses/QueuedTask"
+        default:
+          $ref: "#/responses/Error"
+parameters:
+  PageNumber:
+    name: page_number
+    description: The page number to be returned (starts at 1).
+    in: query
+    type: integer
+    format: int32
+    default: 1
+    minimum: 1
+  PageSize:
+    name: page_size
+    description: The number of items to be returned per page.
+    in: query
+    type: integer
+    format: int32
+    default: 20
+    minimum: 1
+    maximum: 100
+  OrderBy:
+    name: order_by
+    description: The field(s) to use when sorting the results.
+    in: query
+    type: string
+  Version:
+    name: version
+    description: Used to maintain backward compatibility as the API is updated, in the format 1.0.
+    in: query
+    required: true
+    type: string
+  Queue:
+    name: queue
+    description: Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+    in: query
+    required: false
+    type: boolean
+    default: false
+responses:
+  Error:
+    description: Error
+    schema:
+      $ref: "#/definitions/Error"
+  QueuedTask:
+    description: Queued task
+    schema:
+      $ref: "#/definitions/NewQueuedTask"
+securityDefinitions:
+  ApplicationId:
+    type: apiKey
+    name: Application-Id
+    in: header
+  SessionToken:
+    type: apiKey
+    name: Session-Token
+    in: header
+definitions:
+  SharedResponseDefinition:
+    properties:
+      version:
+        type: string
+  NewQueuedTask:
+    type: object
+    allOf:
+      - $ref: "#/definitions/SharedResponseDefinition"
+      - properties:
+          id:
+            type: string
+            format: uuid
+          status:
+            type: string
+            enum: ["pending", "complete"]
+  QueuedTask:
+    type: object
+    allOf:
+      - $ref: "#/definitions/SharedResponseDefinition"
+      - properties:
+          id:
+            type: string
+            format: uuid
+          status:
+            type: string
+            enum: ["pending", "complete"]
+          response:
+            type: object
+  QueuedTasks:
+    type: object
+    allOf:
+      - $ref: "#/definitions/SharedResponseDefinition"
+      - properties:
+          item_list:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: string
+                  format: uuid
+                status:
+                  type: string
+                  enum: ["pending", "complete"]
+  Directories:
+    type: object
+    allOf:
+      - $ref: "#/definitions/SharedResponseDefinition"
+      - properties:
+          total_items:
+            type: integer
+            format: int32
+          item_list:
+            type: array
+            items:
+              type: object
+              properties:
+                property_value_map:
+                  type: object
+                  properties:
+                    ID:
+                      type: string
+                    NAME:
+                      type: string
+                    directory_type:
+                      type: integer
+                      format: int32
+  LoggedInUser:
+    type: object
+    allOf:
+      - $ref: "#/definitions/SharedResponseDefinition"
+      - properties:
+          first_name:
+            type: string
+          last_name:
+            type: string
+          password_expiration_time:
+            type: string
+            format: date-time
+          ptz_priority:
+            type: integer
+            format: int32
+          user_id:
+            type: string
+          user_name:
+            type: string
+          version:
+            type: string
+  Segments:
+    type: object
+    allOf:
+      - $ref: "#/definitions/SharedResponseDefinition"
+    properties:
+      total_items:
+        type: integer
+        format: int32
+      segment_list:
+        type: array
+        items:
+          type: object
+          properties:
+            database_id:
+              type: integer
+              format: int32
+            segment_id:
+              type: integer
+              format: int32
+            segment_name:
+              type: string
+            type:
+              type: string
+  GetUserPreferences:
+    type: object
+    allOf:
+      - $ref: "#/definitions/SharedResponseDefinition"
+      - properties:
+          total_items:
+            type: integer
+            format: int32
+          preference_list:
+            type: array
+            items:
+              type: object
+              allOf:
+                - $ref: "#/definitions/UserPreference"
+  AddUserPreferences:
+    type: object
+    allOf:
+      - $ref: "#/definitions/SharedResponseDefinition"
+      - properties:
+          preference_id:
+            type: integer
+            format: int32
+  ModifyUserPreferences:
+    type: object
+    allOf:
+      - $ref: "#/definitions/SharedResponseDefinition"
+      - $ref: "#/definitions/UserPreference"
+  CardholderFromDirectory:
+    type: object
+    allOf:
+      - $ref: "#/definitions/SharedResponseDefinition"
+      - properties:
+          cardholder_id:
+            type: integer
+            format: int32
+  UserPreference:
+    type: object
+    properties:
+      client_name:
+        type: string
+      preference_id:
+        type: integer
+        format: int32
+      preference_settings:
+        type: string
+      setting_type:
+        type: string
+      user_id:
+        type: integer
+        format: int32
+      is_global:
+        type: boolean
+  DirectoryAccounts:
+    type: object
+    allOf:
+      - $ref: "#/definitions/SharedResponseDefinition"
+      - properties:
+          total_items:
+            type: integer
+            format: int32
+          item_list:
+            type: array
+            items:
+              type: object
+              properties:
+                SID:
+                  type: string
+                display_name: 
+                  type: string
+                email: 
+                  type: string
+                user_name:
+                  type: string
+  DirectoryAccountsMatchingCardholders:
+    type: object
+    allOf:
+      - $ref: "#/definitions/SharedResponseDefinition"
+      - properties:
+          successful_list:
+            type: object
+            properties:
+              total_items:
+                type: integer
+                format: int32
+              item_list:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    cardholder_id:
+                      type: integer
+                      format: int32
+                    directory_account:
+                      type: object
+                      properties:
+                        SID:
+                          type: string
+                        email: 
+                          type: string
+                        user_name:
+                          type: string
+          failure_list:
+            type: object
+            properties:
+              total_items:
+                type: integer
+                format: int32
+              item_list:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    cardholder_id:
+                      type: integer
+                      format: int32
+                    error_message:
+                      type: string                      
+  UpdateCardholderWithDirectoryAccountProperty:
+    type: object
+    allOf:
+      - $ref: "#/definitions/SharedResponseDefinition"
+      - properties:
+          property_written:
+            type: boolean
+  BadgeMobileDevices:
+    type: object
+    allOf:
+      - $ref: "#/definitions/SharedResponseDefinition"
+      - properties:
+          total_items:
+            type: integer
+            format: int32
+          mobile_device_list:
+            type: array
+            items:
+              type: object
+              properties:
+                mobile_device_id:
+                  type: integer
+                  format: int32
+                mobile_device_description:
+                  type: string
+                mobile_device_active:
+                  type: boolean
+  IssueMobileCredential:
+    type: object
+    allOf:
+      - $ref: "#/definitions/SharedResponseDefinition"
+      - properties:
+          mobile_device_activation_code:
+            type: integer
+            format: int32
+          mobile_device_pin:
+            type: string
+          mobile_device_for_installer:
+            type: boolean
+          mobile_issuance_message:
+            type: string
+  AuthorizationWarningOptions:
+    type: object
+    allOf:
+      - properties:
+          authorization_warning_text:
+            description: The authorization warning text to display. Can include HTML hyperlinks.
+            type: string
+          yes_button_text:
+            description: The text to display on the Yes button.
+            type: string
+          no_button_text:
+            description: The text to display on the No button.
+            type: string
+          yes_is_default_button:
+            description: If true, the Yes button should be the default button in the authorization warning dialog.
+            type: boolean
+          font_properties:
+            description: Describes the display font for the authorization warning.
+            type: object
+            properties:
+              height:
+                type: integer
+              width:
+                type: integer
+              escapement:
+                type: integer
+              orientation:
+                type: integer
+              weight:
+                type: integer
+              italic:
+                type: boolean
+              underline:
+                type: boolean
+              strikeout:
+                type: boolean
+              character_set:
+                type: string
+              out_precision:
+                type: string
+              clip_precision:
+                type: string
+              quality:
+                type: string
+              pitch:
+                type: string
+              family:
+                type: string
+              face_name:
+                type: string
+  CardholderOptions:
+    type: object
+    allOf:
+      - $ref: "#/definitions/SharedResponseDefinition"
+      - properties:
+          activate_deactivate_dates_use_time:
+            type: boolean
+          badge_pin_properties:
+            type: object
+            properties:
+              digits:
+                type: integer
+                format: int32
+              generate_pin_code:
+                type: boolean
+          create_photo_thumbnails:
+            type: boolean
+          max_accesslevels_per_badge_standard:
+            type: integer
+            format: int32
+          max_accesslevels_per_badge_temporary:
+            type: integer
+            format: int32
+          max_accesslevels_per_badge_total:
+            type: integer
+            format: int32
+          max_active_badges:
+            type: integer
+            format: int32
+          max_badge_id_length:
+            type: integer
+            format: int32
+          max_extended_id_length:
+            type: integer
+            format: int32
+          temporary_accesslevel_granularity:
+            type: integer
+            format: int32
+  EnterpriseOptions:
+    type: object
+    allOf:
+      - $ref: "#/definitions/SharedResponseDefinition"
+      - properties:
+          default_user_replication:
+            type: integer
+            format: int32
+          default_cardholder_replication:
+            type: integer
+            format: int32
+          default_visitor_replication:
+            type: integer
+            format: int32
+          is_enterprise_system:
+            type: boolean
+          is_master_server:
+            type: boolean
+          local_database_id:
+            type: integer
+            format: int32
+          server_list:
+            type: array
+            items:
+              type: object
+              properties:
+                database_id:
+                  type: integer
+                  format: int32
+                display_name:
+                  type: string
+                server_type:
+                  type: string
+  ManagedAccessLevels:
+    type: object
+    allOf:
+      - $ref: "#/definitions/SharedResponseDefinition"
+      - properties:
+          has_aam_view_only_access:
+            type: boolean
+          total_items:
+            type: integer
+            format: int32
+          access_level_list:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  format: int32
+                name:
+                  type: string
+  AccessLevelManagerIds:
+    type: object
+    allOf:
+      - $ref: "#/definitions/SharedResponseDefinition"
+      - properties:
+          total_items:
+            type: integer
+            format: int32
+          user_id_list:
+            type: array
+            items:
+              type: string
+  UserExtendedProperties:
+    type: object
+    allOf:
+      - $ref: "#/definitions/SharedResponseDefinition"
+      - properties:
+            database_id:
+                type: integer
+                format: int32
+            has_aam_view_only_access:
+                type: boolean
+            monitoring_zone_id:
+                type: integer
+                format: int32
+            monitoring_zone_name:
+                type: string
+            is_user_account_locked:
+                type: boolean
+            last_successful_login_time:
+                type: string
+                format: date-time
+  UserExtendedPropertiesPut:
+   type: object
+   properties:
+        database_id:
+            description: The database identifier in an Enterprise system that identifies the system containing the user data, if Enterprise support is enabled.
+            type: integer
+            format: int32
+        monitoring_zone_id:
+            description: ID of the Monitoring Zone to assign to the user. Use zero or empty to unassign.
+            type: integer
+            format: int32
+        has_aam_view_only_access:
+            description: A flag indicating whether the user has AAM view-only access.
+            type: boolean
+        unlock_account:
+            description: A flag indicating whether to unlock the account of the user whose account has been locked by too many incorrect password attempts.
+            type: boolean
+  SegmentationSettings:
+    type: object
+    allOf:
+      - $ref: "#/definitions/SharedResponseDefinition"
+      - properties:
+          allow_access_levels_to_be_configured_as_assignable_by_other_segments:
+            type: boolean
+          allow_segment_to_belong_to_multiple_groups:
+            type: boolean
+          segment_badge_types:
+            type: boolean
+          segment_card_formats:
+            type: boolean
+          segment_cardholders:
+            type: boolean
+          segment_non_system_list_builder_lists:
+            type: boolean
+          segment_visitors:
+            type: boolean
+          segmentation_enabled:
+            type: boolean
+  VisitSettings:
+    type: object
+    allOf:
+      - $ref: "#/definitions/SharedResponseDefinition"
+      - properties:
+          default_visitor_badge_type_id:
+            type: integer
+            format: int32
+          default_visitor_badge_type_name:
+            type: string
+  PasswordPolicySettings:
+   type: object
+   properties:
+        is_lockout_policy_enabled:
+            description: A flag indicating whether the lockout policy is enabled.
+            type: boolean
+        login_attempt_threshold:
+            description: The number of invalid login attempts that will lock an internal account.
+            type: integer
+            format: int32
+        login_attempt_reset_interval_in_minutes:
+            description: The number of minutes to wait before resetting the record of invalid logins.
+            type: integer
+            format: int32
+        lockout_interval_in_minutes:
+            description: The number of minutes to lock an internal account after exceeding the invalid login attempt threshold.
+            type: integer
+            format: int32
+        disable_lockout_for_sa:
+            description: Supports disabling the lockout policy for the SA user.
+            type: boolean
+        is_expiration_policy_enabled:
+            description: A flag indicating whether the expiration policy is enabled.
+            type: boolean
+        expiration_days:
+            description: The number of days the password will be expired.
+            type: integer
+            format: int32
+        is_expiration_reminders_enabled:
+            description: A flag indicating whether to remind the user if the password is almost expired.
+            type: boolean
+        expiration_first_reminder_days:
+            description: The first day to remind the user that the password is almost expired.
+            type: integer
+            format: int32
+        expiration_reminder_days:
+            description: The day to start reminding the user, with each login, that the password is almost expired.
+            type: integer
+            format: int32
+        is_minimum_length_required:
+            description: A flag indicating whether the minimum password length is required.
+            type: boolean
+        minimum_length:
+            description: The minimum password length.
+            type: integer
+            format: int32
+        is_numeric_characters_required:
+            description: A flag indicating whether the password must contain a numeric character.
+            type: boolean
+        is_special_characters_required:
+            description: A flag indicating whether the password must contain a non-alphanumeric character.
+            type: boolean
+        is_upper_and_lower_case_required:
+            description: A flag indicating whether the password must contain an uppercase alphabetic and a lowercase alphabetic character.
+            type: boolean
+        can_be_same_as_user_name:
+            description: A flag indicating whether the password can be same as user name.
+            type: boolean
+        is_history_policy_enabled:
+            description: A flag indicating whether the password history policy is enabled.
+            type: boolean
+        history_password_count:
+            description: The number of previous passwords that will be prohibited when resetting the password.
+            type: integer
+            format: int32
+        minimum_password_age:
+            description: This determines how long users must keep a password before they can change it. 
+            type: integer
+            format: int32
+        is_prohibited_password_policy_enabled:
+            description: A flag indicating whether the prohibited password policy is enabled.
+            type: boolean
+        is_inactivity_timeout_policy_enabled:
+            description: A flag indicating whether the inactivity timeout policy is enabled.
+            type: boolean
+        inactivity_timeout_in_minutes:
+            description: The authenticated token inactivity timeout, in minutes.
+            type: integer
+            format: int32
+  Types:
+    type: object
+    allOf:
+      - $ref: "#/definitions/SharedResponseDefinition"
+      - properties:
+          total_items:
+            type: integer
+            format: int32
+          types:
+            type: object
+  Type:
+    type: object
+    allOf:
+      - $ref: "#/definitions/SharedResponseDefinition"
+      - properties:
+          access:
+            type: string
+          type_name:
+            type: string
+          display_groups:
+            type: array
+            items:
+              type: object
+              properties:
+                fields:
+                  type: array
+                  items:
+                    type: string
+                name:
+                  type: string
+          display_name:
+            type: string
+          methods:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                in_parameters:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      type:
+                        type: string
+                out_parameters:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      type:
+                        type: string
+          properties:
+            type: array
+            items:
+              type: object
+              properties:
+                access:
+                  type: string
+                default_value:
+                  type: string
+                display_attributes:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      is_password:
+                        type: boolean
+                      is_searchable:
+                        type: boolean
+                      permission:
+                        type: string
+                      template:
+                        type: string
+                display_name:
+                  type: string
+                is_key:
+                  type: boolean
+                is_required:
+                  type: boolean
+                max_length:
+                  type: integer
+                  format: int32
+                name:
+                  type: string
+                possible_values:
+                  type: array
+                  items:
+                    type: object
+                type:
+                  type: string
+  InstanceDefinition:
+    type: object
+    properties:
+      property_value_map:
+        type: object
+  Instance:
+    type: object
+    allOf:
+      - $ref: "#/definitions/SharedResponseDefinition"
+      - $ref: "#/definitions/InstanceDefinition"
+  PagedInstances:
+    type: object
+    allOf:
+      - $ref: "#/definitions/SharedResponseDefinition"
+      - properties:
+          count:
+            type: integer
+            format: int32
+          item_list:
+            type: array
+            items:
+              $ref: "#/definitions/InstanceDefinition"
+          page_number:
+            type: integer
+            format: int32
+          page_size:
+            type: integer
+            format: int32
+          total_items:
+            type: integer
+            format: int32
+          total_pages:
+            type: integer
+            format: int32
+  ExecuteMethodParameters:
+    type: object
+    properties:
+      property_value_map:
+        type: object
+      in_parameter_value_map:
+        type: object
+  ExecuteMethodResults:
+    type: object
+    allOf:
+      - $ref: "#/definitions/SharedResponseDefinition"
+      - properties:
+          out_parameter_value_map:
+            type: object
+  EventSubscriptionDefinition:
+    type: object
+    properties:
+      binding_key:
+        type: string
+      created_date:
+        type: string
+        format: date-time
+      description:
+        type: string
+      exchange_name:
+        type: string
+      filter:
+        type: string
+      id:
+        type: integer
+        format: int32
+      is_durable:
+        type: boolean
+      last_updated_date:
+        type: string
+        format: date-time
+      message_broker_hostname:
+        type: string
+      message_broker_port:
+        type: integer
+        format: int32
+      queue_name:
+        type: string
+      requires_secure_connection:
+        type: boolean
+      user_id:
+        type: string
+  EventSubscription:
+    type: object
+    allOf:
+      - $ref: "#/definitions/SharedResponseDefinition"
+      - $ref: "#/definitions/EventSubscriptionDefinition"
+  PagedEventSubscriptions:
+    type: object
+    allOf:
+      - $ref: "#/definitions/SharedResponseDefinition"
+      - properties:
+          count:
+            type: integer
+            format: int32
+          item_list:
+            type: array
+            items:
+              $ref: "#/definitions/EventSubscriptionDefinition"
+          page_number:
+            type: integer
+            format: int32
+          page_size:
+            type: integer
+            format: int32
+          total_items:
+            type: integer
+            format: int32
+          total_pages:
+            type: integer
+            format: int32
+  NewEventSubscription:
+    type: object
+    properties:
+      description:
+        type: string
+      filter:
+        type: string
+      is_durable:
+        type: boolean
+  ModifiedEventSubscription:
+    type: object
+    properties:
+      description:
+        type: string
+      filter:
+        type: string
+  Error:
+    allOf:
+      - $ref: "#/definitions/SharedResponseDefinition"
+      - properties:
+          error:
+            type: object
+            properties:
+              code:
+                type: string
+              message:
+                type: string
+  GetVideoRecorders:
+    type: object
+    allOf:
+      - $ref: "#/definitions/SharedResponseDefinition"
+      - properties:
+          count:
+            type: integer
+            format: int32
+          item_list:
+            type: array
+            items:
+              type: object
+              allOf:
+                - $ref: "#/definitions/VideoRecorders"
+          page_number:
+            type: integer
+            format: int32
+          page_size:
+            type: integer
+            format: int32
+          total_items:
+            type: integer
+            format: int32
+          total_pages:
+            type: integer
+            format: int32                
+  VideoRecorders:
+    type: object
+    properties:
+      computer_name:
+        type: string
+      database_id:
+        type: integer
+        format: int32
+      id:
+        type: integer
+        format: int32        
+      http_port:
+        type: integer
+        format: int32
+      https_port:
+        type: integer
+        format: int32        
+      is_daylight_saving:
+        type: boolean
+      is_online:
+        type: boolean
+      name:
+        type: string
+      panel_type_id:
+        type: integer
+        format: int32        
+      panel_type_name:
+        type: string
+      primary_ip_address:
+        type: integer
+        format: int32  
+      segment_id:
+        type: integer
+        format: int32         
+      workstation:
+        type: string
+      world_timezone_id:
+        type: integer
+        format: int32
+  VideoRecorderAuthenticationData:
+    type: object
+    allOf:
+      - $ref: "#/definitions/SharedResponseDefinition"
+      - properties:
+            authentication_data:
+                type: string
+  GetLoggedEvents:
+    type: object
+    allOf:
+      - $ref: "#/definitions/SharedResponseDefinition"
+      - properties:
+          count:
+            type: integer
+            format: int32
+          item_list:
+            type: array
+            items:
+              type: object
+              allOf:
+                - $ref: "#/definitions/LoggedEvents"
+          page_number:
+            type: integer
+            format: int32
+          page_size:
+            type: integer
+            format: int32
+          total_items:
+            type: integer
+            format: int32
+          total_pages:
+            type: integer
+            format: int32
+  LoggedEvents:
+    type: object
+    properties:
+      serial_number:
+        type: integer
+        format: int32
+      timestamp:
+        type: string
+        format: date-time
+      description:
+        type: string     
+      controller_id:
+        type: integer
+        format: int32
+      device_id:
+        type: integer
+        format: int32      
+      subdevice_id:
+        type: integer
+        format: int32
+      segment_id:
+        type: integer
+        format: int32
+      event_type:
+        type: integer
+        format: int32
+      event_subtype:
+        type: integer
+        format: int32     
+      event_text:
+        type: string
+      badge_id:
+        type: integer
+        format: int64
+      badge_id_str:
+        type: string
+      badge_extended_id:
+        type: string       
+      badge_issue_code:
+        type: integer
+        format: int32
+      asset_id:
+        type: integer
+        format: int32
+      cardholder_key:
+        type: integer
+        format: int32
+      alarm_priority:
+        type: integer
+        format: int32
+      alarm_ack_blue_channel:
+        type: integer
+        format: int32 
+      alarm_ack_green_channel:
+        type: integer
+        format: int32
+      alarm_ack_red_channel:
+        type: integer
+        format: int32      
+      alarm_blue_channel:
+        type: integer
+        format: int32
+      alarm_green_channel:
+        type: integer
+        format: int32
+      alarm_red_channel:
+        type: integer
+        format: int32
+      access_result:
+        type: integer
+        format: int32    
+      cardholder_entered:
+        type: boolean
+      duress:
+        type: boolean
+      controller_name:
+        type: string     
+      event_source_name:
+        type: string
+      cardholder_first_name:
+        type: string
+      cardholder_last_name:
+        type: string
+      device_name:
+        type: string
+      subdevice_name:
+        type: string
+      must_acknowledge:
+        type: boolean
+      must_mark_in_progress:
+        type: boolean
+  BadgePrintRequestResponse:
+    type: object
+    properties:
+      badgekey:
+        type: integer
+        format: int32
+      status:
+        type: string
+      version:
+        type: string
+  BadgePrinters:
+    type: object
+    allOf:
+      - $ref: "#/definitions/SharedResponseDefinition"
+      - properties:
+          total_items:
+            type: integer
+            format: int32
+          printers:
+            type: array
+            items:
+              type: object
+              properties:
+                badge_type_id:
+                  type: integer
+                  format: int32
+                printer_name:
+                  type: string
+                workstation:
+                  type: string
+  BadgePrinter:
+    type: object
+    allOf:
+      - $ref: "#/definitions/SharedResponseDefinition"
+      - properties:
+          badge_type_id:
+            type: int32
+          printer_name:
+            type: string
+          workstation:
+            type: string
+  ConsoleCard:
+    type: object
+    properties:
+        id:
+            type: string
+            description: "The ID of the console card."
+        group_id:
+            type: string
+            description: "The group ID. 'hidden' if card is hidden."
+        license:
+            type: string
+            description: "The feature license id."
+        display_name:
+            type: string
+            description: "The console card displayed name."
+        color:
+            type: string
+            description: 'The color in HEX.'
+        icon:
+            type: string
+            description: "The icon content in base64. Should start with 'data:*/*;base64,'."
+        application_type:
+            type: string
+            description: "'web' or 'native'"
+        url:
+            type: string
+            description: "The card url."
+        type:
+            type: string
+            description: "'system_default' or 'user'"
+        extended_properties:
+            type: object
+            description: "arbitrary property value pairs"
+  ConsoleCardGroup:
+    type: object
+    properties:
+        id:
+            type: string
+            description: "The ID of the console card group."
+        display_name:
+            type: string
+            description: "The console card group displayed name."
+        cards:
+            type: array
+            items:
+              type: object
+              allOf:
+                - $ref: "#/definitions/ConsoleCard"
+            description: "The card list."
+  ConsoleLayout:
+    type: object
+    properties:
+        id:
+            type: string
+            description: "The ID of the console layout."
+        display_name:
+            type: string
+            description: "The console layout displayed name."
+        groups:
+            type: array
+            items:
+              type: object
+              allOf:
+                - $ref: "#/definitions/ConsoleCardGroup"
+            description: "The card group list."
+  GetConsoleCards:
+    type: object
+    allOf:
+      - $ref: "#/definitions/SharedResponseDefinition"
+      - properties:
+          total_items:
+            type: integer
+            format: int32
+          item_list:
+            type: array
+            items:
+              type: object
+              allOf:
+                - $ref: "#/definitions/ConsoleCard"
+  AddConsoleLayout:
+    type: object
+    allOf:
+      - $ref: "#/definitions/SharedResponseDefinition"
+      - properties:
+          layout_id:
+            type: string
+            description: "The ID of the console layout."
+  AccessLevel:
+    type: object
+    allOf:
+      - properties:
+          readers:
+            type: array
+            items:
+              type: object
+              allOf:
+                - properties:
+                    panel_id:
+                      type: integer
+                      format: int32
+                    reader_id:
+                      type: integer
+                      format: int32
+                    timezone_id:
+                      type: integer
+                      format: int32
