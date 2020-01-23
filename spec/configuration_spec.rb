@@ -12,14 +12,14 @@ Swagger Codegen version: 2.4.9-SNAPSHOT
 
 require 'spec_helper'
 
-describe LenelClient::Configuration do
-  let(:config) { LenelClient::Configuration.default }
+describe LenelSDK::Configuration do
+  let(:config) { LenelSDK::Configuration.default }
 
   before(:each) do
     # uncomment below to setup host and base_path
     # require 'URI'
     # uri = URI.parse("https://localhost/api/access/onguard/openaccess")
-    # LenelClient.configure do |c|
+    # LenelSDK.configure do |c|
     #   c.host = uri.host
     #   c.base_path = uri.path
     # end
