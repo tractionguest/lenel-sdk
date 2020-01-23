@@ -1,4 +1,4 @@
-# LenelClient::ExecuteMethodParameters
+# LenelSDK::ExecuteMethodParameters
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# LenelClient::EventsApi
+# LenelSDK::EventsApi
 
 All URIs are relative to *https://localhost/api/access/onguard/openaccess*
 
@@ -23,7 +23,7 @@ Adds an event subscription.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -35,12 +35,12 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::EventsApi.new
+api_instance = LenelSDK::EventsApi.new
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
 opts = { 
-  new_event_subscription: LenelClient::NewEventSubscription.new, # NewEventSubscription | The new event subscription.
+  new_event_subscription: LenelSDK::NewEventSubscription.new, # NewEventSubscription | The new event subscription.
   queue: false # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
 }
 
@@ -48,7 +48,7 @@ begin
   #Add event subscription
   result = api_instance.add_event_subscription(version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling EventsApi->add_event_subscription: #{e}"
 end
 ```
@@ -88,7 +88,7 @@ Disables the event subscription with the given ID. Non-SA users can only disable
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -100,7 +100,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::EventsApi.new
+api_instance = LenelSDK::EventsApi.new
 
 id = 56 # Integer | Id of the event subscription to disable.
 
@@ -114,7 +114,7 @@ begin
   #Disable event subscription
   result = api_instance.disable_event_subscription(id, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling EventsApi->disable_event_subscription: #{e}"
 end
 ```
@@ -154,7 +154,7 @@ Gets the event subscription with the given ID. Non-SA users can only view subscr
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -166,7 +166,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::EventsApi.new
+api_instance = LenelSDK::EventsApi.new
 
 id = 56 # Integer | ID of the event subscription to return.
 
@@ -180,7 +180,7 @@ begin
   #Get event subscription
   result = api_instance.get_event_subscription(id, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling EventsApi->get_event_subscription: #{e}"
 end
 ```
@@ -220,7 +220,7 @@ Gets event subscriptions. Non-SA users can only view subscriptions they created.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -232,7 +232,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::EventsApi.new
+api_instance = LenelSDK::EventsApi.new
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -247,7 +247,7 @@ begin
   #Get event subscriptions
   result = api_instance.get_event_subscriptions(version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling EventsApi->get_event_subscriptions: #{e}"
 end
 ```
@@ -289,7 +289,7 @@ Modifies the event subscription with the given ID. Non-SA users can only modify 
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -301,14 +301,14 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::EventsApi.new
+api_instance = LenelSDK::EventsApi.new
 
 id = 56 # Integer | Id of the event subscription to modify.
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
 opts = { 
-  modified_event_subscription: LenelClient::ModifiedEventSubscription.new, # ModifiedEventSubscription | The modified event subscription.
+  modified_event_subscription: LenelSDK::ModifiedEventSubscription.new, # ModifiedEventSubscription | The modified event subscription.
   queue: false # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
 }
 
@@ -316,7 +316,7 @@ begin
   #Modify event subscription
   result = api_instance.modify_event_subscription(id, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling EventsApi->modify_event_subscription: #{e}"
 end
 ```

@@ -1,4 +1,4 @@
-# LenelClient::DirectoryAccountsMatchingCardholdersSuccessfulListItemList
+# LenelSDK::DirectoryAccountsMatchingCardholdersSuccessfulListItemList
 
 ## Properties
 Name | Type | Description | Notes

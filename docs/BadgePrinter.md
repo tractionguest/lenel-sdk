@@ -1,4 +1,4 @@
-# LenelClient::BadgePrinter
+# LenelSDK::BadgePrinter
 
 ## Properties
 Name | Type | Description | Notes

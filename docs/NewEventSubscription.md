@@ -1,4 +1,4 @@
-# LenelClient::NewEventSubscription
+# LenelSDK::NewEventSubscription
 
 ## Properties
 Name | Type | Description | Notes

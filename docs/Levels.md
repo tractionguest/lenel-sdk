@@ -1,4 +1,4 @@
-# LenelClient::Levels
+# LenelSDK::Levels
 
 ## Properties
 Name | Type | Description | Notes

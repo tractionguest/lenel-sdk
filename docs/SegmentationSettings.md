@@ -1,4 +1,4 @@
-# LenelClient::SegmentationSettings
+# LenelSDK::SegmentationSettings
 
 ## Properties
 Name | Type | Description | Notes

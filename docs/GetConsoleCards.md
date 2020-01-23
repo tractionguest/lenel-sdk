@@ -1,4 +1,4 @@
-# LenelClient::GetConsoleCards
+# LenelSDK::GetConsoleCards
 
 ## Properties
 Name | Type | Description | Notes

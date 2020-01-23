@@ -1,4 +1,4 @@
-# LenelClient::LoggedInUser
+# LenelSDK::LoggedInUser
 
 ## Properties
 Name | Type | Description | Notes

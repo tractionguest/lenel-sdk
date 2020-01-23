@@ -1,4 +1,4 @@
-# LenelClient::PrintRequest
+# LenelSDK::PrintRequest
 
 ## Properties
 Name | Type | Description | Notes

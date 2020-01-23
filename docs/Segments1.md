@@ -1,4 +1,4 @@
-# LenelClient::Segments1
+# LenelSDK::Segments1
 
 ## Properties
 Name | Type | Description | Notes

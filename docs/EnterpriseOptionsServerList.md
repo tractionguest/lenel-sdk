@@ -1,4 +1,4 @@
-# LenelClient::EnterpriseOptionsServerList
+# LenelSDK::EnterpriseOptionsServerList
 
 ## Properties
 Name | Type | Description | Notes

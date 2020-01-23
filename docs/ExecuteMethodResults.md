@@ -1,4 +1,4 @@
-# LenelClient::ExecuteMethodResults
+# LenelSDK::ExecuteMethodResults
 
 ## Properties
 Name | Type | Description | Notes

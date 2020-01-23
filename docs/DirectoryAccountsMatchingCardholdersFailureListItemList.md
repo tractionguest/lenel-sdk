@@ -1,4 +1,4 @@
-# LenelClient::DirectoryAccountsMatchingCardholdersFailureListItemList
+# LenelSDK::DirectoryAccountsMatchingCardholdersFailureListItemList
 
 ## Properties
 Name | Type | Description | Notes

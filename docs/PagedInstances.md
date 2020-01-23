@@ -1,4 +1,4 @@
-# LenelClient::PagedInstances
+# LenelSDK::PagedInstances
 
 ## Properties
 Name | Type | Description | Notes

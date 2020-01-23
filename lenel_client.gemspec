@@ -17,7 +17,7 @@ require "lenel_client/version"
 
 Gem::Specification.new do |s|
   s.name        = "lenel_client"
-  s.version     = LenelClient::VERSION
+  s.version     = LenelSDK::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Swagger-Codegen"]
   s.email       = [""]

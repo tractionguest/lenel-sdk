@@ -1,4 +1,4 @@
-# LenelClient::ConsoleApi
+# LenelSDK::ConsoleApi
 
 All URIs are relative to *https://localhost/api/access/onguard/openaccess*
 
@@ -22,7 +22,7 @@ Adds a console card to all layouts or modifies a console card in system console 
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -34,9 +34,9 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::ConsoleApi.new
+api_instance = LenelSDK::ConsoleApi.new
 
-console_card = LenelClient::ConsoleCard.new # ConsoleCard | 
+console_card = LenelSDK::ConsoleCard.new # ConsoleCard | 
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -48,7 +48,7 @@ begin
   #Add or modify console card
   result = api_instance.add_or_modify_console_card(console_card, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling ConsoleApi->add_or_modify_console_card: #{e}"
 end
 ```
@@ -88,7 +88,7 @@ Deletes specified console card from all layouts.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -100,7 +100,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::ConsoleApi.new
+api_instance = LenelSDK::ConsoleApi.new
 
 card_id = 'card_id_example' # String | The ID of console card to be deleted.
 
@@ -114,7 +114,7 @@ begin
   #Delete console card
   result = api_instance.delete_console_card(card_id, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling ConsoleApi->delete_console_card: #{e}"
 end
 ```
@@ -154,7 +154,7 @@ Returns specific system console layout
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -166,7 +166,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::ConsoleApi.new
+api_instance = LenelSDK::ConsoleApi.new
 
 layout_id = 'layout_id_example' # String | The ID of the system console layout
 
@@ -180,7 +180,7 @@ begin
   #Get system console layout
   result = api_instance.get_console_layout(layout_id, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling ConsoleApi->get_console_layout: #{e}"
 end
 ```
@@ -220,7 +220,7 @@ Modify the existing system console layout or add if not exist.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -232,9 +232,9 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::ConsoleApi.new
+api_instance = LenelSDK::ConsoleApi.new
 
-console_layout = LenelClient::ConsoleLayout.new # ConsoleLayout | 
+console_layout = LenelSDK::ConsoleLayout.new # ConsoleLayout | 
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -246,7 +246,7 @@ begin
   #Modify or add system console layout
   result = api_instance.modify_console_layout(console_layout, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling ConsoleApi->modify_console_layout: #{e}"
 end
 ```

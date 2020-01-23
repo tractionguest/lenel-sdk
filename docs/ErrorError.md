@@ -1,4 +1,4 @@
-# LenelClient::ErrorError
+# LenelSDK::ErrorError
 
 ## Properties
 Name | Type | Description | Notes

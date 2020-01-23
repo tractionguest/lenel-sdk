@@ -1,4 +1,4 @@
-# LenelClient::DirectoriesPropertyValueMap
+# LenelSDK::DirectoriesPropertyValueMap
 
 ## Properties
 Name | Type | Description | Notes

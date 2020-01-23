@@ -1,4 +1,4 @@
-# LenelClient::AccessLevelManagerIds
+# LenelSDK::AccessLevelManagerIds
 
 ## Properties
 Name | Type | Description | Notes

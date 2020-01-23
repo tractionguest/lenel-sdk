@@ -1,4 +1,4 @@
-# LenelClient::UpdateCardholderWithDirectoryAccountProperty
+# LenelSDK::UpdateCardholderWithDirectoryAccountProperty
 
 ## Properties
 Name | Type | Description | Notes

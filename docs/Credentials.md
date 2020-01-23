@@ -1,4 +1,4 @@
-# LenelClient::Credentials
+# LenelSDK::Credentials
 
 ## Properties
 Name | Type | Description | Notes

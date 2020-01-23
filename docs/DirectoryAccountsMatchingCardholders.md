@@ -1,4 +1,4 @@
-# LenelClient::DirectoryAccountsMatchingCardholders
+# LenelSDK::DirectoryAccountsMatchingCardholders
 
 ## Properties
 Name | Type | Description | Notes

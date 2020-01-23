@@ -1,4 +1,4 @@
-# LenelClient::DirectoryAccountsItemList
+# LenelSDK::DirectoryAccountsItemList
 
 ## Properties
 Name | Type | Description | Notes

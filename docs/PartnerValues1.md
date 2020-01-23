@@ -1,4 +1,4 @@
-# LenelClient::PartnerValues1
+# LenelSDK::PartnerValues1
 
 ## Properties
 Name | Type | Description | Notes

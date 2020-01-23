@@ -12,7 +12,7 @@ Swagger Codegen version: 2.4.9-SNAPSHOT
 
 require 'date'
 
-module LenelClient
+module LenelSDK
   class ConsoleCardGroup
     # The ID of the console card group.
     attr_accessor :id
@@ -156,7 +156,7 @@ module LenelClient
           end
         end
       else # model
-        temp_model = LenelClient.const_get(type).new
+        temp_model = LenelSDK.const_get(type).new
         temp_model.build_from_hash(value)
       end
     end

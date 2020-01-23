@@ -1,4 +1,4 @@
-# LenelClient::Type
+# LenelSDK::Type
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# LenelClient::TypeDisplayAttributes
+# LenelSDK::TypeDisplayAttributes
 
 ## Properties
 Name | Type | Description | Notes

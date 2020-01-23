@@ -1,4 +1,4 @@
-# LenelClient::VideoRecorderAuthenticationData
+# LenelSDK::VideoRecorderAuthenticationData
 
 ## Properties
 Name | Type | Description | Notes

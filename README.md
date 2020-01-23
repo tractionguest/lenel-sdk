@@ -1,6 +1,6 @@
 # lenel_client
 
-LenelClient - the Ruby gem for the OpenAccess
+LenelSDK - the Ruby gem for the OpenAccess
 
 This document describes the OpenAccess REST API. OpenAccess provides access to OnGuard via a RESTful web service.  ## Security / licensing headers  Each authenticated request must include the following HTTP headers:   - `Application-Id` - Each application using the OpenAccess API must have a unique application ID.   - `Session-Token` - A session token is retrieved by logging in via the `POST /authentication` operation.  ## Input parameter location - Query string or request body?  Input parameters can be placed either in the request body or in the URL, as a query parameter. The API makes no distinction and will handle them in either location. In the API specification, some parameters are described as being in the request body, and others are described as being in the query string. This is done simply for clarity in each situation, but clients of the API are free to include parameters wherever it is most convenient. **Sensitive data should always be placed in the request body and not exposed in the URL.**  ### **POST /instances** example  ``` POST /instances?type_name=Lnl_Cardholder&version=1.0 {   \"property_value_map\": {     ...   } } ```  ...is equivalent to this...  ``` POST /instances&version=1.0 {   \"type_name\": \"Lnl_Cardholder\",   \"property_value_map\": {     ...   } } ```  ## Task queuing - dealing with long running requests  Some requests might take a long time, especially requests that access external systems, such as Active Directory. Standard OpenAccess requests will time out after 30 seconds if the HTTP request doesn't time out sooner, depending on the client. Any request that you expect to run long can be queued as a task by adding a `queue` property to the request, set to `true`. For example: ``` GET /directory_accounts_matching_cardholders?directory_id=id1 &cardholder_ids=[1,2,3,4,5,6,7,8,9,10] &filter=displayname has 'firstname' and displayname has 'lastname' &queue=true &version=1.0 ```  When a request is queued in this way, OpenAccess will queue a task for execution and return a 202 (Accepted) HTTP status code and a response identical to `GET /queue/{id}`. For example: ``` {   \"id\": \"5c4b7890-ee73-4199-b3d3-366003eb8ca1\",   \"status\": \"pending\",   \"version\": \"1.0\" } ```  The `id` property indicates the ID of the queued task, which can be used to check the status of the task: ``` GET /queue/5c4b7890-ee73-4199-b3d3-366003eb8ca1?version=1.0 ```  When the task is complete, the response will include the response to the queued request: ``` {   \"id\": \"5c4b7890-ee73-4199-b3d3-366003eb8ca1\",   \"response\": {     ...   },   \"status\": \"complete\",   \"version\": \"1.0\" } ```  The response can be retrieved any number of times until the task is deleted. A completed task can be deleted with `DELETE /queue/{id}` or it will be deleted automatically after 1 hour.  **Note:** Even though you can queue any request, it's only recommended when a request is expected to run long, like `GET /directory_accounts` and `GET /directory_accounts_matching_cardholders`.  ## Samples  There are several sample applications that demonstrate various aspects of the API.  ### [Cardholder Search](/api/access/onguard/openaccess/samples/Cardholder Search) - Getting directories used for authentication - `GET /directories` - Login and logout - `POST /authentication` and `DELETE /authentication` - Getting cardholders and photos - `GET /instances`  ### [Command and Control](/api/access/onguard/openaccess/samples/Command and Control) - Getting directories used for authentication - `GET /directories` - Login and logout - `POST /authentication` and `DELETE /authentication` - Getting panels and readers - `GET /instances` - Updating hardware status, getting/setting reader mode, and opening doors - `POST /execute_method`  ### [Event Subscriber](/api/access/onguard/openaccess/samples/Event Subscriber) - Getting directories used for authentication - `GET /directories` (not used within every event subscriber sample) - Login and logout - `POST /authentication` and `DELETE /authentication` - Adding/modifying/disabling event subscriptions - `POST /event_subscriptions`, `PUT /event_subscriptions`, and `DELETE /event_subscriptions` - Using the Web Event Bridge to receive events via WebSocket 
 
@@ -55,7 +55,7 @@ Please follow the [installation](#installation) procedure and then run the follo
 require 'lenel_client'
 
 # Setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -67,7 +67,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::ApiApi.new
+api_instance = LenelSDK::ApiApi.new
 
 id = 'id_example' # String | ID of the task to delete.
 
@@ -80,7 +80,7 @@ opts = {
 begin
   #Delete queued task
   api_instance.delete_queued_task(id, version, opts)
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling ApiApi->delete_queued_task: #{e}"
 end
 
@@ -92,170 +92,170 @@ All URIs are relative to *https://localhost/api/access/onguard/openaccess*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*LenelClient::ApiApi* | [**delete_queued_task**](docs/ApiApi.md#delete_queued_task) | **DELETE** /queue/{id} | Delete queued task
-*LenelClient::ApiApi* | [**get_feature_availability**](docs/ApiApi.md#get_feature_availability) | **GET** /feature_availability | Get the OnGuard license feature
-*LenelClient::ApiApi* | [**get_queued_task**](docs/ApiApi.md#get_queued_task) | **GET** /queue/{id} | Get queued task
-*LenelClient::ApiApi* | [**get_queued_tasks**](docs/ApiApi.md#get_queued_tasks) | **GET** /queue | Get queued tasks
-*LenelClient::ApiApi* | [**get_version**](docs/ApiApi.md#get_version) | **GET** /version | Get the OnGuard API version
-*LenelClient::ApiApi* | [**keepalive**](docs/ApiApi.md#keepalive) | **GET** /keepalive | Renew idle timeout countdown.
-*LenelClient::ApiApi* | [**post_partner_values**](docs/ApiApi.md#post_partner_values) | **POST** /partner_values | Partners can use this to set their unique values.
-*LenelClient::ApiApi* | [**put_partner_values**](docs/ApiApi.md#put_partner_values) | **PUT** /partner_values | Partners can use this to set their unique values.
-*LenelClient::AuthenticationApi* | [**add_authentication**](docs/AuthenticationApi.md#add_authentication) | **POST** /authentication | Login
-*LenelClient::AuthenticationApi* | [**delete_authentication**](docs/AuthenticationApi.md#delete_authentication) | **DELETE** /authentication | Logout
-*LenelClient::AuthenticationApi* | [**get_directories**](docs/AuthenticationApi.md#get_directories) | **GET** /directories | Get directories
-*LenelClient::AuthenticationApi* | [**get_identity_provider_url**](docs/AuthenticationApi.md#get_identity_provider_url) | **GET** /identity_provider_url | Get identity provider URL.
-*LenelClient::AuthenticationApi* | [**get_session**](docs/AuthenticationApi.md#get_session) | **GET** /session | Get the session data for a session token
-*LenelClient::CardholdersApi* | [**get_active_directory_accounts**](docs/CardholdersApi.md#get_active_directory_accounts) | **GET** /directory_accounts | Search directory accounts
-*LenelClient::CardholdersApi* | [**get_cardholder_from_directory**](docs/CardholdersApi.md#get_cardholder_from_directory) | **GET** /cardholder_from_directory | Get cardholder ID from their linked directory account
-*LenelClient::CardholdersApi* | [**get_directory_accounts_matching_cardholders**](docs/CardholdersApi.md#get_directory_accounts_matching_cardholders) | **GET** /directory_accounts_matching_cardholders | Get directory accounts matching the given cardholders
-*LenelClient::CardholdersApi* | [**update_cardholder_with_directory_account_property**](docs/CardholdersApi.md#update_cardholder_with_directory_account_property) | **PUT** /update_cardholder_with_directory_account_property | Update the cardholder with a directory account property
-*LenelClient::ConsoleApi* | [**add_or_modify_console_card**](docs/ConsoleApi.md#add_or_modify_console_card) | **POST** /console/cards | Add or modify console card
-*LenelClient::ConsoleApi* | [**delete_console_card**](docs/ConsoleApi.md#delete_console_card) | **DELETE** /console/cards | Delete console card
-*LenelClient::ConsoleApi* | [**get_console_layout**](docs/ConsoleApi.md#get_console_layout) | **GET** /console/layouts | Get system console layout
-*LenelClient::ConsoleApi* | [**modify_console_layout**](docs/ConsoleApi.md#modify_console_layout) | **PUT** /console/layouts | Modify or add system console layout
-*LenelClient::EventsApi* | [**add_event_subscription**](docs/EventsApi.md#add_event_subscription) | **POST** /event_subscriptions | Add event subscription
-*LenelClient::EventsApi* | [**disable_event_subscription**](docs/EventsApi.md#disable_event_subscription) | **DELETE** /event_subscriptions/{id} | Disable event subscription
-*LenelClient::EventsApi* | [**get_event_subscription**](docs/EventsApi.md#get_event_subscription) | **GET** /event_subscriptions/{id} | Get event subscription
-*LenelClient::EventsApi* | [**get_event_subscriptions**](docs/EventsApi.md#get_event_subscriptions) | **GET** /event_subscriptions | Get event subscriptions
-*LenelClient::EventsApi* | [**modify_event_subscription**](docs/EventsApi.md#modify_event_subscription) | **PUT** /event_subscriptions/{id} | Modify event subscription
-*LenelClient::InstancesApi* | [**add_instance**](docs/InstancesApi.md#add_instance) | **POST** /instances | Add an instance
-*LenelClient::InstancesApi* | [**delete_instance**](docs/InstancesApi.md#delete_instance) | **DELETE** /instances | Delete an instance
-*LenelClient::InstancesApi* | [**delete_print_request**](docs/InstancesApi.md#delete_print_request) | **DELETE** /badge/{badge_print_request_id}/print_request | Delete a specific badge print request
-*LenelClient::InstancesApi* | [**execute_method**](docs/InstancesApi.md#execute_method) | **POST** /execute_method | Execute method
-*LenelClient::InstancesApi* | [**get_badge_printers**](docs/InstancesApi.md#get_badge_printers) | **GET** /badge_printers | Retrieve a list of badge printers
-*LenelClient::InstancesApi* | [**get_cardholder_search**](docs/InstancesApi.md#get_cardholder_search) | **GET** /cardholders | Advanced cardholder search
-*LenelClient::InstancesApi* | [**get_count**](docs/InstancesApi.md#get_count) | **GET** /count | Get count
-*LenelClient::InstancesApi* | [**get_instances**](docs/InstancesApi.md#get_instances) | **GET** /instances | Get instances
-*LenelClient::InstancesApi* | [**get_logged_events**](docs/InstancesApi.md#get_logged_events) | **GET** /logged_events | Get logged events
-*LenelClient::InstancesApi* | [**get_mobile_devices**](docs/InstancesApi.md#get_mobile_devices) | **GET** /badge/{badgekey}/mobile_devices | A list of mobile devices for a badge.
-*LenelClient::InstancesApi* | [**get_print_request**](docs/InstancesApi.md#get_print_request) | **GET** /badge/{badge_print_request_id}/print_request | Retrieve a specific badge print request
-*LenelClient::InstancesApi* | [**get_type**](docs/InstancesApi.md#get_type) | **GET** /type | Get type details
-*LenelClient::InstancesApi* | [**get_types**](docs/InstancesApi.md#get_types) | **GET** /types | Get type list
-*LenelClient::InstancesApi* | [**get_video_recorder_authentication_data**](docs/InstancesApi.md#get_video_recorder_authentication_data) | **GET** /video_recorder/{id}/auth_data | Get video recorder authentication data
-*LenelClient::InstancesApi* | [**get_video_recorders**](docs/InstancesApi.md#get_video_recorders) | **GET** /video_recorders | Get video recorders
-*LenelClient::InstancesApi* | [**issue_mobile_credential**](docs/InstancesApi.md#issue_mobile_credential) | **POST** /badge/{badgekey}/issue_mobile_credential | Issues mobile credential
-*LenelClient::InstancesApi* | [**modify_access_level**](docs/InstancesApi.md#modify_access_level) | **PUT** /access_level/{id} | Modify an access level
-*LenelClient::InstancesApi* | [**modify_instance**](docs/InstancesApi.md#modify_instance) | **PUT** /instances | Modify an instance
-*LenelClient::InstancesApi* | [**modify_property_bulk_update**](docs/InstancesApi.md#modify_property_bulk_update) | **PUT** /property_bulk_update | Bulk update the instance property
-*LenelClient::InstancesApi* | [**print_request**](docs/InstancesApi.md#print_request) | **POST** /badge/{badgekey}/print_request | Submit print request for a given badge
-*LenelClient::SettingsApi* | [**get_authorization_warning_settings**](docs/SettingsApi.md#get_authorization_warning_settings) | **GET** /settings/authorization_warning | Get authorization warning settings
-*LenelClient::SettingsApi* | [**get_cardholder_settings**](docs/SettingsApi.md#get_cardholder_settings) | **GET** /settings/cardholder | Get cardholder settings
-*LenelClient::SettingsApi* | [**get_enterprise_settings**](docs/SettingsApi.md#get_enterprise_settings) | **GET** /settings/enterprise | Get enterprise settings
-*LenelClient::SettingsApi* | [**get_password_policy_settings**](docs/SettingsApi.md#get_password_policy_settings) | **GET** /settings/password_policy | Get password policy settings
-*LenelClient::SettingsApi* | [**get_segmentation_settings**](docs/SettingsApi.md#get_segmentation_settings) | **GET** /settings/segmentation | Get segment related settings
-*LenelClient::SettingsApi* | [**get_visit_settings**](docs/SettingsApi.md#get_visit_settings) | **GET** /settings/visit | Get visit settings
-*LenelClient::SettingsApi* | [**modify_password_policy_settings**](docs/SettingsApi.md#modify_password_policy_settings) | **PUT** /settings/password_policy | Modify password policy settings
-*LenelClient::SettingsApi* | [**modify_visit_setting**](docs/SettingsApi.md#modify_visit_setting) | **PUT** /settings/visit | Modify visit settings
-*LenelClient::UsersApi* | [**add_managed_access_levels**](docs/UsersApi.md#add_managed_access_levels) | **POST** /user/{id}/managed_access_levels | Add managed access levels
-*LenelClient::UsersApi* | [**add_user_preferences**](docs/UsersApi.md#add_user_preferences) | **POST** /user_preferences | Add user preference
-*LenelClient::UsersApi* | [**add_user_segments**](docs/UsersApi.md#add_user_segments) | **POST** /user/{id}/segments | Add user segments
-*LenelClient::UsersApi* | [**delete_managed_access_levels**](docs/UsersApi.md#delete_managed_access_levels) | **DELETE** /user/{id}/managed_access_levels | Delete managed access levels
-*LenelClient::UsersApi* | [**delete_user_preferences**](docs/UsersApi.md#delete_user_preferences) | **DELETE** /user_preferences | Delete user preference
-*LenelClient::UsersApi* | [**delete_user_segments**](docs/UsersApi.md#delete_user_segments) | **DELETE** /user/{id}/segments | Delete user segments
-*LenelClient::UsersApi* | [**get_editable_segments**](docs/UsersApi.md#get_editable_segments) | **GET** /editable_segments | Get editable segments
-*LenelClient::UsersApi* | [**get_logged_in_user**](docs/UsersApi.md#get_logged_in_user) | **GET** /logged_in_user | Get logged in user
-*LenelClient::UsersApi* | [**get_managed_access_levels**](docs/UsersApi.md#get_managed_access_levels) | **GET** /user/{id}/managed_access_levels | Get managed access levels
-*LenelClient::UsersApi* | [**get_managers_of_access_level**](docs/UsersApi.md#get_managers_of_access_level) | **GET** /managers_of_access_level | Get managers of access level
-*LenelClient::UsersApi* | [**get_user_preferences**](docs/UsersApi.md#get_user_preferences) | **GET** /user_preferences | Get user preferences
-*LenelClient::UsersApi* | [**get_user_segments**](docs/UsersApi.md#get_user_segments) | **GET** /user/{id}/segments | Get user segments
-*LenelClient::UsersApi* | [**getuser**](docs/UsersApi.md#getuser) | **GET** /user/{id} | Get extended properties for a user
-*LenelClient::UsersApi* | [**modify_user_password**](docs/UsersApi.md#modify_user_password) | **PUT** /user_password | Modify user password
-*LenelClient::UsersApi* | [**modify_user_preferences**](docs/UsersApi.md#modify_user_preferences) | **PUT** /user_preferences | Modify user preference
-*LenelClient::UsersApi* | [**modifyuser**](docs/UsersApi.md#modifyuser) | **PUT** /user/{id} | Sets the extended properties for a user
+*LenelSDK::ApiApi* | [**delete_queued_task**](docs/ApiApi.md#delete_queued_task) | **DELETE** /queue/{id} | Delete queued task
+*LenelSDK::ApiApi* | [**get_feature_availability**](docs/ApiApi.md#get_feature_availability) | **GET** /feature_availability | Get the OnGuard license feature
+*LenelSDK::ApiApi* | [**get_queued_task**](docs/ApiApi.md#get_queued_task) | **GET** /queue/{id} | Get queued task
+*LenelSDK::ApiApi* | [**get_queued_tasks**](docs/ApiApi.md#get_queued_tasks) | **GET** /queue | Get queued tasks
+*LenelSDK::ApiApi* | [**get_version**](docs/ApiApi.md#get_version) | **GET** /version | Get the OnGuard API version
+*LenelSDK::ApiApi* | [**keepalive**](docs/ApiApi.md#keepalive) | **GET** /keepalive | Renew idle timeout countdown.
+*LenelSDK::ApiApi* | [**post_partner_values**](docs/ApiApi.md#post_partner_values) | **POST** /partner_values | Partners can use this to set their unique values.
+*LenelSDK::ApiApi* | [**put_partner_values**](docs/ApiApi.md#put_partner_values) | **PUT** /partner_values | Partners can use this to set their unique values.
+*LenelSDK::AuthenticationApi* | [**add_authentication**](docs/AuthenticationApi.md#add_authentication) | **POST** /authentication | Login
+*LenelSDK::AuthenticationApi* | [**delete_authentication**](docs/AuthenticationApi.md#delete_authentication) | **DELETE** /authentication | Logout
+*LenelSDK::AuthenticationApi* | [**get_directories**](docs/AuthenticationApi.md#get_directories) | **GET** /directories | Get directories
+*LenelSDK::AuthenticationApi* | [**get_identity_provider_url**](docs/AuthenticationApi.md#get_identity_provider_url) | **GET** /identity_provider_url | Get identity provider URL.
+*LenelSDK::AuthenticationApi* | [**get_session**](docs/AuthenticationApi.md#get_session) | **GET** /session | Get the session data for a session token
+*LenelSDK::CardholdersApi* | [**get_active_directory_accounts**](docs/CardholdersApi.md#get_active_directory_accounts) | **GET** /directory_accounts | Search directory accounts
+*LenelSDK::CardholdersApi* | [**get_cardholder_from_directory**](docs/CardholdersApi.md#get_cardholder_from_directory) | **GET** /cardholder_from_directory | Get cardholder ID from their linked directory account
+*LenelSDK::CardholdersApi* | [**get_directory_accounts_matching_cardholders**](docs/CardholdersApi.md#get_directory_accounts_matching_cardholders) | **GET** /directory_accounts_matching_cardholders | Get directory accounts matching the given cardholders
+*LenelSDK::CardholdersApi* | [**update_cardholder_with_directory_account_property**](docs/CardholdersApi.md#update_cardholder_with_directory_account_property) | **PUT** /update_cardholder_with_directory_account_property | Update the cardholder with a directory account property
+*LenelSDK::ConsoleApi* | [**add_or_modify_console_card**](docs/ConsoleApi.md#add_or_modify_console_card) | **POST** /console/cards | Add or modify console card
+*LenelSDK::ConsoleApi* | [**delete_console_card**](docs/ConsoleApi.md#delete_console_card) | **DELETE** /console/cards | Delete console card
+*LenelSDK::ConsoleApi* | [**get_console_layout**](docs/ConsoleApi.md#get_console_layout) | **GET** /console/layouts | Get system console layout
+*LenelSDK::ConsoleApi* | [**modify_console_layout**](docs/ConsoleApi.md#modify_console_layout) | **PUT** /console/layouts | Modify or add system console layout
+*LenelSDK::EventsApi* | [**add_event_subscription**](docs/EventsApi.md#add_event_subscription) | **POST** /event_subscriptions | Add event subscription
+*LenelSDK::EventsApi* | [**disable_event_subscription**](docs/EventsApi.md#disable_event_subscription) | **DELETE** /event_subscriptions/{id} | Disable event subscription
+*LenelSDK::EventsApi* | [**get_event_subscription**](docs/EventsApi.md#get_event_subscription) | **GET** /event_subscriptions/{id} | Get event subscription
+*LenelSDK::EventsApi* | [**get_event_subscriptions**](docs/EventsApi.md#get_event_subscriptions) | **GET** /event_subscriptions | Get event subscriptions
+*LenelSDK::EventsApi* | [**modify_event_subscription**](docs/EventsApi.md#modify_event_subscription) | **PUT** /event_subscriptions/{id} | Modify event subscription
+*LenelSDK::InstancesApi* | [**add_instance**](docs/InstancesApi.md#add_instance) | **POST** /instances | Add an instance
+*LenelSDK::InstancesApi* | [**delete_instance**](docs/InstancesApi.md#delete_instance) | **DELETE** /instances | Delete an instance
+*LenelSDK::InstancesApi* | [**delete_print_request**](docs/InstancesApi.md#delete_print_request) | **DELETE** /badge/{badge_print_request_id}/print_request | Delete a specific badge print request
+*LenelSDK::InstancesApi* | [**execute_method**](docs/InstancesApi.md#execute_method) | **POST** /execute_method | Execute method
+*LenelSDK::InstancesApi* | [**get_badge_printers**](docs/InstancesApi.md#get_badge_printers) | **GET** /badge_printers | Retrieve a list of badge printers
+*LenelSDK::InstancesApi* | [**get_cardholder_search**](docs/InstancesApi.md#get_cardholder_search) | **GET** /cardholders | Advanced cardholder search
+*LenelSDK::InstancesApi* | [**get_count**](docs/InstancesApi.md#get_count) | **GET** /count | Get count
+*LenelSDK::InstancesApi* | [**get_instances**](docs/InstancesApi.md#get_instances) | **GET** /instances | Get instances
+*LenelSDK::InstancesApi* | [**get_logged_events**](docs/InstancesApi.md#get_logged_events) | **GET** /logged_events | Get logged events
+*LenelSDK::InstancesApi* | [**get_mobile_devices**](docs/InstancesApi.md#get_mobile_devices) | **GET** /badge/{badgekey}/mobile_devices | A list of mobile devices for a badge.
+*LenelSDK::InstancesApi* | [**get_print_request**](docs/InstancesApi.md#get_print_request) | **GET** /badge/{badge_print_request_id}/print_request | Retrieve a specific badge print request
+*LenelSDK::InstancesApi* | [**get_type**](docs/InstancesApi.md#get_type) | **GET** /type | Get type details
+*LenelSDK::InstancesApi* | [**get_types**](docs/InstancesApi.md#get_types) | **GET** /types | Get type list
+*LenelSDK::InstancesApi* | [**get_video_recorder_authentication_data**](docs/InstancesApi.md#get_video_recorder_authentication_data) | **GET** /video_recorder/{id}/auth_data | Get video recorder authentication data
+*LenelSDK::InstancesApi* | [**get_video_recorders**](docs/InstancesApi.md#get_video_recorders) | **GET** /video_recorders | Get video recorders
+*LenelSDK::InstancesApi* | [**issue_mobile_credential**](docs/InstancesApi.md#issue_mobile_credential) | **POST** /badge/{badgekey}/issue_mobile_credential | Issues mobile credential
+*LenelSDK::InstancesApi* | [**modify_access_level**](docs/InstancesApi.md#modify_access_level) | **PUT** /access_level/{id} | Modify an access level
+*LenelSDK::InstancesApi* | [**modify_instance**](docs/InstancesApi.md#modify_instance) | **PUT** /instances | Modify an instance
+*LenelSDK::InstancesApi* | [**modify_property_bulk_update**](docs/InstancesApi.md#modify_property_bulk_update) | **PUT** /property_bulk_update | Bulk update the instance property
+*LenelSDK::InstancesApi* | [**print_request**](docs/InstancesApi.md#print_request) | **POST** /badge/{badgekey}/print_request | Submit print request for a given badge
+*LenelSDK::SettingsApi* | [**get_authorization_warning_settings**](docs/SettingsApi.md#get_authorization_warning_settings) | **GET** /settings/authorization_warning | Get authorization warning settings
+*LenelSDK::SettingsApi* | [**get_cardholder_settings**](docs/SettingsApi.md#get_cardholder_settings) | **GET** /settings/cardholder | Get cardholder settings
+*LenelSDK::SettingsApi* | [**get_enterprise_settings**](docs/SettingsApi.md#get_enterprise_settings) | **GET** /settings/enterprise | Get enterprise settings
+*LenelSDK::SettingsApi* | [**get_password_policy_settings**](docs/SettingsApi.md#get_password_policy_settings) | **GET** /settings/password_policy | Get password policy settings
+*LenelSDK::SettingsApi* | [**get_segmentation_settings**](docs/SettingsApi.md#get_segmentation_settings) | **GET** /settings/segmentation | Get segment related settings
+*LenelSDK::SettingsApi* | [**get_visit_settings**](docs/SettingsApi.md#get_visit_settings) | **GET** /settings/visit | Get visit settings
+*LenelSDK::SettingsApi* | [**modify_password_policy_settings**](docs/SettingsApi.md#modify_password_policy_settings) | **PUT** /settings/password_policy | Modify password policy settings
+*LenelSDK::SettingsApi* | [**modify_visit_setting**](docs/SettingsApi.md#modify_visit_setting) | **PUT** /settings/visit | Modify visit settings
+*LenelSDK::UsersApi* | [**add_managed_access_levels**](docs/UsersApi.md#add_managed_access_levels) | **POST** /user/{id}/managed_access_levels | Add managed access levels
+*LenelSDK::UsersApi* | [**add_user_preferences**](docs/UsersApi.md#add_user_preferences) | **POST** /user_preferences | Add user preference
+*LenelSDK::UsersApi* | [**add_user_segments**](docs/UsersApi.md#add_user_segments) | **POST** /user/{id}/segments | Add user segments
+*LenelSDK::UsersApi* | [**delete_managed_access_levels**](docs/UsersApi.md#delete_managed_access_levels) | **DELETE** /user/{id}/managed_access_levels | Delete managed access levels
+*LenelSDK::UsersApi* | [**delete_user_preferences**](docs/UsersApi.md#delete_user_preferences) | **DELETE** /user_preferences | Delete user preference
+*LenelSDK::UsersApi* | [**delete_user_segments**](docs/UsersApi.md#delete_user_segments) | **DELETE** /user/{id}/segments | Delete user segments
+*LenelSDK::UsersApi* | [**get_editable_segments**](docs/UsersApi.md#get_editable_segments) | **GET** /editable_segments | Get editable segments
+*LenelSDK::UsersApi* | [**get_logged_in_user**](docs/UsersApi.md#get_logged_in_user) | **GET** /logged_in_user | Get logged in user
+*LenelSDK::UsersApi* | [**get_managed_access_levels**](docs/UsersApi.md#get_managed_access_levels) | **GET** /user/{id}/managed_access_levels | Get managed access levels
+*LenelSDK::UsersApi* | [**get_managers_of_access_level**](docs/UsersApi.md#get_managers_of_access_level) | **GET** /managers_of_access_level | Get managers of access level
+*LenelSDK::UsersApi* | [**get_user_preferences**](docs/UsersApi.md#get_user_preferences) | **GET** /user_preferences | Get user preferences
+*LenelSDK::UsersApi* | [**get_user_segments**](docs/UsersApi.md#get_user_segments) | **GET** /user/{id}/segments | Get user segments
+*LenelSDK::UsersApi* | [**getuser**](docs/UsersApi.md#getuser) | **GET** /user/{id} | Get extended properties for a user
+*LenelSDK::UsersApi* | [**modify_user_password**](docs/UsersApi.md#modify_user_password) | **PUT** /user_password | Modify user password
+*LenelSDK::UsersApi* | [**modify_user_preferences**](docs/UsersApi.md#modify_user_preferences) | **PUT** /user_preferences | Modify user preference
+*LenelSDK::UsersApi* | [**modifyuser**](docs/UsersApi.md#modifyuser) | **PUT** /user/{id} | Sets the extended properties for a user
 
 
 ## Documentation for Models
 
- - [LenelClient::AccessLevel](docs/AccessLevel.md)
- - [LenelClient::AuthorizationWarningOptions](docs/AuthorizationWarningOptions.md)
- - [LenelClient::AuthorizationWarningOptionsFontProperties](docs/AuthorizationWarningOptionsFontProperties.md)
- - [LenelClient::BadgeMobileDevicesMobileDeviceList](docs/BadgeMobileDevicesMobileDeviceList.md)
- - [LenelClient::BadgePrintRequestResponse](docs/BadgePrintRequestResponse.md)
- - [LenelClient::BadgePrintersPrinters](docs/BadgePrintersPrinters.md)
- - [LenelClient::CardholderOptionsBadgePinProperties](docs/CardholderOptionsBadgePinProperties.md)
- - [LenelClient::ConsoleCard](docs/ConsoleCard.md)
- - [LenelClient::ConsoleCardGroup](docs/ConsoleCardGroup.md)
- - [LenelClient::ConsoleLayout](docs/ConsoleLayout.md)
- - [LenelClient::Credentials](docs/Credentials.md)
- - [LenelClient::DirectoriesItemList](docs/DirectoriesItemList.md)
- - [LenelClient::DirectoriesPropertyValueMap](docs/DirectoriesPropertyValueMap.md)
- - [LenelClient::DirectoryAccountsItemList](docs/DirectoryAccountsItemList.md)
- - [LenelClient::DirectoryAccountsMatchingCardholdersFailureList](docs/DirectoryAccountsMatchingCardholdersFailureList.md)
- - [LenelClient::DirectoryAccountsMatchingCardholdersFailureListItemList](docs/DirectoryAccountsMatchingCardholdersFailureListItemList.md)
- - [LenelClient::DirectoryAccountsMatchingCardholdersSuccessfulList](docs/DirectoryAccountsMatchingCardholdersSuccessfulList.md)
- - [LenelClient::DirectoryAccountsMatchingCardholdersSuccessfulListDirectoryAccount](docs/DirectoryAccountsMatchingCardholdersSuccessfulListDirectoryAccount.md)
- - [LenelClient::DirectoryAccountsMatchingCardholdersSuccessfulListItemList](docs/DirectoryAccountsMatchingCardholdersSuccessfulListItemList.md)
- - [LenelClient::EnterpriseOptionsServerList](docs/EnterpriseOptionsServerList.md)
- - [LenelClient::ErrorError](docs/ErrorError.md)
- - [LenelClient::EventSubscriptionDefinition](docs/EventSubscriptionDefinition.md)
- - [LenelClient::ExecuteMethodParameters](docs/ExecuteMethodParameters.md)
- - [LenelClient::InParameterValueMap](docs/InParameterValueMap.md)
- - [LenelClient::InstanceDefinition](docs/InstanceDefinition.md)
- - [LenelClient::Levels](docs/Levels.md)
- - [LenelClient::Levels1](docs/Levels1.md)
- - [LenelClient::LoggedEvents](docs/LoggedEvents.md)
- - [LenelClient::ManagedAccessLevelsAccessLevelList](docs/ManagedAccessLevelsAccessLevelList.md)
- - [LenelClient::ModifiedEventSubscription](docs/ModifiedEventSubscription.md)
- - [LenelClient::NewEventSubscription](docs/NewEventSubscription.md)
- - [LenelClient::ParameterName](docs/ParameterName.md)
- - [LenelClient::ParameterName1](docs/ParameterName1.md)
- - [LenelClient::ParameterName2](docs/ParameterName2.md)
- - [LenelClient::PartnerValues](docs/PartnerValues.md)
- - [LenelClient::PartnerValues1](docs/PartnerValues1.md)
- - [LenelClient::PasswordPolicySettings](docs/PasswordPolicySettings.md)
- - [LenelClient::PrintRequest](docs/PrintRequest.md)
- - [LenelClient::QueuedTasksItemList](docs/QueuedTasksItemList.md)
- - [LenelClient::Segments](docs/Segments.md)
- - [LenelClient::Segments1](docs/Segments1.md)
- - [LenelClient::SharedResponseDefinition](docs/SharedResponseDefinition.md)
- - [LenelClient::TypeDisplayAttributes](docs/TypeDisplayAttributes.md)
- - [LenelClient::TypeDisplayGroups](docs/TypeDisplayGroups.md)
- - [LenelClient::TypeInParameters](docs/TypeInParameters.md)
- - [LenelClient::TypeMethods](docs/TypeMethods.md)
- - [LenelClient::TypeProperties](docs/TypeProperties.md)
- - [LenelClient::UserExtendedPropertiesPut](docs/UserExtendedPropertiesPut.md)
- - [LenelClient::UserPreference](docs/UserPreference.md)
- - [LenelClient::UserPreferences](docs/UserPreferences.md)
- - [LenelClient::UserPreferences1](docs/UserPreferences1.md)
- - [LenelClient::VideoRecorders](docs/VideoRecorders.md)
- - [LenelClient::VisitSettings1](docs/VisitSettings1.md)
- - [LenelClient::AccessLevelManagerIds](docs/AccessLevelManagerIds.md)
- - [LenelClient::AddConsoleLayout](docs/AddConsoleLayout.md)
- - [LenelClient::AddUserPreferences](docs/AddUserPreferences.md)
- - [LenelClient::BadgeMobileDevices](docs/BadgeMobileDevices.md)
- - [LenelClient::BadgePrinter](docs/BadgePrinter.md)
- - [LenelClient::BadgePrinters](docs/BadgePrinters.md)
- - [LenelClient::CardholderFromDirectory](docs/CardholderFromDirectory.md)
- - [LenelClient::CardholderOptions](docs/CardholderOptions.md)
- - [LenelClient::Directories](docs/Directories.md)
- - [LenelClient::DirectoryAccounts](docs/DirectoryAccounts.md)
- - [LenelClient::DirectoryAccountsMatchingCardholders](docs/DirectoryAccountsMatchingCardholders.md)
- - [LenelClient::EnterpriseOptions](docs/EnterpriseOptions.md)
- - [LenelClient::Error](docs/Error.md)
- - [LenelClient::EventSubscription](docs/EventSubscription.md)
- - [LenelClient::ExecuteMethodResults](docs/ExecuteMethodResults.md)
- - [LenelClient::GetConsoleCards](docs/GetConsoleCards.md)
- - [LenelClient::GetLoggedEvents](docs/GetLoggedEvents.md)
- - [LenelClient::GetUserPreferences](docs/GetUserPreferences.md)
- - [LenelClient::GetVideoRecorders](docs/GetVideoRecorders.md)
- - [LenelClient::Instance](docs/Instance.md)
- - [LenelClient::IssueMobileCredential](docs/IssueMobileCredential.md)
- - [LenelClient::LoggedInUser](docs/LoggedInUser.md)
- - [LenelClient::ManagedAccessLevels](docs/ManagedAccessLevels.md)
- - [LenelClient::ModifyUserPreferences](docs/ModifyUserPreferences.md)
- - [LenelClient::NewQueuedTask](docs/NewQueuedTask.md)
- - [LenelClient::PagedEventSubscriptions](docs/PagedEventSubscriptions.md)
- - [LenelClient::PagedInstances](docs/PagedInstances.md)
- - [LenelClient::QueuedTask](docs/QueuedTask.md)
- - [LenelClient::QueuedTasks](docs/QueuedTasks.md)
- - [LenelClient::SegmentationSettings](docs/SegmentationSettings.md)
- - [LenelClient::Segments](docs/Segments.md)
- - [LenelClient::Type](docs/Type.md)
- - [LenelClient::Types](docs/Types.md)
- - [LenelClient::UpdateCardholderWithDirectoryAccountProperty](docs/UpdateCardholderWithDirectoryAccountProperty.md)
- - [LenelClient::UserExtendedProperties](docs/UserExtendedProperties.md)
- - [LenelClient::VideoRecorderAuthenticationData](docs/VideoRecorderAuthenticationData.md)
- - [LenelClient::VisitSettings](docs/VisitSettings.md)
+ - [LenelSDK::AccessLevel](docs/AccessLevel.md)
+ - [LenelSDK::AuthorizationWarningOptions](docs/AuthorizationWarningOptions.md)
+ - [LenelSDK::AuthorizationWarningOptionsFontProperties](docs/AuthorizationWarningOptionsFontProperties.md)
+ - [LenelSDK::BadgeMobileDevicesMobileDeviceList](docs/BadgeMobileDevicesMobileDeviceList.md)
+ - [LenelSDK::BadgePrintRequestResponse](docs/BadgePrintRequestResponse.md)
+ - [LenelSDK::BadgePrintersPrinters](docs/BadgePrintersPrinters.md)
+ - [LenelSDK::CardholderOptionsBadgePinProperties](docs/CardholderOptionsBadgePinProperties.md)
+ - [LenelSDK::ConsoleCard](docs/ConsoleCard.md)
+ - [LenelSDK::ConsoleCardGroup](docs/ConsoleCardGroup.md)
+ - [LenelSDK::ConsoleLayout](docs/ConsoleLayout.md)
+ - [LenelSDK::Credentials](docs/Credentials.md)
+ - [LenelSDK::DirectoriesItemList](docs/DirectoriesItemList.md)
+ - [LenelSDK::DirectoriesPropertyValueMap](docs/DirectoriesPropertyValueMap.md)
+ - [LenelSDK::DirectoryAccountsItemList](docs/DirectoryAccountsItemList.md)
+ - [LenelSDK::DirectoryAccountsMatchingCardholdersFailureList](docs/DirectoryAccountsMatchingCardholdersFailureList.md)
+ - [LenelSDK::DirectoryAccountsMatchingCardholdersFailureListItemList](docs/DirectoryAccountsMatchingCardholdersFailureListItemList.md)
+ - [LenelSDK::DirectoryAccountsMatchingCardholdersSuccessfulList](docs/DirectoryAccountsMatchingCardholdersSuccessfulList.md)
+ - [LenelSDK::DirectoryAccountsMatchingCardholdersSuccessfulListDirectoryAccount](docs/DirectoryAccountsMatchingCardholdersSuccessfulListDirectoryAccount.md)
+ - [LenelSDK::DirectoryAccountsMatchingCardholdersSuccessfulListItemList](docs/DirectoryAccountsMatchingCardholdersSuccessfulListItemList.md)
+ - [LenelSDK::EnterpriseOptionsServerList](docs/EnterpriseOptionsServerList.md)
+ - [LenelSDK::ErrorError](docs/ErrorError.md)
+ - [LenelSDK::EventSubscriptionDefinition](docs/EventSubscriptionDefinition.md)
+ - [LenelSDK::ExecuteMethodParameters](docs/ExecuteMethodParameters.md)
+ - [LenelSDK::InParameterValueMap](docs/InParameterValueMap.md)
+ - [LenelSDK::InstanceDefinition](docs/InstanceDefinition.md)
+ - [LenelSDK::Levels](docs/Levels.md)
+ - [LenelSDK::Levels1](docs/Levels1.md)
+ - [LenelSDK::LoggedEvents](docs/LoggedEvents.md)
+ - [LenelSDK::ManagedAccessLevelsAccessLevelList](docs/ManagedAccessLevelsAccessLevelList.md)
+ - [LenelSDK::ModifiedEventSubscription](docs/ModifiedEventSubscription.md)
+ - [LenelSDK::NewEventSubscription](docs/NewEventSubscription.md)
+ - [LenelSDK::ParameterName](docs/ParameterName.md)
+ - [LenelSDK::ParameterName1](docs/ParameterName1.md)
+ - [LenelSDK::ParameterName2](docs/ParameterName2.md)
+ - [LenelSDK::PartnerValues](docs/PartnerValues.md)
+ - [LenelSDK::PartnerValues1](docs/PartnerValues1.md)
+ - [LenelSDK::PasswordPolicySettings](docs/PasswordPolicySettings.md)
+ - [LenelSDK::PrintRequest](docs/PrintRequest.md)
+ - [LenelSDK::QueuedTasksItemList](docs/QueuedTasksItemList.md)
+ - [LenelSDK::Segments](docs/Segments.md)
+ - [LenelSDK::Segments1](docs/Segments1.md)
+ - [LenelSDK::SharedResponseDefinition](docs/SharedResponseDefinition.md)
+ - [LenelSDK::TypeDisplayAttributes](docs/TypeDisplayAttributes.md)
+ - [LenelSDK::TypeDisplayGroups](docs/TypeDisplayGroups.md)
+ - [LenelSDK::TypeInParameters](docs/TypeInParameters.md)
+ - [LenelSDK::TypeMethods](docs/TypeMethods.md)
+ - [LenelSDK::TypeProperties](docs/TypeProperties.md)
+ - [LenelSDK::UserExtendedPropertiesPut](docs/UserExtendedPropertiesPut.md)
+ - [LenelSDK::UserPreference](docs/UserPreference.md)
+ - [LenelSDK::UserPreferences](docs/UserPreferences.md)
+ - [LenelSDK::UserPreferences1](docs/UserPreferences1.md)
+ - [LenelSDK::VideoRecorders](docs/VideoRecorders.md)
+ - [LenelSDK::VisitSettings1](docs/VisitSettings1.md)
+ - [LenelSDK::AccessLevelManagerIds](docs/AccessLevelManagerIds.md)
+ - [LenelSDK::AddConsoleLayout](docs/AddConsoleLayout.md)
+ - [LenelSDK::AddUserPreferences](docs/AddUserPreferences.md)
+ - [LenelSDK::BadgeMobileDevices](docs/BadgeMobileDevices.md)
+ - [LenelSDK::BadgePrinter](docs/BadgePrinter.md)
+ - [LenelSDK::BadgePrinters](docs/BadgePrinters.md)
+ - [LenelSDK::CardholderFromDirectory](docs/CardholderFromDirectory.md)
+ - [LenelSDK::CardholderOptions](docs/CardholderOptions.md)
+ - [LenelSDK::Directories](docs/Directories.md)
+ - [LenelSDK::DirectoryAccounts](docs/DirectoryAccounts.md)
+ - [LenelSDK::DirectoryAccountsMatchingCardholders](docs/DirectoryAccountsMatchingCardholders.md)
+ - [LenelSDK::EnterpriseOptions](docs/EnterpriseOptions.md)
+ - [LenelSDK::Error](docs/Error.md)
+ - [LenelSDK::EventSubscription](docs/EventSubscription.md)
+ - [LenelSDK::ExecuteMethodResults](docs/ExecuteMethodResults.md)
+ - [LenelSDK::GetConsoleCards](docs/GetConsoleCards.md)
+ - [LenelSDK::GetLoggedEvents](docs/GetLoggedEvents.md)
+ - [LenelSDK::GetUserPreferences](docs/GetUserPreferences.md)
+ - [LenelSDK::GetVideoRecorders](docs/GetVideoRecorders.md)
+ - [LenelSDK::Instance](docs/Instance.md)
+ - [LenelSDK::IssueMobileCredential](docs/IssueMobileCredential.md)
+ - [LenelSDK::LoggedInUser](docs/LoggedInUser.md)
+ - [LenelSDK::ManagedAccessLevels](docs/ManagedAccessLevels.md)
+ - [LenelSDK::ModifyUserPreferences](docs/ModifyUserPreferences.md)
+ - [LenelSDK::NewQueuedTask](docs/NewQueuedTask.md)
+ - [LenelSDK::PagedEventSubscriptions](docs/PagedEventSubscriptions.md)
+ - [LenelSDK::PagedInstances](docs/PagedInstances.md)
+ - [LenelSDK::QueuedTask](docs/QueuedTask.md)
+ - [LenelSDK::QueuedTasks](docs/QueuedTasks.md)
+ - [LenelSDK::SegmentationSettings](docs/SegmentationSettings.md)
+ - [LenelSDK::Segments](docs/Segments.md)
+ - [LenelSDK::Type](docs/Type.md)
+ - [LenelSDK::Types](docs/Types.md)
+ - [LenelSDK::UpdateCardholderWithDirectoryAccountProperty](docs/UpdateCardholderWithDirectoryAccountProperty.md)
+ - [LenelSDK::UserExtendedProperties](docs/UserExtendedProperties.md)
+ - [LenelSDK::VideoRecorderAuthenticationData](docs/VideoRecorderAuthenticationData.md)
+ - [LenelSDK::VisitSettings](docs/VisitSettings.md)
 
 
 ## Documentation for Authorization

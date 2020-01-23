@@ -1,4 +1,4 @@
-# LenelClient::TypeMethods
+# LenelSDK::TypeMethods
 
 ## Properties
 Name | Type | Description | Notes

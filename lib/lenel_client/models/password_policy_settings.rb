@@ -12,7 +12,7 @@ Swagger Codegen version: 2.4.9-SNAPSHOT
 
 require 'date'
 
-module LenelClient
+module LenelSDK
   class PasswordPolicySettings
     # A flag indicating whether the lockout policy is enabled.
     attr_accessor :is_lockout_policy_enabled
@@ -344,7 +344,7 @@ module LenelClient
           end
         end
       else # model
-        temp_model = LenelClient.const_get(type).new
+        temp_model = LenelSDK.const_get(type).new
         temp_model.build_from_hash(value)
       end
     end

@@ -12,7 +12,7 @@ Swagger Codegen version: 2.4.9-SNAPSHOT
 
 require 'date'
 
-module LenelClient
+module LenelSDK
   class UserExtendedPropertiesPut
     # The database identifier in an Enterprise system that identifies the system containing the user data, if Enterprise support is enabled.
     attr_accessor :database_id
@@ -164,7 +164,7 @@ module LenelClient
           end
         end
       else # model
-        temp_model = LenelClient.const_get(type).new
+        temp_model = LenelSDK.const_get(type).new
         temp_model.build_from_hash(value)
       end
     end

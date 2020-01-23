@@ -1,4 +1,4 @@
-# LenelClient::VideoRecorders
+# LenelSDK::VideoRecorders
 
 ## Properties
 Name | Type | Description | Notes

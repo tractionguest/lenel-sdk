@@ -1,4 +1,4 @@
-# LenelClient::InParameterValueMap
+# LenelSDK::InParameterValueMap
 
 ## Properties
 Name | Type | Description | Notes

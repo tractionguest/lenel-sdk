@@ -1,4 +1,4 @@
-# LenelClient::AuthenticationApi
+# LenelSDK::AuthenticationApi
 
 All URIs are relative to *https://localhost/api/access/onguard/openaccess*
 
@@ -23,16 +23,16 @@ Login to the API, retrieving a session token. This method expects the **Applicat
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   #config.api_key_prefix['Application-Id'] = 'Bearer'
 end
 
-api_instance = LenelClient::AuthenticationApi.new
+api_instance = LenelSDK::AuthenticationApi.new
 
-credentials = LenelClient::Credentials.new # Credentials | Either username and password must be present, or the oidc_token must be present.
+credentials = LenelSDK::Credentials.new # Credentials | Either username and password must be present, or the oidc_token must be present.
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -44,7 +44,7 @@ begin
   #Login
   result = api_instance.add_authentication(credentials, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling AuthenticationApi->add_authentication: #{e}"
 end
 ```
@@ -84,7 +84,7 @@ Logout of the API, invalidating the session token.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -96,7 +96,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::AuthenticationApi.new
+api_instance = LenelSDK::AuthenticationApi.new
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -108,7 +108,7 @@ begin
   #Logout
   result = api_instance.delete_authentication(version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling AuthenticationApi->delete_authentication: #{e}"
 end
 ```
@@ -147,7 +147,7 @@ Gets the authentication directories configured.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -159,7 +159,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::AuthenticationApi.new
+api_instance = LenelSDK::AuthenticationApi.new
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -171,7 +171,7 @@ begin
   #Get directories
   result = api_instance.get_directories(version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling AuthenticationApi->get_directories: #{e}"
 end
 ```
@@ -210,7 +210,7 @@ Get login URL for the selected OpenID Connect identity provider.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -222,7 +222,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::AuthenticationApi.new
+api_instance = LenelSDK::AuthenticationApi.new
 
 directory_id = 'directory_id_example' # String | The directory ID of the selected identity provider.
 
@@ -240,7 +240,7 @@ begin
   #Get identity provider URL.
   result = api_instance.get_identity_provider_url(directory_id, redirect_url, response_mode, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling AuthenticationApi->get_identity_provider_url: #{e}"
 end
 ```
@@ -282,7 +282,7 @@ Used to retrieve the session data associated with a session token.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -294,7 +294,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::AuthenticationApi.new
+api_instance = LenelSDK::AuthenticationApi.new
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -306,7 +306,7 @@ begin
   #Get the session data for a session token
   result = api_instance.get_session(version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling AuthenticationApi->get_session: #{e}"
 end
 ```

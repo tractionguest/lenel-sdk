@@ -1,4 +1,4 @@
-# LenelClient::ManagedAccessLevelsAccessLevelList
+# LenelSDK::ManagedAccessLevelsAccessLevelList
 
 ## Properties
 Name | Type | Description | Notes

@@ -12,7 +12,7 @@ Swagger Codegen version: 2.4.9-SNAPSHOT
 
 require 'uri'
 
-module LenelClient
+module LenelSDK
   class AuthenticationApi
     attr_accessor :api_client
 

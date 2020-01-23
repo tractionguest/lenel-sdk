@@ -1,4 +1,4 @@
-# LenelClient::IssueMobileCredential
+# LenelSDK::IssueMobileCredential
 
 ## Properties
 Name | Type | Description | Notes

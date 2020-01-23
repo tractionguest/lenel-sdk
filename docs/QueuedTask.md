@@ -1,4 +1,4 @@
-# LenelClient::QueuedTask
+# LenelSDK::QueuedTask
 
 ## Properties
 Name | Type | Description | Notes

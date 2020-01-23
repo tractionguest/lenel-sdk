@@ -118,10 +118,10 @@ require 'lenel_client/api/instances_api'
 require 'lenel_client/api/settings_api'
 require 'lenel_client/api/users_api'
 
-module LenelClient
+module LenelSDK
   class << self
     # Customize default settings for the SDK using block.
-    #   LenelClient.configure do |config|
+    #   LenelSDK.configure do |config|
     #     config.username = "xxx"
     #     config.password = "xxx"
     #   end

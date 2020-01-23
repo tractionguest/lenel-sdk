@@ -1,4 +1,4 @@
-# LenelClient::SettingsApi
+# LenelSDK::SettingsApi
 
 All URIs are relative to *https://localhost/api/access/onguard/openaccess*
 
@@ -26,7 +26,7 @@ Returns the authorization warning text, display settings, and Yes/No button text
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -38,7 +38,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::SettingsApi.new
+api_instance = LenelSDK::SettingsApi.new
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -50,7 +50,7 @@ begin
   #Get authorization warning settings
   result = api_instance.get_authorization_warning_settings(version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling SettingsApi->get_authorization_warning_settings: #{e}"
 end
 ```
@@ -89,7 +89,7 @@ Returns cardholder and badge-related information for the system.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -101,7 +101,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::SettingsApi.new
+api_instance = LenelSDK::SettingsApi.new
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -114,7 +114,7 @@ begin
   #Get cardholder settings
   result = api_instance.get_cardholder_settings(version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling SettingsApi->get_cardholder_settings: #{e}"
 end
 ```
@@ -154,7 +154,7 @@ Returns enterprise information for the system.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -166,7 +166,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::SettingsApi.new
+api_instance = LenelSDK::SettingsApi.new
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -178,7 +178,7 @@ begin
   #Get enterprise settings
   result = api_instance.get_enterprise_settings(version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling SettingsApi->get_enterprise_settings: #{e}"
 end
 ```
@@ -217,7 +217,7 @@ Gets the current password policy settings of the system.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -229,7 +229,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::SettingsApi.new
+api_instance = LenelSDK::SettingsApi.new
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -241,7 +241,7 @@ begin
   #Get password policy settings
   result = api_instance.get_password_policy_settings(version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling SettingsApi->get_password_policy_settings: #{e}"
 end
 ```
@@ -280,7 +280,7 @@ Gets the current segment settings of the system.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -292,7 +292,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::SettingsApi.new
+api_instance = LenelSDK::SettingsApi.new
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -304,7 +304,7 @@ begin
   #Get segment related settings
   result = api_instance.get_segmentation_settings(version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling SettingsApi->get_segmentation_settings: #{e}"
 end
 ```
@@ -343,7 +343,7 @@ Gets the current visit settings of the system.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -355,7 +355,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::SettingsApi.new
+api_instance = LenelSDK::SettingsApi.new
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -367,7 +367,7 @@ begin
   #Get visit settings
   result = api_instance.get_visit_settings(version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling SettingsApi->get_visit_settings: #{e}"
 end
 ```
@@ -406,7 +406,7 @@ Modifies the system password policy settings.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -418,9 +418,9 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::SettingsApi.new
+api_instance = LenelSDK::SettingsApi.new
 
-modified_password_policy_settings = LenelClient::PasswordPolicySettings.new # PasswordPolicySettings | The modified password policy settings.
+modified_password_policy_settings = LenelSDK::PasswordPolicySettings.new # PasswordPolicySettings | The modified password policy settings.
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -432,7 +432,7 @@ begin
   #Modify password policy settings
   result = api_instance.modify_password_policy_settings(modified_password_policy_settings, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling SettingsApi->modify_password_policy_settings: #{e}"
 end
 ```
@@ -472,7 +472,7 @@ Modifies system visit settings.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -484,9 +484,9 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::SettingsApi.new
+api_instance = LenelSDK::SettingsApi.new
 
-visit_settings = LenelClient::VisitSettings1.new # VisitSettings1 | 
+visit_settings = LenelSDK::VisitSettings1.new # VisitSettings1 | 
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -498,7 +498,7 @@ begin
   #Modify visit settings
   result = api_instance.modify_visit_setting(visit_settings, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling SettingsApi->modify_visit_setting: #{e}"
 end
 ```

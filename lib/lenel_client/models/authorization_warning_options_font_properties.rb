@@ -12,7 +12,7 @@ Swagger Codegen version: 2.4.9-SNAPSHOT
 
 require 'date'
 
-module LenelClient
+module LenelSDK
   # Describes the display font for the authorization warning.
   class AuthorizationWarningOptionsFontProperties
     attr_accessor :height
@@ -260,7 +260,7 @@ module LenelClient
           end
         end
       else # model
-        temp_model = LenelClient.const_get(type).new
+        temp_model = LenelSDK.const_get(type).new
         temp_model.build_from_hash(value)
       end
     end

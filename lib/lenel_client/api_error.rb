@@ -10,7 +10,7 @@ Swagger Codegen version: 2.4.9-SNAPSHOT
 
 =end
 
-module LenelClient
+module LenelSDK
   class ApiError < StandardError
     attr_reader :code, :response_headers, :response_body
 

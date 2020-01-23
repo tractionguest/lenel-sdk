@@ -1,4 +1,4 @@
-# LenelClient::BadgeMobileDevicesMobileDeviceList
+# LenelSDK::BadgeMobileDevicesMobileDeviceList
 
 ## Properties
 Name | Type | Description | Notes

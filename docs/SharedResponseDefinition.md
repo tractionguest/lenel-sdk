@@ -1,4 +1,4 @@
-# LenelClient::SharedResponseDefinition
+# LenelSDK::SharedResponseDefinition
 
 ## Properties
 Name | Type | Description | Notes

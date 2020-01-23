@@ -1,4 +1,4 @@
-# LenelClient::VisitSettings
+# LenelSDK::VisitSettings
 
 ## Properties
 Name | Type | Description | Notes

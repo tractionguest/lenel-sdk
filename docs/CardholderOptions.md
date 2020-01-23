@@ -1,4 +1,4 @@
-# LenelClient::CardholderOptions
+# LenelSDK::CardholderOptions
 
 ## Properties
 Name | Type | Description | Notes

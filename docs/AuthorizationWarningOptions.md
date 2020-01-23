@@ -1,4 +1,4 @@
-# LenelClient::AuthorizationWarningOptions
+# LenelSDK::AuthorizationWarningOptions
 
 ## Properties
 Name | Type | Description | Notes

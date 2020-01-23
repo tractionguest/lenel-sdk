@@ -1,4 +1,4 @@
-# LenelClient::CardholderOptionsBadgePinProperties
+# LenelSDK::CardholderOptionsBadgePinProperties
 
 ## Properties
 Name | Type | Description | Notes

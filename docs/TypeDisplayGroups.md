@@ -1,4 +1,4 @@
-# LenelClient::TypeDisplayGroups
+# LenelSDK::TypeDisplayGroups
 
 ## Properties
 Name | Type | Description | Notes

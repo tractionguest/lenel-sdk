@@ -1,4 +1,4 @@
-# LenelClient::AddConsoleLayout
+# LenelSDK::AddConsoleLayout
 
 ## Properties
 Name | Type | Description | Notes

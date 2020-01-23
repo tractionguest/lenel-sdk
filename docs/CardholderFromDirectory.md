@@ -1,4 +1,4 @@
-# LenelClient::CardholderFromDirectory
+# LenelSDK::CardholderFromDirectory
 
 ## Properties
 Name | Type | Description | Notes

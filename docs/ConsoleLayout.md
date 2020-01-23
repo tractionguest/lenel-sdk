@@ -1,4 +1,4 @@
-# LenelClient::ConsoleLayout
+# LenelSDK::ConsoleLayout
 
 ## Properties
 Name | Type | Description | Notes

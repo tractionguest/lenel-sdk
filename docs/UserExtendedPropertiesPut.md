@@ -1,4 +1,4 @@
-# LenelClient::UserExtendedPropertiesPut
+# LenelSDK::UserExtendedPropertiesPut
 
 ## Properties
 Name | Type | Description | Notes

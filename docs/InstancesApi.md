@@ -1,4 +1,4 @@
-# LenelClient::InstancesApi
+# LenelSDK::InstancesApi
 
 All URIs are relative to *https://localhost/api/access/onguard/openaccess*
 
@@ -38,7 +38,7 @@ Adds an instance of the given type.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -50,11 +50,11 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::InstancesApi.new
+api_instance = LenelSDK::InstancesApi.new
 
 type_name = 'type_name_example' # String | 
 
-instance = LenelClient::InstanceDefinition.new # InstanceDefinition | The new instance.
+instance = LenelSDK::InstanceDefinition.new # InstanceDefinition | The new instance.
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -66,7 +66,7 @@ begin
   #Add an instance
   result = api_instance.add_instance(type_name, instance, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling InstancesApi->add_instance: #{e}"
 end
 ```
@@ -107,7 +107,7 @@ Deletes an instance of the given type.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -119,11 +119,11 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::InstancesApi.new
+api_instance = LenelSDK::InstancesApi.new
 
 type_name = 'type_name_example' # String | 
 
-instance = LenelClient::InstanceDefinition.new # InstanceDefinition | The instance to delete, with only key properties required.
+instance = LenelSDK::InstanceDefinition.new # InstanceDefinition | The instance to delete, with only key properties required.
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -135,7 +135,7 @@ begin
   #Delete an instance
   result = api_instance.delete_instance(type_name, instance, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling InstancesApi->delete_instance: #{e}"
 end
 ```
@@ -176,7 +176,7 @@ Delete a request to print the badge.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -188,7 +188,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::InstancesApi.new
+api_instance = LenelSDK::InstancesApi.new
 
 badge_print_request_id = 'badge_print_request_id_example' # String | The badge print request ID represents a unique identifier associated with a badge print request.
 
@@ -202,7 +202,7 @@ opts = {
 begin
   #Delete a specific badge print request
   api_instance.delete_print_request(badge_print_request_id, version, opts)
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling InstancesApi->delete_print_request: #{e}"
 end
 ```
@@ -243,7 +243,7 @@ Executes a method on an instance.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -255,13 +255,13 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::InstancesApi.new
+api_instance = LenelSDK::InstancesApi.new
 
 type_name = 'type_name_example' # String | The type for which to execute a method.
 
 method_name = 'method_name_example' # String | The name of the method to execute.
 
-execute_method_parameters = LenelClient::ExecuteMethodParameters.new # ExecuteMethodParameters | The execute method parameters.
+execute_method_parameters = LenelSDK::ExecuteMethodParameters.new # ExecuteMethodParameters | The execute method parameters.
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -273,7 +273,7 @@ begin
   #Execute method
   result = api_instance.execute_method(type_name, method_name, execute_method_parameters, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling InstancesApi->execute_method: #{e}"
 end
 ```
@@ -315,7 +315,7 @@ Retrieve a list of badge printers.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -327,7 +327,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::InstancesApi.new
+api_instance = LenelSDK::InstancesApi.new
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -340,7 +340,7 @@ begin
   #Retrieve a list of badge printers
   result = api_instance.get_badge_printers(version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling InstancesApi->get_badge_printers: #{e}"
 end
 ```
@@ -380,7 +380,7 @@ Performs an advanced cardholder search, optionally searching on Badge fields.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -392,7 +392,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::InstancesApi.new
+api_instance = LenelSDK::InstancesApi.new
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -415,7 +415,7 @@ begin
   #Advanced cardholder search
   result = api_instance.get_cardholder_search(version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling InstancesApi->get_cardholder_search: #{e}"
 end
 ```
@@ -465,7 +465,7 @@ Gets the number of instances of a given type.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -477,7 +477,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::InstancesApi.new
+api_instance = LenelSDK::InstancesApi.new
 
 type_name = 'type_name_example' # String | 
 
@@ -492,7 +492,7 @@ begin
   #Get count
   result = api_instance.get_count(type_name, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling InstancesApi->get_count: #{e}"
 end
 ```
@@ -533,7 +533,7 @@ Gets instances of the given type.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -545,7 +545,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::InstancesApi.new
+api_instance = LenelSDK::InstancesApi.new
 
 type_name = 'type_name_example' # String | 
 
@@ -563,7 +563,7 @@ begin
   #Get instances
   result = api_instance.get_instances(type_name, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling InstancesApi->get_instances: #{e}"
 end
 ```
@@ -607,7 +607,7 @@ Used to retrieve a page of logged events and their relevant properties.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -619,7 +619,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::InstancesApi.new
+api_instance = LenelSDK::InstancesApi.new
 
 filter = 'filter_example' # String | The filter based on logged event properties.
 
@@ -636,7 +636,7 @@ begin
   #Get logged events
   result = api_instance.get_logged_events(filter, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling InstancesApi->get_logged_events: #{e}"
 end
 ```
@@ -679,7 +679,7 @@ Gets a list of mobile devices for a person associated with a badge. This list co
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -691,7 +691,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::InstancesApi.new
+api_instance = LenelSDK::InstancesApi.new
 
 badgekey = 56 # Integer | The badgekey of the badge assigned to the mobile devices you want to get from OnGuard.
 
@@ -705,7 +705,7 @@ begin
   #A list of mobile devices for a badge.
   result = api_instance.get_mobile_devices(badgekey, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling InstancesApi->get_mobile_devices: #{e}"
 end
 ```
@@ -745,7 +745,7 @@ Get the status of a print request for the badge.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -757,7 +757,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::InstancesApi.new
+api_instance = LenelSDK::InstancesApi.new
 
 badge_print_request_id = 'badge_print_request_id_example' # String | The badge print request ID represents a unique identifier associated with a badge print request.
 
@@ -771,7 +771,7 @@ begin
   #Retrieve a specific badge print request
   result = api_instance.get_print_request(badge_print_request_id, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling InstancesApi->get_print_request: #{e}"
 end
 ```
@@ -811,7 +811,7 @@ Gets the details of a specific type.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -823,7 +823,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::InstancesApi.new
+api_instance = LenelSDK::InstancesApi.new
 
 type_name = 'type_name_example' # String | 
 
@@ -837,7 +837,7 @@ begin
   #Get type details
   result = api_instance.get_type(type_name, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling InstancesApi->get_type: #{e}"
 end
 ```
@@ -877,7 +877,7 @@ Gets a list of the supported instance types.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -889,7 +889,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::InstancesApi.new
+api_instance = LenelSDK::InstancesApi.new
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -901,7 +901,7 @@ begin
   #Get type list
   result = api_instance.get_types(version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling InstancesApi->get_types: #{e}"
 end
 ```
@@ -940,7 +940,7 @@ Retrieves the authentication token for a Lenel NVR. This token is used for authe
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -952,7 +952,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::InstancesApi.new
+api_instance = LenelSDK::InstancesApi.new
 
 id = 56 # Integer | The panel ID of the recorder for which the authentication data is being requested.
 
@@ -966,7 +966,7 @@ begin
   #Get video recorder authentication data
   result = api_instance.get_video_recorder_authentication_data(id, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling InstancesApi->get_video_recorder_authentication_data: #{e}"
 end
 ```
@@ -1006,7 +1006,7 @@ Used to retrieve a page of video recorders and their relevant properties.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -1018,7 +1018,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::InstancesApi.new
+api_instance = LenelSDK::InstancesApi.new
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -1033,7 +1033,7 @@ begin
   #Get video recorders
   result = api_instance.get_video_recorders(version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling InstancesApi->get_video_recorders: #{e}"
 end
 ```
@@ -1075,7 +1075,7 @@ Issues a credential to a mobile device of the person with the given badge.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -1087,11 +1087,11 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::InstancesApi.new
+api_instance = LenelSDK::InstancesApi.new
 
 badgekey = 56 # Integer | 
 
-in_parameter_value_map = LenelClient::InParameterValueMap.new # InParameterValueMap | 
+in_parameter_value_map = LenelSDK::InParameterValueMap.new # InParameterValueMap | 
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -1103,7 +1103,7 @@ begin
   #Issues mobile credential
   result = api_instance.issue_mobile_credential(badgekey, in_parameter_value_map, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling InstancesApi->issue_mobile_credential: #{e}"
 end
 ```
@@ -1144,7 +1144,7 @@ Modifies the access level with the given ID.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -1156,14 +1156,14 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::InstancesApi.new
+api_instance = LenelSDK::InstancesApi.new
 
 id = 56 # Integer | Id of the access level to modify.
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
 opts = { 
-  modified_access_level: LenelClient::AccessLevel.new, # AccessLevel | The modified access level.
+  modified_access_level: LenelSDK::AccessLevel.new, # AccessLevel | The modified access level.
   queue: false # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
 }
 
@@ -1171,7 +1171,7 @@ begin
   #Modify an access level
   result = api_instance.modify_access_level(id, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling InstancesApi->modify_access_level: #{e}"
 end
 ```
@@ -1212,7 +1212,7 @@ Modifies an instance of the given type.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -1224,11 +1224,11 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::InstancesApi.new
+api_instance = LenelSDK::InstancesApi.new
 
 type_name = 'type_name_example' # String | 
 
-instance = LenelClient::InstanceDefinition.new # InstanceDefinition | The updated instance.
+instance = LenelSDK::InstanceDefinition.new # InstanceDefinition | The updated instance.
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -1240,7 +1240,7 @@ begin
   #Modify an instance
   result = api_instance.modify_instance(type_name, instance, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling InstancesApi->modify_instance: #{e}"
 end
 ```
@@ -1281,7 +1281,7 @@ Bulk update the instance property with the given instance ids.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -1293,11 +1293,11 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::InstancesApi.new
+api_instance = LenelSDK::InstancesApi.new
 
 type_name = 'type_name_example' # String | Type name.
 
-parameter_name = LenelClient::ParameterName2.new # ParameterName2 | 
+parameter_name = LenelSDK::ParameterName2.new # ParameterName2 | 
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -1310,7 +1310,7 @@ begin
   #Bulk update the instance property
   result = api_instance.modify_property_bulk_update(type_name, parameter_name, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling InstancesApi->modify_property_bulk_update: #{e}"
 end
 ```
@@ -1352,7 +1352,7 @@ Submit a request to print the badge.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -1364,14 +1364,14 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::InstancesApi.new
+api_instance = LenelSDK::InstancesApi.new
 
 badgekey = 56 # Integer | The badge key of the badge associated with an OnGuard cardholder.
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
 opts = { 
-  print_request: LenelClient::PrintRequest.new, # PrintRequest | Additional parameters associated with a badge print request.
+  print_request: LenelSDK::PrintRequest.new, # PrintRequest | Additional parameters associated with a badge print request.
   queue: false # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
 }
 
@@ -1379,7 +1379,7 @@ begin
   #Submit print request for a given badge
   result = api_instance.print_request(badgekey, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling InstancesApi->print_request: #{e}"
 end
 ```

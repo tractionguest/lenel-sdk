@@ -1,4 +1,4 @@
-# LenelClient::PagedEventSubscriptions
+# LenelSDK::PagedEventSubscriptions
 
 ## Properties
 Name | Type | Description | Notes

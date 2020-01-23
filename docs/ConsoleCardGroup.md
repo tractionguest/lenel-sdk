@@ -1,4 +1,4 @@
-# LenelClient::ConsoleCardGroup
+# LenelSDK::ConsoleCardGroup
 
 ## Properties
 Name | Type | Description | Notes

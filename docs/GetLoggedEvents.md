@@ -1,4 +1,4 @@
-# LenelClient::GetLoggedEvents
+# LenelSDK::GetLoggedEvents
 
 ## Properties
 Name | Type | Description | Notes

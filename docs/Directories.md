@@ -1,4 +1,4 @@
-# LenelClient::Directories
+# LenelSDK::Directories
 
 ## Properties
 Name | Type | Description | Notes

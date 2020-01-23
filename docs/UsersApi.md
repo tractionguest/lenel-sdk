@@ -1,4 +1,4 @@
-# LenelClient::UsersApi
+# LenelSDK::UsersApi
 
 All URIs are relative to *https://localhost/api/access/onguard/openaccess*
 
@@ -34,7 +34,7 @@ Adds to the existing list of access levels a user can manage.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -46,11 +46,11 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::UsersApi.new
+api_instance = LenelSDK::UsersApi.new
 
 id = 'id_example' # String | ID of user to which access level management will be added.
 
-levels = LenelClient::Levels.new # Levels | A list of access level IDs the user can manage.
+levels = LenelSDK::Levels.new # Levels | A list of access level IDs the user can manage.
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -62,7 +62,7 @@ begin
   #Add managed access levels
   result = api_instance.add_managed_access_levels(id, levels, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling UsersApi->add_managed_access_levels: #{e}"
 end
 ```
@@ -103,7 +103,7 @@ Adds a user preference.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -115,9 +115,9 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::UsersApi.new
+api_instance = LenelSDK::UsersApi.new
 
-user_preferences = LenelClient::UserPreferences1.new # UserPreferences1 | 
+user_preferences = LenelSDK::UserPreferences1.new # UserPreferences1 | 
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -129,7 +129,7 @@ begin
   #Add user preference
   result = api_instance.add_user_preferences(user_preferences, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling UsersApi->add_user_preferences: #{e}"
 end
 ```
@@ -169,7 +169,7 @@ Adds to the existing list of segments assigned to a user.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -181,11 +181,11 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::UsersApi.new
+api_instance = LenelSDK::UsersApi.new
 
 id = 'id_example' # String | ID of the user to which segment assignment will be added.
 
-segments = LenelClient::Segments.new # Segments | A list of segment IDs that indicate which segments to assign to the user.
+segments = LenelSDK::Segments.new # Segments | A list of segment IDs that indicate which segments to assign to the user.
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -197,7 +197,7 @@ begin
   #Add user segments
   result = api_instance.add_user_segments(id, segments, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling UsersApi->add_user_segments: #{e}"
 end
 ```
@@ -238,7 +238,7 @@ Deletes specific access levels from the access levels a user can manage.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -250,11 +250,11 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::UsersApi.new
+api_instance = LenelSDK::UsersApi.new
 
 id = 'id_example' # String | ID of user from which to remove access level management.
 
-levels = LenelClient::Levels1.new # Levels1 | A list of access level IDs the user cannot manage.
+levels = LenelSDK::Levels1.new # Levels1 | A list of access level IDs the user cannot manage.
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -266,7 +266,7 @@ begin
   #Delete managed access levels
   result = api_instance.delete_managed_access_levels(id, levels, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling UsersApi->delete_managed_access_levels: #{e}"
 end
 ```
@@ -307,7 +307,7 @@ Deletes specified preference from the existing user preferences.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -319,7 +319,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::UsersApi.new
+api_instance = LenelSDK::UsersApi.new
 
 preference_id = 56 # Integer | ID of user preference to be deleted.
 
@@ -333,7 +333,7 @@ begin
   #Delete user preference
   result = api_instance.delete_user_preferences(preference_id, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling UsersApi->delete_user_preferences: #{e}"
 end
 ```
@@ -373,7 +373,7 @@ Deletes specific segments from the segments assigned to a user.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -385,11 +385,11 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::UsersApi.new
+api_instance = LenelSDK::UsersApi.new
 
 id = 'id_example' # String | ID of user from which to remove segment assignment.
 
-segments = LenelClient::Segments1.new # Segments1 | A list of segment IDs that indicate which segments to remove from the user.
+segments = LenelSDK::Segments1.new # Segments1 | A list of segment IDs that indicate which segments to remove from the user.
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -401,7 +401,7 @@ begin
   #Delete user segments
   result = api_instance.delete_user_segments(id, segments, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling UsersApi->delete_user_segments: #{e}"
 end
 ```
@@ -442,7 +442,7 @@ Returns a list of segments for which the logged-in user has editable permission,
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -454,7 +454,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::UsersApi.new
+api_instance = LenelSDK::UsersApi.new
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -466,7 +466,7 @@ begin
   #Get editable segments
   result = api_instance.get_editable_segments(version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling UsersApi->get_editable_segments: #{e}"
 end
 ```
@@ -505,7 +505,7 @@ Gets details about the logged in user.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -517,7 +517,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::UsersApi.new
+api_instance = LenelSDK::UsersApi.new
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -529,7 +529,7 @@ begin
   #Get logged in user
   result = api_instance.get_logged_in_user(version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling UsersApi->get_logged_in_user: #{e}"
 end
 ```
@@ -568,7 +568,7 @@ Returns a list of access levels a user can manage and a flag indicating whether 
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -580,7 +580,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::UsersApi.new
+api_instance = LenelSDK::UsersApi.new
 
 id = 'id_example' # String | ID of user for whom you want a list of access levels the user can manage. If this parameter is not provided, the access level list is provided for the logged in user.
 
@@ -594,7 +594,7 @@ begin
   #Get managed access levels
   result = api_instance.get_managed_access_levels(id, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling UsersApi->get_managed_access_levels: #{e}"
 end
 ```
@@ -634,7 +634,7 @@ Returns a list of user IDs for users who can manage the access level.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -646,7 +646,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::UsersApi.new
+api_instance = LenelSDK::UsersApi.new
 
 access_level_id = 56 # Integer | ID of the access level for which to retrieve users who can manage that access level.
 
@@ -660,7 +660,7 @@ begin
   #Get managers of access level
   result = api_instance.get_managers_of_access_level(access_level_id, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling UsersApi->get_managers_of_access_level: #{e}"
 end
 ```
@@ -700,7 +700,7 @@ Returns user preferences for the current user and application type
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -712,7 +712,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::UsersApi.new
+api_instance = LenelSDK::UsersApi.new
 
 client_name = 'client_name_example' # String | The application client name
 
@@ -728,7 +728,7 @@ begin
   #Get user preferences
   result = api_instance.get_user_preferences(client_name, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling UsersApi->get_user_preferences: #{e}"
 end
 ```
@@ -770,7 +770,7 @@ Returns a list of segments assigned to a user.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -782,7 +782,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::UsersApi.new
+api_instance = LenelSDK::UsersApi.new
 
 id = 'id_example' # String | ID of the user for whom you want to retrieve segments.
 
@@ -796,7 +796,7 @@ begin
   #Get user segments
   result = api_instance.get_user_segments(id, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling UsersApi->get_user_segments: #{e}"
 end
 ```
@@ -836,7 +836,7 @@ Gets extended properties for a user.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -848,7 +848,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::UsersApi.new
+api_instance = LenelSDK::UsersApi.new
 
 id = 'id_example' # String | ID of user for which to retrieve the extended properties.
 
@@ -862,7 +862,7 @@ begin
   #Get extended properties for a user
   result = api_instance.getuser(id, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling UsersApi->getuser: #{e}"
 end
 ```
@@ -902,7 +902,7 @@ Modify the user's password.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -914,9 +914,9 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::UsersApi.new
+api_instance = LenelSDK::UsersApi.new
 
-parameter_name = LenelClient::ParameterName.new # ParameterName | 
+parameter_name = LenelSDK::ParameterName.new # ParameterName | 
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -928,7 +928,7 @@ begin
   #Modify user password
   result = api_instance.modify_user_password(parameter_name, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling UsersApi->modify_user_password: #{e}"
 end
 ```
@@ -968,7 +968,7 @@ Modify the existing user preference with the given ID.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -980,9 +980,9 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::UsersApi.new
+api_instance = LenelSDK::UsersApi.new
 
-user_preferences = LenelClient::UserPreferences.new # UserPreferences | 
+user_preferences = LenelSDK::UserPreferences.new # UserPreferences | 
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -994,7 +994,7 @@ begin
   #Modify user preference
   result = api_instance.modify_user_preferences(user_preferences, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling UsersApi->modify_user_preferences: #{e}"
 end
 ```
@@ -1034,7 +1034,7 @@ Sets the extended properties for a user.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -1046,14 +1046,14 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::UsersApi.new
+api_instance = LenelSDK::UsersApi.new
 
 id = 'id_example' # String | ID of user for which to set the extended properties.
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
 opts = { 
-  properties: LenelClient::UserExtendedPropertiesPut.new, # UserExtendedPropertiesPut | The updated properties
+  properties: LenelSDK::UserExtendedPropertiesPut.new, # UserExtendedPropertiesPut | The updated properties
   queue: false # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
 }
 
@@ -1061,7 +1061,7 @@ begin
   #Sets the extended properties for a user
   result = api_instance.modifyuser(id, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling UsersApi->modifyuser: #{e}"
 end
 ```

@@ -1,4 +1,4 @@
-# LenelClient::ApiApi
+# LenelSDK::ApiApi
 
 All URIs are relative to *https://localhost/api/access/onguard/openaccess*
 
@@ -26,7 +26,7 @@ Deletes the queued task with the given ID. All queued tasks will be deleted afte
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -38,7 +38,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::ApiApi.new
+api_instance = LenelSDK::ApiApi.new
 
 id = 'id_example' # String | ID of the task to delete.
 
@@ -51,7 +51,7 @@ opts = {
 begin
   #Delete queued task
   api_instance.delete_queued_task(id, version, opts)
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling ApiApi->delete_queued_task: #{e}"
 end
 ```
@@ -91,7 +91,7 @@ Used to retrieve the OnGuard license feature information.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -103,7 +103,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::ApiApi.new
+api_instance = LenelSDK::ApiApi.new
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -115,7 +115,7 @@ begin
   #Get the OnGuard license feature
   result = api_instance.get_feature_availability(version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling ApiApi->get_feature_availability: #{e}"
 end
 ```
@@ -154,7 +154,7 @@ Gets the queued task with the given ID, which will include the response when the
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -166,7 +166,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::ApiApi.new
+api_instance = LenelSDK::ApiApi.new
 
 id = 'id_example' # String | ID of the task to return.
 
@@ -180,7 +180,7 @@ begin
   #Get queued task
   result = api_instance.get_queued_task(id, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling ApiApi->get_queued_task: #{e}"
 end
 ```
@@ -220,7 +220,7 @@ Gets the queued tasks created by the user. This method is only intended to check
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -232,7 +232,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::ApiApi.new
+api_instance = LenelSDK::ApiApi.new
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -244,7 +244,7 @@ begin
   #Get queued tasks
   result = api_instance.get_queued_tasks(version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling ApiApi->get_queued_tasks: #{e}"
 end
 ```
@@ -283,7 +283,7 @@ Used to retrieve the OnGuard product name and version information. An unauthenti
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -295,7 +295,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::ApiApi.new
+api_instance = LenelSDK::ApiApi.new
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -307,7 +307,7 @@ begin
   #Get the OnGuard API version
   result = api_instance.get_version(version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling ApiApi->get_version: #{e}"
 end
 ```
@@ -346,7 +346,7 @@ Used to prevent idle session timeout.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -358,7 +358,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::ApiApi.new
+api_instance = LenelSDK::ApiApi.new
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -367,7 +367,7 @@ begin
   #Renew idle timeout countdown.
   result = api_instance.keepalive(version)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling ApiApi->keepalive: #{e}"
 end
 ```
@@ -405,7 +405,7 @@ Partners can use this to set their unique values
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -417,9 +417,9 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::ApiApi.new
+api_instance = LenelSDK::ApiApi.new
 
-partner_values = LenelClient::PartnerValues1.new # PartnerValues1 | 
+partner_values = LenelSDK::PartnerValues1.new # PartnerValues1 | 
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -431,7 +431,7 @@ begin
   #Partners can use this to set their unique values.
   result = api_instance.post_partner_values(partner_values, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling ApiApi->post_partner_values: #{e}"
 end
 ```
@@ -471,7 +471,7 @@ Partners can use this to set their unique values
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -483,9 +483,9 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::ApiApi.new
+api_instance = LenelSDK::ApiApi.new
 
-partner_values = LenelClient::PartnerValues.new # PartnerValues | 
+partner_values = LenelSDK::PartnerValues.new # PartnerValues | 
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -497,7 +497,7 @@ begin
   #Partners can use this to set their unique values.
   result = api_instance.put_partner_values(partner_values, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling ApiApi->put_partner_values: #{e}"
 end
 ```

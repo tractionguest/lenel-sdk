@@ -1,4 +1,4 @@
-# LenelClient::PasswordPolicySettings
+# LenelSDK::PasswordPolicySettings
 
 ## Properties
 Name | Type | Description | Notes

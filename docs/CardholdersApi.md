@@ -1,4 +1,4 @@
-# LenelClient::CardholdersApi
+# LenelSDK::CardholdersApi
 
 All URIs are relative to *https://localhost/api/access/onguard/openaccess*
 
@@ -22,7 +22,7 @@ Gets directory accounts matching the provided filter.  **Note:** Depending on th
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -34,7 +34,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::CardholdersApi.new
+api_instance = LenelSDK::CardholdersApi.new
 
 directory_id = 'directory_id_example' # String | Directory ID for the directory containing the active directory accounts you want to find.
 
@@ -50,7 +50,7 @@ begin
   #Search directory accounts
   result = api_instance.get_active_directory_accounts(directory_id, filter, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling CardholdersApi->get_active_directory_accounts: #{e}"
 end
 ```
@@ -91,7 +91,7 @@ Returns the internal cardholder ID of a cardholder who has a linked directory ac
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -103,7 +103,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::CardholdersApi.new
+api_instance = LenelSDK::CardholdersApi.new
 
 user_name = 'user_name_example' # String | Directory account username of the cardholder whose internal ID you want to look up in OnGuard.
 
@@ -121,7 +121,7 @@ begin
   #Get cardholder ID from their linked directory account
   result = api_instance.get_cardholder_from_directory(user_name, password, directory_id, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling CardholdersApi->get_cardholder_from_directory: #{e}"
 end
 ```
@@ -163,7 +163,7 @@ Gets directory accounts matching the given cardholders, based on the property pa
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -175,7 +175,7 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::CardholdersApi.new
+api_instance = LenelSDK::CardholdersApi.new
 
 directory_id = 'directory_id_example' # String | Directory ID for the directory containing the active directory accounts that you want to find.
 
@@ -193,7 +193,7 @@ begin
   #Get directory accounts matching the given cardholders
   result = api_instance.get_directory_accounts_matching_cardholders(directory_id, cardholder_ids, filter, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling CardholdersApi->get_directory_accounts_matching_cardholders: #{e}"
 end
 ```
@@ -235,7 +235,7 @@ Updates the given cardholder with the given directory account property.
 # load the gem
 require 'lenel_client'
 # setup authorization
-LenelClient.configure do |config|
+LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
   config.api_key['Application-Id'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -247,11 +247,11 @@ LenelClient.configure do |config|
   #config.api_key_prefix['Session-Token'] = 'Bearer'
 end
 
-api_instance = LenelClient::CardholdersApi.new
+api_instance = LenelSDK::CardholdersApi.new
 
 cardholder_id = 56 # Integer | cardholder ID.
 
-parameter_name = LenelClient::ParameterName1.new # ParameterName1 | 
+parameter_name = LenelSDK::ParameterName1.new # ParameterName1 | 
 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
 
@@ -263,7 +263,7 @@ begin
   #Update the cardholder with a directory account property
   result = api_instance.update_cardholder_with_directory_account_property(cardholder_id, parameter_name, version, opts)
   p result
-rescue LenelClient::ApiError => e
+rescue LenelSDK::ApiError => e
   puts "Exception when calling CardholdersApi->update_cardholder_with_directory_account_property: #{e}"
 end
 ```

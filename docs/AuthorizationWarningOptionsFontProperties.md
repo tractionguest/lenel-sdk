@@ -1,4 +1,4 @@
-# LenelClient::AuthorizationWarningOptionsFontProperties
+# LenelSDK::AuthorizationWarningOptionsFontProperties
 
 ## Properties
 Name | Type | Description | Notes

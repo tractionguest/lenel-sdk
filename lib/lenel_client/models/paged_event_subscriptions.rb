@@ -12,7 +12,7 @@ Swagger Codegen version: 2.4.9-SNAPSHOT
 
 require 'date'
 
-module LenelClient
+module LenelSDK
   class PagedEventSubscriptions
     attr_accessor :version
 
@@ -189,7 +189,7 @@ module LenelClient
           end
         end
       else # model
-        temp_model = LenelClient.const_get(type).new
+        temp_model = LenelSDK.const_get(type).new
         temp_model.build_from_hash(value)
       end
     end

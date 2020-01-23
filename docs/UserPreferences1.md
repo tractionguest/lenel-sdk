@@ -1,4 +1,4 @@
-# LenelClient::UserPreferences1
+# LenelSDK::UserPreferences1
 
 ## Properties
 Name | Type | Description | Notes

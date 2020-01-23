@@ -10,6 +10,6 @@ Swagger Codegen version: 2.4.9-SNAPSHOT
 
 =end
 
-module LenelClient
+module LenelSDK
   VERSION = '1.0.0'
 end
