@@ -21,7 +21,7 @@ Adds an event subscription.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -86,7 +86,7 @@ Disables the event subscription with the given ID. Non-SA users can only disable
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -152,7 +152,7 @@ Gets the event subscription with the given ID. Non-SA users can only view subscr
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -218,7 +218,7 @@ Gets event subscriptions. Non-SA users can only view subscriptions they created.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -287,7 +287,7 @@ Modifies the event subscription with the given ID. Non-SA users can only modify 
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId

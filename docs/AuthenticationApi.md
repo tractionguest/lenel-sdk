@@ -21,7 +21,7 @@ Login to the API, retrieving a session token. This method expects the **Applicat
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -82,7 +82,7 @@ Logout of the API, invalidating the session token.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -145,7 +145,7 @@ Gets the authentication directories configured.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -208,7 +208,7 @@ Get login URL for the selected OpenID Connect identity provider.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -280,7 +280,7 @@ Used to retrieve the session data associated with a session token.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId

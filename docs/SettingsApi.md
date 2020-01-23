@@ -24,7 +24,7 @@ Returns the authorization warning text, display settings, and Yes/No button text
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -87,7 +87,7 @@ Returns cardholder and badge-related information for the system.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -152,7 +152,7 @@ Returns enterprise information for the system.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -215,7 +215,7 @@ Gets the current password policy settings of the system.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -278,7 +278,7 @@ Gets the current segment settings of the system.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -341,7 +341,7 @@ Gets the current visit settings of the system.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -404,7 +404,7 @@ Modifies the system password policy settings.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -470,7 +470,7 @@ Modifies system visit settings.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId

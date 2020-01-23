@@ -32,7 +32,7 @@ Adds to the existing list of access levels a user can manage.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -101,7 +101,7 @@ Adds a user preference.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -167,7 +167,7 @@ Adds to the existing list of segments assigned to a user.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -236,7 +236,7 @@ Deletes specific access levels from the access levels a user can manage.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -305,7 +305,7 @@ Deletes specified preference from the existing user preferences.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -371,7 +371,7 @@ Deletes specific segments from the segments assigned to a user.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -440,7 +440,7 @@ Returns a list of segments for which the logged-in user has editable permission,
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -503,7 +503,7 @@ Gets details about the logged in user.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -566,7 +566,7 @@ Returns a list of access levels a user can manage and a flag indicating whether 
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -632,7 +632,7 @@ Returns a list of user IDs for users who can manage the access level.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -698,7 +698,7 @@ Returns user preferences for the current user and application type
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -768,7 +768,7 @@ Returns a list of segments assigned to a user.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -834,7 +834,7 @@ Gets extended properties for a user.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -900,7 +900,7 @@ Modify the user's password.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -966,7 +966,7 @@ Modify the existing user preference with the given ID.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -1032,7 +1032,7 @@ Sets the extended properties for a user.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId

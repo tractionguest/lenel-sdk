@@ -36,7 +36,7 @@ Adds an instance of the given type.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -105,7 +105,7 @@ Deletes an instance of the given type.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -174,7 +174,7 @@ Delete a request to print the badge.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -241,7 +241,7 @@ Executes a method on an instance.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -313,7 +313,7 @@ Retrieve a list of badge printers.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -378,7 +378,7 @@ Performs an advanced cardholder search, optionally searching on Badge fields.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -463,7 +463,7 @@ Gets the number of instances of a given type.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -531,7 +531,7 @@ Gets instances of the given type.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -605,7 +605,7 @@ Used to retrieve a page of logged events and their relevant properties.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -677,7 +677,7 @@ Gets a list of mobile devices for a person associated with a badge. This list co
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -743,7 +743,7 @@ Get the status of a print request for the badge.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -809,7 +809,7 @@ Gets the details of a specific type.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -875,7 +875,7 @@ Gets a list of the supported instance types.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -938,7 +938,7 @@ Retrieves the authentication token for a Lenel NVR. This token is used for authe
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -1004,7 +1004,7 @@ Used to retrieve a page of video recorders and their relevant properties.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -1073,7 +1073,7 @@ Issues a credential to a mobile device of the person with the given badge.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -1142,7 +1142,7 @@ Modifies the access level with the given ID.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -1210,7 +1210,7 @@ Modifies an instance of the given type.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -1279,7 +1279,7 @@ Bulk update the instance property with the given instance ids.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
@@ -1350,7 +1350,7 @@ Submit a request to print the badge.
 ### Example
 ```ruby
 # load the gem
-require 'lenel_client'
+require 'lenel_sdk'
 # setup authorization
 LenelSDK.configure do |config|
   # Configure API key authorization: ApplicationId
