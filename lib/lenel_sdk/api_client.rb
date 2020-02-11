@@ -104,6 +104,7 @@ module LenelSDK
         :headers => header_params,
         :params => query_params,
         :params_encoding => @config.params_encoding,
+        :forbid_reuse => true,
         :timeout => @config.timeout,
         :ssl_verifypeer => @config.verify_ssl,
         :ssl_verifyhost => _verify_ssl_host,
