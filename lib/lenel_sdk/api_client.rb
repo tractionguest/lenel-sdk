@@ -62,10 +62,17 @@ module LenelSDK
           fail ApiError.new(:code => 0,
                             :message => response.return_message)
         else
-          fail ApiError.new(:code => response.code,
-                            :response_headers => response.headers,
-                            :response_body => response.body),
-               response.status_message
+          # When status message is not present the logger is not printing the ApiError. This conditional allows the error to be captured.
+          if response.status_message.present?
+            fail ApiError.new(:code => response.code,
+                              :response_headers => response.headers,
+                              :response_body => response.body),
+                 response.status_message
+          else
+            fail ApiError.new(:code => response.code,
+                              :response_headers => response.headers,
+                              :response_body => response.body)
+          end
         end
       end
 
