@@ -17,6 +17,7 @@ require 'swagger_client/version'
 require 'swagger_client/configuration'
 
 # Models
+require 'swagger_client/models/lenel_sdk/instance'
 require 'swagger_client/models/access_level'
 require 'swagger_client/models/access_level_manager_ids'
 require 'swagger_client/models/add_console_layout'
