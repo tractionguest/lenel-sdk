@@ -50,8 +50,8 @@ module SwaggerClient
         self.id = attributes[:'ID']
       end
 
-      if attributes.has_key?(:'NAME')
-        self.name = attributes[:'NAME']
+      if attributes.has_key?(:'Name')
+        self.name = attributes[:'Name']
       end
 
       if attributes.has_key?(:'directory_type')
