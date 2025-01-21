@@ -24,7 +24,7 @@ module SwaggerClient
     def self.attribute_map
       {
         :'id' => :'ID',
-        :'name' => :'NAME',
+        :'name' => :'Name',
         :'directory_type' => :'directory_type'
       }
     end
