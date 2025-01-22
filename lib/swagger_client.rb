@@ -12,6 +12,7 @@ Swagger Codegen version: 2.4.8
 
 require 'zeitwerk'
 loader = Zeitwerk::Loader.for_gem
+loader.ignore("#{__dir__}/lenel_sdk.rb")  # Add this line
 loader.collapse("#{__dir__}/swagger_client/api",
                 "#{__dir__}/swagger_client/models")
 loader.setup
