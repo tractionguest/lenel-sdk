@@ -1,10 +1,9 @@
-# SwaggerClient::Directories
+# LenelSdk::Directories
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**version** | **String** |  | [optional] 
 **total_items** | **Integer** |  | [optional] 
 **item_list** | [**Array&lt;DirectoriesItemList&gt;**](DirectoriesItemList.md) |  | [optional] 
-
+**version** | **String** |  | [optional] 
 

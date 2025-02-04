@@ -1,4 +1,4 @@
-# SwaggerClient::VideoRecorders
+# LenelSdk::VideoRecorders
 
 ## Properties
 Name | Type | Description | Notes
@@ -17,5 +17,4 @@ Name | Type | Description | Notes
 **segment_id** | **Integer** |  | [optional] 
 **workstation** | **String** |  | [optional] 
 **world_timezone_id** | **Integer** |  | [optional] 
-
 

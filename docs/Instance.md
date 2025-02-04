@@ -1,9 +1,8 @@
-# SwaggerClient::Instance
+# LenelSdk::Instance
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**version** | **String** |  | [optional] 
 **property_value_map** | **Object** |  | [optional] 
-
+**version** | **String** |  | [optional] 
 

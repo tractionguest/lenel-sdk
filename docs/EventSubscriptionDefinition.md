@@ -1,4 +1,4 @@
-# SwaggerClient::EventSubscriptionDefinition
+# LenelSdk::EventSubscriptionDefinition
 
 ## Properties
 Name | Type | Description | Notes
@@ -6,8 +6,10 @@ Name | Type | Description | Notes
 **binding_key** | **String** |  | [optional] 
 **created_date** | **DateTime** |  | [optional] 
 **description** | **String** |  | [optional] 
+**type** | **Integer** |  | [optional] 
 **exchange_name** | **String** |  | [optional] 
 **filter** | **String** |  | [optional] 
+**monitoring_zone_id** | **Integer** |  | [optional] 
 **id** | **Integer** |  | [optional] 
 **is_durable** | **BOOLEAN** |  | [optional] 
 **last_updated_date** | **DateTime** |  | [optional] 
@@ -16,5 +18,4 @@ Name | Type | Description | Notes
 **queue_name** | **String** |  | [optional] 
 **requires_secure_connection** | **BOOLEAN** |  | [optional] 
 **user_id** | **String** |  | [optional] 
-
 

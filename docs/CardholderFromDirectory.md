@@ -1,9 +1,8 @@
-# SwaggerClient::CardholderFromDirectory
+# LenelSdk::CardholderFromDirectory
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**version** | **String** |  | [optional] 
 **cardholder_id** | **Integer** |  | [optional] 
-
+**version** | **String** |  | [optional] 
 

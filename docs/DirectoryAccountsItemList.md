@@ -1,4 +1,4 @@
-# SwaggerClient::DirectoryAccountsItemList
+# LenelSdk::DirectoryAccountsItemList
 
 ## Properties
 Name | Type | Description | Notes
@@ -7,5 +7,4 @@ Name | Type | Description | Notes
 **display_name** | **String** |  | [optional] 
 **email** | **String** |  | [optional] 
 **user_name** | **String** |  | [optional] 
-
 

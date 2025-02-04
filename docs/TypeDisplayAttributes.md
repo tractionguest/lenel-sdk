@@ -1,4 +1,4 @@
-# SwaggerClient::TypeDisplayAttributes
+# LenelSdk::TypeDisplayAttributes
 
 ## Properties
 Name | Type | Description | Notes
@@ -7,5 +7,4 @@ Name | Type | Description | Notes
 **is_searchable** | **BOOLEAN** |  | [optional] 
 **permission** | **String** |  | [optional] 
 **template** | **String** |  | [optional] 
-
 

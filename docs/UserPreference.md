@@ -1,4 +1,4 @@
-# SwaggerClient::UserPreference
+# LenelSdk::UserPreference
 
 ## Properties
 Name | Type | Description | Notes
@@ -9,5 +9,4 @@ Name | Type | Description | Notes
 **setting_type** | **String** |  | [optional] 
 **user_id** | **Integer** |  | [optional] 
 **is_global** | **BOOLEAN** |  | [optional] 
-
 

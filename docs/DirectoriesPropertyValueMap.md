@@ -1,4 +1,4 @@
-# SwaggerClient::DirectoriesPropertyValueMap
+# LenelSdk::DirectoriesPropertyValueMap
 
 ## Properties
 Name | Type | Description | Notes
@@ -6,5 +6,4 @@ Name | Type | Description | Notes
 **id** | **String** |  | [optional] 
 **name** | **String** |  | [optional] 
 **directory_type** | **Integer** |  | [optional] 
-
 

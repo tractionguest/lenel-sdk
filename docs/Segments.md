@@ -1,8 +1,9 @@
-# SwaggerClient::Segments
+# LenelSdk::Segments
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**segment_list** | **Array&lt;Integer&gt;** |  | [optional] 
-
+**version** | **String** |  | [optional] 
+**total_items** | **Integer** |  | [optional] 
+**segment_list** | [**Array&lt;SegmentsSegmentList&gt;**](SegmentsSegmentList.md) |  | [optional] 
 

@@ -1,4 +1,4 @@
-# SwaggerClient::TypeProperties
+# LenelSdk::TypeProperties
 
 ## Properties
 Name | Type | Description | Notes
@@ -13,5 +13,4 @@ Name | Type | Description | Notes
 **name** | **String** |  | [optional] 
 **possible_values** | **Array&lt;Object&gt;** |  | [optional] 
 **type** | **String** |  | [optional] 
-
 

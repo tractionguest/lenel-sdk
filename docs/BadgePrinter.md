@@ -1,10 +1,10 @@
-# SwaggerClient::BadgePrinter
+# LenelSdk::BadgePrinter
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**version** | **String** |  | [optional] 
+**badge_type_id** | **Integer** |  | [optional] 
 **printer_name** | **String** |  | [optional] 
 **workstation** | **String** |  | [optional] 
-
+**version** | **String** |  | [optional] 
 
