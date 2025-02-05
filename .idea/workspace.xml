@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="023291f9-e44d-40e7-bf20-a04e4183c619" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/docs/AddDeviceGroupRequest.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/AddModifyDeviceGroupDeviceInstance.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/AddModifyDeviceGroupResponse.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/AllOfAddDeviceGroupRequestDevicesItems.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/AllOfConsoleCardGroupCardsItems.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/AllOfConsoleLayoutGroupsItems.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/AllOfGetAccessPanelsWithCertsAndUsersInstanceAccessPanelUsersItems.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/AllOfGetDeviceGroupInstanceDevicesItems.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/AllOfIncomingEventActionsItems.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/AllOfMapIconGroupMapItemGroupMembersItems.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/AllOfModifyDeviceGroupRequestDevicesItems.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/AllOfSendIncomingEventsResponseFailureListItemListItems.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/AuthorizationWarningOptionsFontProperties.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/BadgePrintersBody.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/BadgePrintersBody1.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/BadgePrintersBody2.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/GetAccessPanelUserInstance.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/GetAccessPanelsWithCertsAndUsersInstance.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/GetAccessPanelsWithCertsAndUsersResponse.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/GetDeviceGroupDeviceInstance.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/GetDeviceGroupInstance.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/GetDeviceGroupsResponse.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/GetMapDevicesResponse.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/GetMapIconGroupsResponse.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/GetMapIconsResponse.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/GetMapsResponse.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/GetVisitEventStatus.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/IdSegmentsBody1.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/IncomingEvent.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/InlineResponse200.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/InlineResponse2002.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/InlineResponse2003.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/InlineResponse2004.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/InlineResponse2005.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/InlineResponse2006.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/InlineResponse2007.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/InlineResponse2008.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/InlineResponse2009.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/MapBackground.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/MapDefinition.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/MapDevice.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/MapIcon.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/MapIconGroup.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/MapItemGroupMember.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/MapsApi.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/ModifyDeviceGroupRequest.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/NewIncomingEvents.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/PasswordPolicySettingsLimits.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/PrintersApi.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/SegmentsSegmentList.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/SendIncomingEventsResponse.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/SendIncomingEventsResponseFailureList.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/SettingsVisitBody.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/VideoOptions.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/VideoRecorderCredentials.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/VisitEventStatus.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/api/maps_api.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/api/printers_api.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/add_device_group_request.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/add_modify_device_group_device_instance.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/add_modify_device_group_response.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/all_of_add_device_group_request_devices_items.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/all_of_console_card_group_cards_items.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/all_of_console_layout_groups_items.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/all_of_get_access_panels_with_certs_and_users_instance_access_panel_users_items.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/all_of_get_device_group_instance_devices_items.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/all_of_incoming_event_actions_items.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/all_of_map_icon_group_map_item_group_members_items.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/all_of_modify_device_group_request_devices_items.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/all_of_send_incoming_events_response_failure_list_item_list_items.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/authorization_warning_options_font_properties.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/badge_printers_body.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/badge_printers_body_1.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/badge_printers_body_2.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/get_access_panel_user_instance.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/get_access_panels_with_certs_and_users_instance.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/get_access_panels_with_certs_and_users_response.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/get_device_group_device_instance.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/get_device_group_instance.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/get_device_groups_response.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/get_map_devices_response.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/get_map_icon_groups_response.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/get_map_icons_response.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/get_maps_response.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/get_visit_event_status.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/id_segments_body_1.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/incoming_event.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/inline_response_200.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/inline_response_200_1.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/inline_response_200_2.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/inline_response_200_3.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/inline_response_200_4.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/inline_response_200_5.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/inline_response_200_6.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/inline_response_200_7.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/inline_response_200_8.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/inline_response_200_9.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/map_background.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/map_definition.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/map_device.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/map_icon.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/map_icon_group.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/map_item_group_member.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/modify_device_group_request.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/new_incoming_events.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/password_policy_settings_limits.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/segments_segment_list.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/send_incoming_events_response.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/send_incoming_events_response_failure_list.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/video_options.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/video_recorder_credentials.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/swagger_client/models/visit_event_status.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/api/maps_api_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/api/printers_api_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/base_object_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/add_device_group_request_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/add_modify_device_group_device_instance_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/add_modify_device_group_response_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/all_of_add_device_group_request_devices_items_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/all_of_console_card_group_cards_items_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/all_of_console_layout_groups_items_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/all_of_get_access_panels_with_certs_and_users_instance_access_panel_users_items_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/all_of_get_device_group_instance_devices_items_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/all_of_incoming_event_actions_items_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/all_of_map_icon_group_map_item_group_members_items_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/all_of_modify_device_group_request_devices_items_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/all_of_send_incoming_events_response_failure_list_item_list_items_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/authorization_warning_options_font_properties_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/badge_printers_body_1_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/badge_printers_body_2_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/get_access_panel_user_instance_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/get_access_panels_with_certs_and_users_instance_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/get_access_panels_with_certs_and_users_response_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/get_device_group_device_instance_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/get_device_group_instance_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/get_device_groups_response_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/get_map_devices_response_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/get_map_icon_groups_response_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/get_map_icons_response_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/get_maps_response_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/get_visit_event_status_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/id_managed_access_levels_body_1_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/id_managed_access_levels_body_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/incoming_event_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/inline_response_200_1_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/inline_response_200_2_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/inline_response_200_3_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/inline_response_200_4_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/inline_response_200_5_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/inline_response_200_6_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/inline_response_200_7_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/inline_response_200_8_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/inline_response_200_9_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/inline_response_200_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/map_definition_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/map_device_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/map_icon_group_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/map_icon_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/map_item_group_member_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/modify_device_group_request_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/new_incoming_events_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/password_policy_settings_limits_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/segments_segment_list_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/send_incoming_events_response_failure_list_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/send_incoming_events_response_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/settings_visit_body_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/update_cardholder_with_directory_account_property_body_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/video_options_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/video_recorder_credentials_spec.rb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spec/models/visit_event_status_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gemfile" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/AccessLevel.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/AccessLevel.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/AccessLevelManagerIds.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/AccessLevelManagerIds.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/AddConsoleLayout.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/AddConsoleLayout.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/AddUserPreferences.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/AddUserPreferences.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/ApiApi.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ApiApi.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/AuthenticationApi.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/AuthenticationApi.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/AuthorizationWarningOptions.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/AuthorizationWarningOptions.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/BadgeMobileDevices.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/BadgeMobileDevices.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/BadgeMobileDevicesMobileDeviceList.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/BadgeMobileDevicesMobileDeviceList.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/BadgePrintRequestResponse.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/BadgePrintRequestResponse.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/BadgePrinter.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/BadgePrinter.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/BadgePrinters.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/BadgePrinters.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/BadgePrintersPrinters.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/BadgePrintersPrinters.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/CardholderFromDirectory.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/CardholderFromDirectory.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/CardholderOptions.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/CardholderOptions.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/CardholderOptionsBadgePinProperties.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/CardholderOptionsBadgePinProperties.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/CardholdersApi.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/CardholdersApi.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/ConsoleApi.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ConsoleApi.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/ConsoleCard.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ConsoleCard.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/ConsoleCardGroup.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ConsoleCardGroup.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/ConsoleLayout.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ConsoleLayout.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Credentials.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/AuthenticationBody.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Directories.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Directories.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/DirectoriesItemList.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/DirectoriesItemList.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/DirectoriesPropertyValueMap.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/DirectoriesPropertyValueMap.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/DirectoryAccounts.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/DirectoryAccounts.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/DirectoryAccountsItemList.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/DirectoryAccountsItemList.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/DirectoryAccountsMatchingCardholders.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/DirectoryAccountsMatchingCardholders.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/DirectoryAccountsMatchingCardholdersFailureList.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/DirectoryAccountsMatchingCardholdersFailureList.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/DirectoryAccountsMatchingCardholdersFailureListItemList.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/DirectoryAccountsMatchingCardholdersFailureListItemList.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/DirectoryAccountsMatchingCardholdersSuccessfulList.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/DirectoryAccountsMatchingCardholdersSuccessfulList.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/DirectoryAccountsMatchingCardholdersSuccessfulListDirectoryAccount.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/DirectoryAccountsMatchingCardholdersSuccessfulListDirectoryAccount.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/DirectoryAccountsMatchingCardholdersSuccessfulListItemList.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/DirectoryAccountsMatchingCardholdersSuccessfulListItemList.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/EnterpriseOptions.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/EnterpriseOptions.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/EnterpriseOptionsServerList.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/EnterpriseOptionsServerList.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Error.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Error.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/ErrorError.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ErrorError.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/EventSubscription.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/EventSubscription.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/EventSubscriptionDefinition.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/EventSubscriptionDefinition.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/EventsApi.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/EventsApi.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/ExecuteMethodParameters.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ExecuteMethodParameters.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/ExecuteMethodResults.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ExecuteMethodResults.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/GetConsoleCards.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/GetConsoleCards.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/GetLoggedEvents.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/GetLoggedEvents.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/GetUserPreferences.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/GetUserPreferences.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/GetVideoRecorders.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/GetVideoRecorders.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/InParameterValueMap.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/BadgekeyIssueMobileCredentialBody.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Instance.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Instance.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/InstanceDefinition.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/InstanceDefinition.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/InstancesApi.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/InstancesApi.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/IssueMobileCredential.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/IssueMobileCredential.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Levels.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/IdManagedAccessLevelsBody.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Levels1.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/IdManagedAccessLevelsBody1.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/LoggedEvents.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/LoggedEvents.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/LoggedInUser.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/LoggedInUser.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/ManagedAccessLevels.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ManagedAccessLevels.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/ManagedAccessLevelsAccessLevelList.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ManagedAccessLevelsAccessLevelList.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/ModifiedEventSubscription.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ModifiedEventSubscription.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/ModifyUserPreferences.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ModifyUserPreferences.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/NewEventSubscription.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/NewEventSubscription.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/NewQueuedTask.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/NewQueuedTask.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/PagedEventSubscriptions.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/PagedEventSubscriptions.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/PagedInstances.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/PagedInstances.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/ParameterName.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/UserPasswordBody.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/ParameterName1.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/UpdateCardholderWithDirectoryAccountPropertyBody.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/ParameterName2.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/PropertyBulkUpdateBody.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/PartnerValues.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/PartnerValuesBody.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/PartnerValues1.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/PartnerValuesBody1.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/PasswordPolicySettings.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/PasswordPolicySettings.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/PrintRequest.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/BadgekeyPrintRequestBody.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/QueuedTask.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/QueuedTask.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/QueuedTasks.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/QueuedTasks.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/QueuedTasksItemList.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/QueuedTasksItemList.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/SegmentationSettings.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/SegmentationSettings.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Segments.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Segments.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Segments1.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/IdSegmentsBody.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/SettingsApi.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/SettingsApi.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/SharedResponseDefinition.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/SharedResponseDefinition.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Type.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Type.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/TypeDisplayAttributes.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/TypeDisplayAttributes.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/TypeDisplayGroups.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/TypeDisplayGroups.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/TypeInParameters.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/TypeInParameters.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/TypeMethods.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/TypeMethods.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/TypeProperties.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/TypeProperties.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Types.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Types.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/UpdateCardholderWithDirectoryAccountProperty.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/UpdateCardholderWithDirectoryAccountProperty.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/UserExtendedProperties.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/UserExtendedProperties.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/UserExtendedPropertiesPut.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/UserExtendedPropertiesPut.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/UserPreference.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/UserPreference.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/UserPreferences.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/UserPreferencesBody.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/UserPreferences1.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/UserPreferencesBody1.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/UsersApi.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/UsersApi.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/VideoRecorderAuthenticationData.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/VideoRecorderAuthenticationData.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/VideoRecorders.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/VideoRecorders.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/VisitSettings.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/VisitSettings.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/VisitSettings1.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/InlineResponse2001.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/git_push.sh" beforeDir="false" afterPath="$PROJECT_DIR$/git_push.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lenel_sdk.gemspec" beforeDir="false" afterPath="$PROJECT_DIR$/lenel_sdk.gemspec" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/api/api_api.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/api/api_api.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/api/authentication_api.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/api/authentication_api.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/api/cardholders_api.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/api/cardholders_api.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/api/console_api.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/api/console_api.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/api/events_api.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/api/events_api.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/api/instances_api.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/api/instances_api.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/api/settings_api.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/api/settings_api.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/api/users_api.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/api/users_api.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/api_client.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/api_client.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/api_error.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/api_error.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/configuration.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/configuration.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/access_level.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/access_level.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/access_level_manager_ids.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/access_level_manager_ids.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/add_console_layout.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/add_console_layout.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/add_user_preferences.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/add_user_preferences.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/authorization_warning_options.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/authorization_warning_options.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/badge_mobile_devices.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/badge_mobile_devices.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/badge_mobile_devices_mobile_device_list.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/badge_mobile_devices_mobile_device_list.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/badge_print_request_response.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/badge_print_request_response.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/badge_printer.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/badge_printer.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/badge_printers.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/badge_printers.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/badge_printers_printers.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/badge_printers_printers.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/cardholder_from_directory.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/cardholder_from_directory.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/cardholder_options.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/cardholder_options.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/cardholder_options_badge_pin_properties.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/cardholder_options_badge_pin_properties.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/console_card.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/console_card.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/console_card_group.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/console_card_group.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/console_layout.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/console_layout.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/credentials.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/authentication_body.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/directories.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/directories.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/directories_item_list.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/directories_item_list.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/directories_property_value_map.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/directories_property_value_map.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/directory_accounts.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/directory_accounts.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/directory_accounts_item_list.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/directory_accounts_item_list.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/directory_accounts_matching_cardholders.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/directory_accounts_matching_cardholders.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/directory_accounts_matching_cardholders_failure_list.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/directory_accounts_matching_cardholders_failure_list.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/directory_accounts_matching_cardholders_failure_list_item_list.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/directory_accounts_matching_cardholders_failure_list_item_list.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/directory_accounts_matching_cardholders_successful_list.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/directory_accounts_matching_cardholders_successful_list.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/directory_accounts_matching_cardholders_successful_list_directory_account.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/directory_accounts_matching_cardholders_successful_list_directory_account.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/directory_accounts_matching_cardholders_successful_list_item_list.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/directory_accounts_matching_cardholders_successful_list_item_list.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/enterprise_options.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/enterprise_options.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/enterprise_options_server_list.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/enterprise_options_server_list.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/error.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/error.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/error_error.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/error_error.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/event_subscription.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/event_subscription.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/event_subscription_definition.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/event_subscription_definition.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/execute_method_parameters.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/execute_method_parameters.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/execute_method_results.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/execute_method_results.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/get_console_cards.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/get_console_cards.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/get_logged_events.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/get_logged_events.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/get_user_preferences.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/get_user_preferences.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/get_video_recorders.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/get_video_recorders.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/in_parameter_value_map.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/badgekey_issue_mobile_credential_body.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/instance.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/instance.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/instance_definition.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/instance_definition.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/issue_mobile_credential.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/issue_mobile_credential.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/levels.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/id_managed_access_levels_body.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/levels_1.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/id_managed_access_levels_body_1.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/logged_events.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/logged_events.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/logged_in_user.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/logged_in_user.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/managed_access_levels.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/managed_access_levels.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/managed_access_levels_access_level_list.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/managed_access_levels_access_level_list.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/modified_event_subscription.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/modified_event_subscription.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/modify_user_preferences.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/modify_user_preferences.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/new_event_subscription.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/new_event_subscription.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/new_queued_task.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/new_queued_task.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/paged_event_subscriptions.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/paged_event_subscriptions.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/paged_instances.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/paged_instances.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/parameter_name.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/user_password_body.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/parameter_name_1.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/update_cardholder_with_directory_account_property_body.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/parameter_name_2.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/property_bulk_update_body.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/partner_values.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/partner_values_body.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/partner_values_1.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/partner_values_body_1.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/password_policy_settings.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/password_policy_settings.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/print_request.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/badgekey_print_request_body.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/queued_task.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/queued_task.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/queued_tasks.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/queued_tasks.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/queued_tasks_item_list.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/queued_tasks_item_list.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/segmentation_settings.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/segmentation_settings.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/segments.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/segments.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/segments_1.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/id_segments_body.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/shared_response_definition.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/shared_response_definition.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/type.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/type.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/type_display_attributes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/type_display_attributes.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/type_display_groups.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/type_display_groups.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/type_in_parameters.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/type_in_parameters.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/type_methods.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/type_methods.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/type_properties.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/type_properties.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/types.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/types.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/update_cardholder_with_directory_account_property.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/update_cardholder_with_directory_account_property.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/user_extended_properties.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/user_extended_properties.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/user_extended_properties_put.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/user_extended_properties_put.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/user_preference.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/user_preference.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/user_preferences.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/user_preferences_body.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/user_preferences_1.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/user_preferences_body_1.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/video_recorder_authentication_data.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/video_recorder_authentication_data.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/video_recorders.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/video_recorders.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/visit_settings.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/visit_settings.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/models/visit_settings_1.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/models/settings_visit_body.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/swagger_client/version.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/swagger_client/version.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/api/api_api_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/api/api_api_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/api/authentication_api_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/api/authentication_api_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/api/cardholders_api_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/api/cardholders_api_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/api/console_api_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/api/console_api_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/api/events_api_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/api/events_api_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/api/instances_api_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/api/instances_api_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/api/settings_api_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/api/settings_api_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/api/users_api_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/api/users_api_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/api_client_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/api_client_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/configuration_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/configuration_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/access_level_manager_ids_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/access_level_manager_ids_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/access_level_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/access_level_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/add_console_layout_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/add_console_layout_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/add_user_preferences_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/add_user_preferences_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/authorization_warning_options_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/authorization_warning_options_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/badge_mobile_devices_mobile_device_list_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/badge_mobile_devices_mobile_device_list_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/badge_mobile_devices_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/badge_mobile_devices_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/badge_print_request_response_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/badge_print_request_response_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/badge_printer_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/badge_printer_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/badge_printers_printers_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/badge_printers_printers_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/badge_printers_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/badge_printers_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/cardholder_from_directory_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/cardholder_from_directory_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/cardholder_options_badge_pin_properties_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/cardholder_options_badge_pin_properties_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/cardholder_options_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/cardholder_options_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/console_card_group_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/console_card_group_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/console_card_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/console_card_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/console_layout_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/console_layout_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/credentials_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/authentication_body_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/directories_item_list_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/directories_item_list_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/directories_property_value_map_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/directories_property_value_map_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/directories_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/directories_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/directory_accounts_item_list_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/directory_accounts_item_list_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/directory_accounts_matching_cardholders_failure_list_item_list_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/directory_accounts_matching_cardholders_failure_list_item_list_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/directory_accounts_matching_cardholders_failure_list_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/directory_accounts_matching_cardholders_failure_list_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/directory_accounts_matching_cardholders_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/directory_accounts_matching_cardholders_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/directory_accounts_matching_cardholders_successful_list_directory_account_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/directory_accounts_matching_cardholders_successful_list_directory_account_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/directory_accounts_matching_cardholders_successful_list_item_list_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/directory_accounts_matching_cardholders_successful_list_item_list_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/directory_accounts_matching_cardholders_successful_list_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/directory_accounts_matching_cardholders_successful_list_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/directory_accounts_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/directory_accounts_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/enterprise_options_server_list_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/enterprise_options_server_list_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/enterprise_options_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/enterprise_options_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/error_error_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/error_error_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/error_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/error_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/event_subscription_definition_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/event_subscription_definition_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/event_subscription_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/event_subscription_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/execute_method_parameters_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/execute_method_parameters_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/execute_method_results_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/execute_method_results_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/get_console_cards_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/get_console_cards_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/get_logged_events_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/get_logged_events_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/get_user_preferences_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/get_user_preferences_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/get_video_recorders_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/get_video_recorders_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/in_parameter_value_map_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/badgekey_issue_mobile_credential_body_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/instance_definition_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/instance_definition_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/instance_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/instance_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/issue_mobile_credential_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/issue_mobile_credential_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/levels_1_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/map_background_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/levels_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/id_segments_body_1_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/logged_events_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/logged_events_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/logged_in_user_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/logged_in_user_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/managed_access_levels_access_level_list_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/managed_access_levels_access_level_list_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/managed_access_levels_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/managed_access_levels_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/modified_event_subscription_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/modified_event_subscription_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/modify_user_preferences_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/modify_user_preferences_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/new_event_subscription_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/new_event_subscription_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/new_queued_task_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/new_queued_task_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/paged_event_subscriptions_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/paged_event_subscriptions_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/paged_instances_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/paged_instances_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/parameter_name_1_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/badge_printers_body_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/parameter_name_2_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/property_bulk_update_body_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/parameter_name_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/user_password_body_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/partner_values_1_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/partner_values_body_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/partner_values_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/partner_values_body_1_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/password_policy_settings_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/password_policy_settings_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/print_request_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/badgekey_print_request_body_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/queued_task_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/queued_task_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/queued_tasks_item_list_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/queued_tasks_item_list_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/queued_tasks_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/queued_tasks_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/segmentation_settings_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/segmentation_settings_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/segments_1_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/id_segments_body_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/segments_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/segments_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/shared_response_definition_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/shared_response_definition_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/type_display_attributes_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/type_display_attributes_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/type_display_groups_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/type_display_groups_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/type_in_parameters_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/type_in_parameters_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/type_methods_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/type_methods_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/type_properties_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/type_properties_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/type_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/type_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/types_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/types_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/update_cardholder_with_directory_account_property_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/update_cardholder_with_directory_account_property_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/user_extended_properties_put_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/user_extended_properties_put_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/user_extended_properties_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/user_extended_properties_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/user_preference_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/user_preference_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/user_preferences_1_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/user_preferences_body_1_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/user_preferences_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/user_preferences_body_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/video_recorder_authentication_data_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/video_recorder_authentication_data_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/video_recorders_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/video_recorders_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/visit_settings_1_spec.rb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/models/visit_settings_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/models/visit_settings_spec.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/spec_helper.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/spec_helper.rb" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2rtrjsOprkgfIlUHptBdp50zxwg" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "/Users/nickrobertson/Dev/lenel-sdk/docs",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ruby.structure.view.model.defaults.configured": "true",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/docs" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/spec" />
+      <recent name="$PROJECT_DIR$/spec/models" />
+      <recent name="$PROJECT_DIR$/spec/api" />
+      <recent name="$PROJECT_DIR$/lib/swagger_client" />
+      <recent name="$PROJECT_DIR$/lib/swagger_client/models" />
+    </key>
+  </component>
+  <component name="RubyModuleManagerSettings">
+    <option name="blackListedRootsPaths">
+      <list>
+        <option value="$PROJECT_DIR$" />
+      </list>
+    </option>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-RM-243.22562.213" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpringUtil" SPRING_PRE_LOADER_OPTION="true" RAKE_SPRING_PRE_LOADER_OPTION="true" RAILS_SPRING_PRE_LOADER_OPTION="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="023291f9-e44d-40e7-bf20-a04e4183c619" name="Changes" comment="" />
+      <created>1737389351304</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1737389351304</updated>
+      <workItem from="1737389353625" duration="9510000" />
+      <workItem from="1737410466165" duration="602000" />
+      <workItem from="1737416034795" duration="14813000" />
+      <workItem from="1737563673675" duration="4176000" />
+      <workItem from="1738686549192" duration="14000" />
+      <workItem from="1738703958816" duration="5176000" />
+      <workItem from="1738709411401" duration="5284000" />
+      <workItem from="1738772082971" duration="938000" />
+      <workItem from="1738773459791" duration="3728000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

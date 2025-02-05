@@ -7,4 +7,3 @@ Name | Type | Description | Notes
 **in_parameters** | [**Array&lt;TypeInParameters&gt;**](TypeInParameters.md) |  | [optional] 
 **out_parameters** | [**Array&lt;TypeInParameters&gt;**](TypeInParameters.md) |  | [optional] 
 
-

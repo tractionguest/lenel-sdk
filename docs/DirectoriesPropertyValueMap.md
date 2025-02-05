@@ -7,4 +7,3 @@ Name | Type | Description | Notes
 **name** | **String** |  | [optional] 
 **directory_type** | **Integer** |  | [optional] 
 
-

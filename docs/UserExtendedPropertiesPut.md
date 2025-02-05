@@ -8,4 +8,3 @@ Name | Type | Description | Notes
 **has_aam_view_only_access** | **BOOLEAN** | A flag indicating whether the user has AAM view-only access. | [optional] 
 **unlock_account** | **BOOLEAN** | A flag indicating whether to unlock the account of the user whose account has been locked by too many incorrect password attempts. | [optional] 
 
-

@@ -2,13 +2,13 @@
 
 SwaggerClient - the Ruby gem for the OpenAccess
 
-This document describes the OpenAccess REST API. OpenAccess provides access to OnGuard via a RESTful web service.  ## Security / licensing headers  Each authenticated request must include the following HTTP headers:   - `Application-Id` - Each application using the OpenAccess API must have a unique application ID.   - `Session-Token` - A session token is retrieved by logging in via the `POST /authentication` operation.  ## Input parameter location - Query string or request body?  Input parameters can be placed either in the request body or in the URL, as a query parameter. The API makes no distinction and will handle them in either location. In the API specification, some parameters are described as being in the request body, and others are described as being in the query string. This is done simply for clarity in each situation, but clients of the API are free to include parameters wherever it is most convenient. **Sensitive data should always be placed in the request body and not exposed in the URL.**  ### **POST /instances** example  ``` POST /instances?type_name=Lnl_Cardholder&version=1.0 {   \"property_value_map\": {     ...   } } ```  ...is equivalent to this...  ``` POST /instances&version=1.0 {   \"type_name\": \"Lnl_Cardholder\",   \"property_value_map\": {     ...   } } ```  ## Task queuing - dealing with long running requests  Some requests might take a long time, especially requests that access external systems, such as Active Directory. Standard OpenAccess requests will time out after 30 seconds if the HTTP request doesn't time out sooner, depending on the client. Any request that you expect to run long can be queued as a task by adding a `queue` property to the request, set to `true`. For example: ``` GET /directory_accounts_matching_cardholders?directory_id=id1 &cardholder_ids=[1,2,3,4,5,6,7,8,9,10] &filter=displayname has 'firstname' and displayname has 'lastname' &queue=true &version=1.0 ```  When a request is queued in this way, OpenAccess will queue a task for execution and return a 202 (Accepted) HTTP status code and a response identical to `GET /queue/{id}`. For example: ``` {   \"id\": \"5c4b7890-ee73-4199-b3d3-366003eb8ca1\",   \"status\": \"pending\",   \"version\": \"1.0\" } ```  The `id` property indicates the ID of the queued task, which can be used to check the status of the task: ``` GET /queue/5c4b7890-ee73-4199-b3d3-366003eb8ca1?version=1.0 ```  When the task is complete, the response will include the response to the queued request: ``` {   \"id\": \"5c4b7890-ee73-4199-b3d3-366003eb8ca1\",   \"response\": {     ...   },   \"status\": \"complete\",   \"version\": \"1.0\" } ```  The response can be retrieved any number of times until the task is deleted. A completed task can be deleted with `DELETE /queue/{id}` or it will be deleted automatically after 1 hour.  **Note:** Even though you can queue any request, it's only recommended when a request is expected to run long, like `GET /directory_accounts` and `GET /directory_accounts_matching_cardholders`.  ## Samples  There are several sample applications that demonstrate various aspects of the API.  ### [Cardholder Search](/api/access/onguard/openaccess/samples/Cardholder Search) - Getting directories used for authentication - `GET /directories` - Login and logout - `POST /authentication` and `DELETE /authentication` - Getting cardholders and photos - `GET /instances`  ### [Command and Control](/api/access/onguard/openaccess/samples/Command and Control) - Getting directories used for authentication - `GET /directories` - Login and logout - `POST /authentication` and `DELETE /authentication` - Getting panels and readers - `GET /instances` - Updating hardware status, getting/setting reader mode, and opening doors - `POST /execute_method`  ### [Event Subscriber](/api/access/onguard/openaccess/samples/Event Subscriber) - Getting directories used for authentication - `GET /directories` (not used within every event subscriber sample) - Login and logout - `POST /authentication` and `DELETE /authentication` - Adding/modifying/disabling event subscriptions - `POST /event_subscriptions`, `PUT /event_subscriptions`, and `DELETE /event_subscriptions` - Using the Web Event Bridge to receive events via WebSocket 
+This document describes the OpenAccess REST API. OpenAccess provides access to OnGuard via a RESTful web service.  ## Security / licensing headers  Each authenticated request must include the following HTTP headers:   - `Application-Id` - Each application using the OpenAccess API must have a unique application ID.   - `Session-Token` - A session token is retrieved by logging in via the `POST /authentication` operation.  ## Input parameter location - Query string or request body?  Input parameters can be placed either in the request body or in the URL, as a query parameter. The API makes no distinction and will handle them in either location. In the API specification, some parameters are described as being in the request body, and others are described as being in the query string. This is done simply for clarity in each situation, but clients of the API are free to include parameters wherever it is most convenient. **Sensitive data should always be placed in the request body and not exposed in the URL.**  ### **POST /instances** example  ``` POST /instances?type_name=Lnl_Cardholder&version=1.0 {   \"property_value_map\": {     ...   } } ```  ...is equivalent to this...  ``` POST /instances&version=1.0 {   \"type_name\": \"Lnl_Cardholder\",   \"property_value_map\": {     ...   } } ```  ## Task queuing - dealing with long running requests  Some requests might take a long time, especially requests that access external systems, such as Active Directory. Standard OpenAccess requests will time out after 30 seconds if the HTTP request doesn't time out sooner, depending on the client. Any request that you expect to run long can be queued as a task by adding a `queue` property to the request, set to `true`. For example: ``` GET /directory_accounts_matching_cardholders?directory_id=id1 &cardholder_ids=[1,2,3,4,5,6,7,8,9,10] &filter=displayname has 'firstname' and displayname has 'lastname' &queue=true &version=1.0 ```  When a request is queued in this way, OpenAccess will queue a task for execution and return a 202 (Accepted) HTTP status code and a response identical to `GET /queue/{id}`. For example: ``` {   \"id\": \"5c4b7890-ee73-4199-b3d3-366003eb8ca1\",   \"status\": \"pending\",   \"version\": \"1.0\" } ```  The `id` property indicates the ID of the queued task, which can be used to check the status of the task: ``` GET /queue/5c4b7890-ee73-4199-b3d3-366003eb8ca1?version=1.0 ```  When the task is complete, the response will include the response to the queued request: ``` {   \"id\": \"5c4b7890-ee73-4199-b3d3-366003eb8ca1\",   \"response\": {     ...   },   \"status\": \"complete\",   \"version\": \"1.0\" } ```  The response can be retrieved any number of times until the task is deleted. A completed task can be deleted with `DELETE /queue/{id}` or it will be deleted automatically after 1 hour.  **Note:** Even though you can queue any request, it's only recommended when a request is expected to run long, like `GET /directory_accounts` and `GET /directory_accounts_matching_cardholders`.  ## Samples  There are several sample applications that demonstrate various aspects of the API.  ### [Cardholder Search](/api/access/onguard/openaccess/samples/Cardholder Search) - Getting directories used for authentication - `GET /directories` - Login and logout - `POST /authentication` and `DELETE /authentication` - Getting cardholders and photos - `GET /instances`  ### [Command and Control](/api/access/onguard/openaccess/samples/Command and Control) - Getting directories used for authentication - `GET /directories` - Login and logout - `POST /authentication` and `DELETE /authentication` - Getting panels and readers - `GET /instances` - Updating hardware status, getting/setting reader mode, and opening doors - `POST /execute_method`  ### [Event Subscriber](/api/access/onguard/openaccess/samples/Event Subscriber) - Getting directories used for authentication - `GET /directories` (not used within every event subscriber sample) - Login and logout - `POST /authentication` and `DELETE /authentication` - Adding/modifying/disabling event subscriptions - `POST /event_subscriptions`, `PUT /event_subscriptions`, and `DELETE /event_subscriptions` - Using the Web Event Bridge to receive events via WebSocket
 
 This SDK is automatically generated by the [Swagger Codegen](https://github.com/swagger-api/swagger-codegen) project:
 
-- API version: 7.5
+- API version: 8.3
 - Package version: 1.0.0
-- Build package: io.swagger.codegen.languages.RubyClientCodegen
+- Build package: io.swagger.codegen.v3.generators.ruby.RubyClientCodegen
 
 ## Installation
 
@@ -35,9 +35,9 @@ Finally add this to the Gemfile:
 
 ### Install from Git
 
-If the Ruby gem is hosted at a git repository: https://github.com/YOUR_GIT_USERNAME/YOUR_GIT_REPO, then add the following in the Gemfile:
+If the Ruby gem is hosted at a git repository: https://github.com/GIT_USER_ID/GIT_REPO_ID, then add the following in the Gemfile:
 
-    gem 'swagger_client', :git => 'https://github.com/YOUR_GIT_USERNAME/YOUR_GIT_REPO.git'
+    gem 'swagger_client', :git => 'https://github.com/GIT_USER_ID/GIT_REPO_ID.git'
 
 ### Include the Ruby code directly
 
@@ -88,15 +88,18 @@ end
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://localhost/api/access/onguard/openaccess*
+All URIs are relative to */api/access/onguard/openaccess*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *SwaggerClient::ApiApi* | [**delete_queued_task**](docs/ApiApi.md#delete_queued_task) | **DELETE** /queue/{id} | Delete queued task
 *SwaggerClient::ApiApi* | [**get_feature_availability**](docs/ApiApi.md#get_feature_availability) | **GET** /feature_availability | Get the OnGuard license feature
+*SwaggerClient::ApiApi* | [**get_marketplace**](docs/ApiApi.md#get_marketplace) | **GET** /marketplace | Get the LenelS2 Marketplace data
 *SwaggerClient::ApiApi* | [**get_queued_task**](docs/ApiApi.md#get_queued_task) | **GET** /queue/{id} | Get queued task
 *SwaggerClient::ApiApi* | [**get_queued_tasks**](docs/ApiApi.md#get_queued_tasks) | **GET** /queue | Get queued tasks
+*SwaggerClient::ApiApi* | [**get_susp_expiration**](docs/ApiApi.md#get_susp_expiration) | **GET** /susp_expiration | Get OnGuard SUSP Expiration
 *SwaggerClient::ApiApi* | [**get_version**](docs/ApiApi.md#get_version) | **GET** /version | Get the OnGuard API version
+*SwaggerClient::ApiApi* | [**getlicensedata**](docs/ApiApi.md#getlicensedata) | **GET** /licensedata | Get the OnGuard license feature data from License
 *SwaggerClient::ApiApi* | [**keepalive**](docs/ApiApi.md#keepalive) | **GET** /keepalive | Renew idle timeout countdown.
 *SwaggerClient::ApiApi* | [**post_partner_values**](docs/ApiApi.md#post_partner_values) | **POST** /partner_values | Partners can use this to set their unique values.
 *SwaggerClient::ApiApi* | [**put_partner_values**](docs/ApiApi.md#put_partner_values) | **PUT** /partner_values | Partners can use this to set their unique values.
@@ -118,13 +121,16 @@ Class | Method | HTTP request | Description
 *SwaggerClient::EventsApi* | [**get_event_subscription**](docs/EventsApi.md#get_event_subscription) | **GET** /event_subscriptions/{id} | Get event subscription
 *SwaggerClient::EventsApi* | [**get_event_subscriptions**](docs/EventsApi.md#get_event_subscriptions) | **GET** /event_subscriptions | Get event subscriptions
 *SwaggerClient::EventsApi* | [**modify_event_subscription**](docs/EventsApi.md#modify_event_subscription) | **PUT** /event_subscriptions/{id} | Modify event subscription
+*SwaggerClient::InstancesApi* | [**add_device_group**](docs/InstancesApi.md#add_device_group) | **POST** /device_group | Add device group
 *SwaggerClient::InstancesApi* | [**add_instance**](docs/InstancesApi.md#add_instance) | **POST** /instances | Add an instance
+*SwaggerClient::InstancesApi* | [**delete_device_group**](docs/InstancesApi.md#delete_device_group) | **DELETE** /device_group | Delete device group
 *SwaggerClient::InstancesApi* | [**delete_instance**](docs/InstancesApi.md#delete_instance) | **DELETE** /instances | Delete an instance
 *SwaggerClient::InstancesApi* | [**delete_print_request**](docs/InstancesApi.md#delete_print_request) | **DELETE** /badge/{badge_print_request_id}/print_request | Delete a specific badge print request
 *SwaggerClient::InstancesApi* | [**execute_method**](docs/InstancesApi.md#execute_method) | **POST** /execute_method | Execute method
-*SwaggerClient::InstancesApi* | [**get_badge_printers**](docs/InstancesApi.md#get_badge_printers) | **GET** /badge_printers | Retrieve a list of badge printers
+*SwaggerClient::InstancesApi* | [**get_access_panels_with_certs_and_users**](docs/InstancesApi.md#get_access_panels_with_certs_and_users) | **GET** /access_panel_with_certs_and_users | Get access panels list with certificates and users
 *SwaggerClient::InstancesApi* | [**get_cardholder_search**](docs/InstancesApi.md#get_cardholder_search) | **GET** /cardholders | Advanced cardholder search
 *SwaggerClient::InstancesApi* | [**get_count**](docs/InstancesApi.md#get_count) | **GET** /count | Get count
+*SwaggerClient::InstancesApi* | [**get_device_groups**](docs/InstancesApi.md#get_device_groups) | **GET** /device_groups | Get device groups
 *SwaggerClient::InstancesApi* | [**get_instances**](docs/InstancesApi.md#get_instances) | **GET** /instances | Get instances
 *SwaggerClient::InstancesApi* | [**get_logged_events**](docs/InstancesApi.md#get_logged_events) | **GET** /logged_events | Get logged events
 *SwaggerClient::InstancesApi* | [**get_mobile_devices**](docs/InstancesApi.md#get_mobile_devices) | **GET** /badge/{badgekey}/mobile_devices | A list of mobile devices for a badge.
@@ -132,17 +138,33 @@ Class | Method | HTTP request | Description
 *SwaggerClient::InstancesApi* | [**get_type**](docs/InstancesApi.md#get_type) | **GET** /type | Get type details
 *SwaggerClient::InstancesApi* | [**get_types**](docs/InstancesApi.md#get_types) | **GET** /types | Get type list
 *SwaggerClient::InstancesApi* | [**get_video_recorder_authentication_data**](docs/InstancesApi.md#get_video_recorder_authentication_data) | **GET** /video_recorder/{id}/auth_data | Get video recorder authentication data
+*SwaggerClient::InstancesApi* | [**get_video_recorder_credentials**](docs/InstancesApi.md#get_video_recorder_credentials) | **GET** /video_recorder/{id}/credentials | Get video recorder credentials
 *SwaggerClient::InstancesApi* | [**get_video_recorders**](docs/InstancesApi.md#get_video_recorders) | **GET** /video_recorders | Get video recorders
+*SwaggerClient::InstancesApi* | [**get_visit_event_status**](docs/InstancesApi.md#get_visit_event_status) | **GET** /visitevent_status | Get VisitEvent status
+*SwaggerClient::InstancesApi* | [**get_visitor_search**](docs/InstancesApi.md#get_visitor_search) | **GET** /visitors | Advanced visitor search
 *SwaggerClient::InstancesApi* | [**issue_mobile_credential**](docs/InstancesApi.md#issue_mobile_credential) | **POST** /badge/{badgekey}/issue_mobile_credential | Issues mobile credential
 *SwaggerClient::InstancesApi* | [**modify_access_level**](docs/InstancesApi.md#modify_access_level) | **PUT** /access_level/{id} | Modify an access level
+*SwaggerClient::InstancesApi* | [**modify_device_group**](docs/InstancesApi.md#modify_device_group) | **PUT** /device_group | Modify device group
 *SwaggerClient::InstancesApi* | [**modify_instance**](docs/InstancesApi.md#modify_instance) | **PUT** /instances | Modify an instance
 *SwaggerClient::InstancesApi* | [**modify_property_bulk_update**](docs/InstancesApi.md#modify_property_bulk_update) | **PUT** /property_bulk_update | Bulk update the instance property
 *SwaggerClient::InstancesApi* | [**print_request**](docs/InstancesApi.md#print_request) | **POST** /badge/{badgekey}/print_request | Submit print request for a given badge
+*SwaggerClient::InstancesApi* | [**send_incoming_events**](docs/InstancesApi.md#send_incoming_events) | **POST** /send_incoming_events | Send incoming events
+*SwaggerClient::MapsApi* | [**get_map_background**](docs/MapsApi.md#get_map_background) | **GET** /maps/{id}/background | Get map background image
+*SwaggerClient::MapsApi* | [**get_map_devices**](docs/MapsApi.md#get_map_devices) | **GET** /maps/{id}/devices | Get map devices
+*SwaggerClient::MapsApi* | [**get_map_icon_groups**](docs/MapsApi.md#get_map_icon_groups) | **GET** /map_icon_groups | Get map icon groups
+*SwaggerClient::MapsApi* | [**get_map_icons**](docs/MapsApi.md#get_map_icons) | **GET** /map_icons | Get map icons
+*SwaggerClient::MapsApi* | [**get_maps**](docs/MapsApi.md#get_maps) | **GET** /maps | Get maps
+*SwaggerClient::PrintersApi* | [**add_badge_printer**](docs/PrintersApi.md#add_badge_printer) | **POST** /badge_printers | Add badge printer
+*SwaggerClient::PrintersApi* | [**delete_badge_printer**](docs/PrintersApi.md#delete_badge_printer) | **DELETE** /badge_printers | Delete badge printer
+*SwaggerClient::PrintersApi* | [**get_badge_printers**](docs/PrintersApi.md#get_badge_printers) | **GET** /badge_printers | Retrieve a list of badge printers
+*SwaggerClient::PrintersApi* | [**modify_badge_printer**](docs/PrintersApi.md#modify_badge_printer) | **PUT** /badge_printers | Modify badge printer
 *SwaggerClient::SettingsApi* | [**get_authorization_warning_settings**](docs/SettingsApi.md#get_authorization_warning_settings) | **GET** /settings/authorization_warning | Get authorization warning settings
 *SwaggerClient::SettingsApi* | [**get_cardholder_settings**](docs/SettingsApi.md#get_cardholder_settings) | **GET** /settings/cardholder | Get cardholder settings
 *SwaggerClient::SettingsApi* | [**get_enterprise_settings**](docs/SettingsApi.md#get_enterprise_settings) | **GET** /settings/enterprise | Get enterprise settings
 *SwaggerClient::SettingsApi* | [**get_password_policy_settings**](docs/SettingsApi.md#get_password_policy_settings) | **GET** /settings/password_policy | Get password policy settings
+*SwaggerClient::SettingsApi* | [**get_password_policy_settings_limits**](docs/SettingsApi.md#get_password_policy_settings_limits) | **GET** /settings/password_policy_limits | Get password policy limits.
 *SwaggerClient::SettingsApi* | [**get_segmentation_settings**](docs/SettingsApi.md#get_segmentation_settings) | **GET** /settings/segmentation | Get segment related settings
+*SwaggerClient::SettingsApi* | [**get_video_options**](docs/SettingsApi.md#get_video_options) | **GET** /settings/video | Get video options
 *SwaggerClient::SettingsApi* | [**get_visit_settings**](docs/SettingsApi.md#get_visit_settings) | **GET** /settings/visit | Get visit settings
 *SwaggerClient::SettingsApi* | [**modify_password_policy_settings**](docs/SettingsApi.md#modify_password_policy_settings) | **PUT** /settings/password_policy | Modify password policy settings
 *SwaggerClient::SettingsApi* | [**modify_visit_setting**](docs/SettingsApi.md#modify_visit_setting) | **PUT** /settings/visit | Modify visit settings
@@ -156,6 +178,7 @@ Class | Method | HTTP request | Description
 *SwaggerClient::UsersApi* | [**get_logged_in_user**](docs/UsersApi.md#get_logged_in_user) | **GET** /logged_in_user | Get logged in user
 *SwaggerClient::UsersApi* | [**get_managed_access_levels**](docs/UsersApi.md#get_managed_access_levels) | **GET** /user/{id}/managed_access_levels | Get managed access levels
 *SwaggerClient::UsersApi* | [**get_managers_of_access_level**](docs/UsersApi.md#get_managers_of_access_level) | **GET** /managers_of_access_level | Get managers of access level
+*SwaggerClient::UsersApi* | [**get_restricted_segments**](docs/UsersApi.md#get_restricted_segments) | **GET** /restricted_segments | Get restricted segments
 *SwaggerClient::UsersApi* | [**get_user_preferences**](docs/UsersApi.md#get_user_preferences) | **GET** /user_preferences | Get user preferences
 *SwaggerClient::UsersApi* | [**get_user_segments**](docs/UsersApi.md#get_user_segments) | **GET** /user/{id}/segments | Get user segments
 *SwaggerClient::UsersApi* | [**getuser**](docs/UsersApi.md#getuser) | **GET** /user/{id} | Get extended properties for a user
@@ -163,98 +186,150 @@ Class | Method | HTTP request | Description
 *SwaggerClient::UsersApi* | [**modify_user_preferences**](docs/UsersApi.md#modify_user_preferences) | **PUT** /user_preferences | Modify user preference
 *SwaggerClient::UsersApi* | [**modifyuser**](docs/UsersApi.md#modifyuser) | **PUT** /user/{id} | Sets the extended properties for a user
 
-
 ## Documentation for Models
 
- - [SwaggerClient::AccessLevel](docs/AccessLevel.md)
- - [SwaggerClient::AccessLevelManagerIds](docs/AccessLevelManagerIds.md)
- - [SwaggerClient::AddConsoleLayout](docs/AddConsoleLayout.md)
- - [SwaggerClient::AddUserPreferences](docs/AddUserPreferences.md)
- - [SwaggerClient::AuthorizationWarningOptions](docs/AuthorizationWarningOptions.md)
- - [SwaggerClient::BadgeMobileDevices](docs/BadgeMobileDevices.md)
- - [SwaggerClient::BadgeMobileDevicesMobileDeviceList](docs/BadgeMobileDevicesMobileDeviceList.md)
- - [SwaggerClient::BadgePrintRequestResponse](docs/BadgePrintRequestResponse.md)
- - [SwaggerClient::BadgePrinter](docs/BadgePrinter.md)
- - [SwaggerClient::BadgePrinters](docs/BadgePrinters.md)
- - [SwaggerClient::BadgePrintersPrinters](docs/BadgePrintersPrinters.md)
- - [SwaggerClient::CardholderFromDirectory](docs/CardholderFromDirectory.md)
- - [SwaggerClient::CardholderOptions](docs/CardholderOptions.md)
- - [SwaggerClient::CardholderOptionsBadgePinProperties](docs/CardholderOptionsBadgePinProperties.md)
- - [SwaggerClient::ConsoleCard](docs/ConsoleCard.md)
- - [SwaggerClient::ConsoleCardGroup](docs/ConsoleCardGroup.md)
- - [SwaggerClient::ConsoleLayout](docs/ConsoleLayout.md)
- - [SwaggerClient::Credentials](docs/Credentials.md)
- - [SwaggerClient::Directories](docs/Directories.md)
- - [SwaggerClient::DirectoriesItemList](docs/DirectoriesItemList.md)
- - [SwaggerClient::DirectoriesPropertyValueMap](docs/DirectoriesPropertyValueMap.md)
- - [SwaggerClient::DirectoryAccounts](docs/DirectoryAccounts.md)
- - [SwaggerClient::DirectoryAccountsItemList](docs/DirectoryAccountsItemList.md)
- - [SwaggerClient::DirectoryAccountsMatchingCardholders](docs/DirectoryAccountsMatchingCardholders.md)
- - [SwaggerClient::DirectoryAccountsMatchingCardholdersFailureList](docs/DirectoryAccountsMatchingCardholdersFailureList.md)
- - [SwaggerClient::DirectoryAccountsMatchingCardholdersFailureListItemList](docs/DirectoryAccountsMatchingCardholdersFailureListItemList.md)
- - [SwaggerClient::DirectoryAccountsMatchingCardholdersSuccessfulList](docs/DirectoryAccountsMatchingCardholdersSuccessfulList.md)
- - [SwaggerClient::DirectoryAccountsMatchingCardholdersSuccessfulListDirectoryAccount](docs/DirectoryAccountsMatchingCardholdersSuccessfulListDirectoryAccount.md)
- - [SwaggerClient::DirectoryAccountsMatchingCardholdersSuccessfulListItemList](docs/DirectoryAccountsMatchingCardholdersSuccessfulListItemList.md)
- - [SwaggerClient::EnterpriseOptions](docs/EnterpriseOptions.md)
- - [SwaggerClient::EnterpriseOptionsServerList](docs/EnterpriseOptionsServerList.md)
- - [SwaggerClient::Error](docs/Error.md)
- - [SwaggerClient::ErrorError](docs/ErrorError.md)
- - [SwaggerClient::EventSubscription](docs/EventSubscription.md)
- - [SwaggerClient::EventSubscriptionDefinition](docs/EventSubscriptionDefinition.md)
- - [SwaggerClient::ExecuteMethodParameters](docs/ExecuteMethodParameters.md)
- - [SwaggerClient::ExecuteMethodResults](docs/ExecuteMethodResults.md)
- - [SwaggerClient::GetConsoleCards](docs/GetConsoleCards.md)
- - [SwaggerClient::GetLoggedEvents](docs/GetLoggedEvents.md)
- - [SwaggerClient::GetUserPreferences](docs/GetUserPreferences.md)
- - [SwaggerClient::GetVideoRecorders](docs/GetVideoRecorders.md)
- - [SwaggerClient::InParameterValueMap](docs/InParameterValueMap.md)
- - [SwaggerClient::Instance](docs/Instance.md)
- - [SwaggerClient::InstanceDefinition](docs/InstanceDefinition.md)
- - [SwaggerClient::IssueMobileCredential](docs/IssueMobileCredential.md)
- - [SwaggerClient::Levels](docs/Levels.md)
- - [SwaggerClient::Levels1](docs/Levels1.md)
- - [SwaggerClient::LoggedEvents](docs/LoggedEvents.md)
- - [SwaggerClient::LoggedInUser](docs/LoggedInUser.md)
- - [SwaggerClient::ManagedAccessLevels](docs/ManagedAccessLevels.md)
- - [SwaggerClient::ManagedAccessLevelsAccessLevelList](docs/ManagedAccessLevelsAccessLevelList.md)
- - [SwaggerClient::ModifiedEventSubscription](docs/ModifiedEventSubscription.md)
- - [SwaggerClient::ModifyUserPreferences](docs/ModifyUserPreferences.md)
- - [SwaggerClient::NewEventSubscription](docs/NewEventSubscription.md)
- - [SwaggerClient::NewQueuedTask](docs/NewQueuedTask.md)
- - [SwaggerClient::PagedEventSubscriptions](docs/PagedEventSubscriptions.md)
- - [SwaggerClient::PagedInstances](docs/PagedInstances.md)
- - [SwaggerClient::ParameterName](docs/ParameterName.md)
- - [SwaggerClient::ParameterName1](docs/ParameterName1.md)
- - [SwaggerClient::ParameterName2](docs/ParameterName2.md)
- - [SwaggerClient::PartnerValues](docs/PartnerValues.md)
- - [SwaggerClient::PartnerValues1](docs/PartnerValues1.md)
- - [SwaggerClient::PasswordPolicySettings](docs/PasswordPolicySettings.md)
- - [SwaggerClient::PrintRequest](docs/PrintRequest.md)
- - [SwaggerClient::QueuedTask](docs/QueuedTask.md)
- - [SwaggerClient::QueuedTasks](docs/QueuedTasks.md)
- - [SwaggerClient::QueuedTasksItemList](docs/QueuedTasksItemList.md)
- - [SwaggerClient::SegmentationSettings](docs/SegmentationSettings.md)
- - [SwaggerClient::Segments](docs/Segments.md)
- - [SwaggerClient::Segments1](docs/Segments1.md)
- - [SwaggerClient::SharedResponseDefinition](docs/SharedResponseDefinition.md)
- - [SwaggerClient::Type](docs/Type.md)
- - [SwaggerClient::TypeDisplayAttributes](docs/TypeDisplayAttributes.md)
- - [SwaggerClient::TypeDisplayGroups](docs/TypeDisplayGroups.md)
- - [SwaggerClient::TypeInParameters](docs/TypeInParameters.md)
- - [SwaggerClient::TypeMethods](docs/TypeMethods.md)
- - [SwaggerClient::TypeProperties](docs/TypeProperties.md)
- - [SwaggerClient::Types](docs/Types.md)
- - [SwaggerClient::UpdateCardholderWithDirectoryAccountProperty](docs/UpdateCardholderWithDirectoryAccountProperty.md)
- - [SwaggerClient::UserExtendedProperties](docs/UserExtendedProperties.md)
- - [SwaggerClient::UserExtendedPropertiesPut](docs/UserExtendedPropertiesPut.md)
- - [SwaggerClient::UserPreference](docs/UserPreference.md)
- - [SwaggerClient::UserPreferences](docs/UserPreferences.md)
- - [SwaggerClient::UserPreferences1](docs/UserPreferences1.md)
- - [SwaggerClient::VideoRecorderAuthenticationData](docs/VideoRecorderAuthenticationData.md)
- - [SwaggerClient::VideoRecorders](docs/VideoRecorders.md)
- - [SwaggerClient::VisitSettings](docs/VisitSettings.md)
- - [SwaggerClient::VisitSettings1](docs/VisitSettings1.md)
-
+- [SwaggerClient::AccessLevel](docs/AccessLevel.md)
+- [SwaggerClient::AccessLevelManagerIds](docs/AccessLevelManagerIds.md)
+- [SwaggerClient::AddConsoleLayout](docs/AddConsoleLayout.md)
+- [SwaggerClient::AddDeviceGroupRequest](docs/AddDeviceGroupRequest.md)
+- [SwaggerClient::AddModifyDeviceGroupDeviceInstance](docs/AddModifyDeviceGroupDeviceInstance.md)
+- [SwaggerClient::AddModifyDeviceGroupResponse](docs/AddModifyDeviceGroupResponse.md)
+- [SwaggerClient::AddUserPreferences](docs/AddUserPreferences.md)
+- [SwaggerClient::AllOfAddDeviceGroupRequestDevicesItems](docs/AllOfAddDeviceGroupRequestDevicesItems.md)
+- [SwaggerClient::AllOfConsoleCardGroupCardsItems](docs/AllOfConsoleCardGroupCardsItems.md)
+- [SwaggerClient::AllOfConsoleLayoutGroupsItems](docs/AllOfConsoleLayoutGroupsItems.md)
+- [SwaggerClient::AllOfGetAccessPanelsWithCertsAndUsersInstanceAccessPanelUsersItems](docs/AllOfGetAccessPanelsWithCertsAndUsersInstanceAccessPanelUsersItems.md)
+- [SwaggerClient::AllOfGetDeviceGroupInstanceDevicesItems](docs/AllOfGetDeviceGroupInstanceDevicesItems.md)
+- [SwaggerClient::AllOfIncomingEventActionsItems](docs/AllOfIncomingEventActionsItems.md)
+- [SwaggerClient::AllOfMapIconGroupMapItemGroupMembersItems](docs/AllOfMapIconGroupMapItemGroupMembersItems.md)
+- [SwaggerClient::AllOfModifyDeviceGroupRequestDevicesItems](docs/AllOfModifyDeviceGroupRequestDevicesItems.md)
+- [SwaggerClient::AllOfSendIncomingEventsResponseFailureListItemListItems](docs/AllOfSendIncomingEventsResponseFailureListItemListItems.md)
+- [SwaggerClient::AuthenticationBody](docs/AuthenticationBody.md)
+- [SwaggerClient::AuthorizationWarningOptions](docs/AuthorizationWarningOptions.md)
+- [SwaggerClient::AuthorizationWarningOptionsFontProperties](docs/AuthorizationWarningOptionsFontProperties.md)
+- [SwaggerClient::BadgeMobileDevices](docs/BadgeMobileDevices.md)
+- [SwaggerClient::BadgeMobileDevicesMobileDeviceList](docs/BadgeMobileDevicesMobileDeviceList.md)
+- [SwaggerClient::BadgePrintRequestResponse](docs/BadgePrintRequestResponse.md)
+- [SwaggerClient::BadgePrinter](docs/BadgePrinter.md)
+- [SwaggerClient::BadgePrinters](docs/BadgePrinters.md)
+- [SwaggerClient::BadgePrintersBody](docs/BadgePrintersBody.md)
+- [SwaggerClient::BadgePrintersBody1](docs/BadgePrintersBody1.md)
+- [SwaggerClient::BadgePrintersBody2](docs/BadgePrintersBody2.md)
+- [SwaggerClient::BadgePrintersPrinters](docs/BadgePrintersPrinters.md)
+- [SwaggerClient::BadgekeyIssueMobileCredentialBody](docs/BadgekeyIssueMobileCredentialBody.md)
+- [SwaggerClient::BadgekeyPrintRequestBody](docs/BadgekeyPrintRequestBody.md)
+- [SwaggerClient::CardholderFromDirectory](docs/CardholderFromDirectory.md)
+- [SwaggerClient::CardholderOptions](docs/CardholderOptions.md)
+- [SwaggerClient::CardholderOptionsBadgePinProperties](docs/CardholderOptionsBadgePinProperties.md)
+- [SwaggerClient::ConsoleCard](docs/ConsoleCard.md)
+- [SwaggerClient::ConsoleCardGroup](docs/ConsoleCardGroup.md)
+- [SwaggerClient::ConsoleLayout](docs/ConsoleLayout.md)
+- [SwaggerClient::Directories](docs/Directories.md)
+- [SwaggerClient::DirectoriesItemList](docs/DirectoriesItemList.md)
+- [SwaggerClient::DirectoriesPropertyValueMap](docs/DirectoriesPropertyValueMap.md)
+- [SwaggerClient::DirectoryAccounts](docs/DirectoryAccounts.md)
+- [SwaggerClient::DirectoryAccountsItemList](docs/DirectoryAccountsItemList.md)
+- [SwaggerClient::DirectoryAccountsMatchingCardholders](docs/DirectoryAccountsMatchingCardholders.md)
+- [SwaggerClient::DirectoryAccountsMatchingCardholdersFailureList](docs/DirectoryAccountsMatchingCardholdersFailureList.md)
+- [SwaggerClient::DirectoryAccountsMatchingCardholdersFailureListItemList](docs/DirectoryAccountsMatchingCardholdersFailureListItemList.md)
+- [SwaggerClient::DirectoryAccountsMatchingCardholdersSuccessfulList](docs/DirectoryAccountsMatchingCardholdersSuccessfulList.md)
+- [SwaggerClient::DirectoryAccountsMatchingCardholdersSuccessfulListDirectoryAccount](docs/DirectoryAccountsMatchingCardholdersSuccessfulListDirectoryAccount.md)
+- [SwaggerClient::DirectoryAccountsMatchingCardholdersSuccessfulListItemList](docs/DirectoryAccountsMatchingCardholdersSuccessfulListItemList.md)
+- [SwaggerClient::EnterpriseOptions](docs/EnterpriseOptions.md)
+- [SwaggerClient::EnterpriseOptionsServerList](docs/EnterpriseOptionsServerList.md)
+- [SwaggerClient::Error](docs/Error.md)
+- [SwaggerClient::ErrorError](docs/ErrorError.md)
+- [SwaggerClient::EventSubscription](docs/EventSubscription.md)
+- [SwaggerClient::EventSubscriptionDefinition](docs/EventSubscriptionDefinition.md)
+- [SwaggerClient::ExecuteMethodParameters](docs/ExecuteMethodParameters.md)
+- [SwaggerClient::ExecuteMethodResults](docs/ExecuteMethodResults.md)
+- [SwaggerClient::GetAccessPanelUserInstance](docs/GetAccessPanelUserInstance.md)
+- [SwaggerClient::GetAccessPanelsWithCertsAndUsersInstance](docs/GetAccessPanelsWithCertsAndUsersInstance.md)
+- [SwaggerClient::GetAccessPanelsWithCertsAndUsersResponse](docs/GetAccessPanelsWithCertsAndUsersResponse.md)
+- [SwaggerClient::GetConsoleCards](docs/GetConsoleCards.md)
+- [SwaggerClient::GetDeviceGroupDeviceInstance](docs/GetDeviceGroupDeviceInstance.md)
+- [SwaggerClient::GetDeviceGroupInstance](docs/GetDeviceGroupInstance.md)
+- [SwaggerClient::GetDeviceGroupsResponse](docs/GetDeviceGroupsResponse.md)
+- [SwaggerClient::GetLoggedEvents](docs/GetLoggedEvents.md)
+- [SwaggerClient::GetMapDevicesResponse](docs/GetMapDevicesResponse.md)
+- [SwaggerClient::GetMapIconGroupsResponse](docs/GetMapIconGroupsResponse.md)
+- [SwaggerClient::GetMapIconsResponse](docs/GetMapIconsResponse.md)
+- [SwaggerClient::GetMapsResponse](docs/GetMapsResponse.md)
+- [SwaggerClient::GetUserPreferences](docs/GetUserPreferences.md)
+- [SwaggerClient::GetVideoRecorders](docs/GetVideoRecorders.md)
+- [SwaggerClient::GetVisitEventStatus](docs/GetVisitEventStatus.md)
+- [SwaggerClient::IdManagedAccessLevelsBody](docs/IdManagedAccessLevelsBody.md)
+- [SwaggerClient::IdManagedAccessLevelsBody1](docs/IdManagedAccessLevelsBody1.md)
+- [SwaggerClient::IdSegmentsBody](docs/IdSegmentsBody.md)
+- [SwaggerClient::IdSegmentsBody1](docs/IdSegmentsBody1.md)
+- [SwaggerClient::IncomingEvent](docs/IncomingEvent.md)
+- [SwaggerClient::InlineResponse200](docs/InlineResponse200.md)
+- [SwaggerClient::InlineResponse2001](docs/InlineResponse2001.md)
+- [SwaggerClient::InlineResponse2002](docs/InlineResponse2002.md)
+- [SwaggerClient::InlineResponse2003](docs/InlineResponse2003.md)
+- [SwaggerClient::InlineResponse2004](docs/InlineResponse2004.md)
+- [SwaggerClient::InlineResponse2005](docs/InlineResponse2005.md)
+- [SwaggerClient::InlineResponse2006](docs/InlineResponse2006.md)
+- [SwaggerClient::InlineResponse2007](docs/InlineResponse2007.md)
+- [SwaggerClient::InlineResponse2008](docs/InlineResponse2008.md)
+- [SwaggerClient::InlineResponse2009](docs/InlineResponse2009.md)
+- [SwaggerClient::Instance](docs/Instance.md)
+- [SwaggerClient::InstanceDefinition](docs/InstanceDefinition.md)
+- [SwaggerClient::IssueMobileCredential](docs/IssueMobileCredential.md)
+- [SwaggerClient::LoggedEvents](docs/LoggedEvents.md)
+- [SwaggerClient::LoggedInUser](docs/LoggedInUser.md)
+- [SwaggerClient::ManagedAccessLevels](docs/ManagedAccessLevels.md)
+- [SwaggerClient::ManagedAccessLevelsAccessLevelList](docs/ManagedAccessLevelsAccessLevelList.md)
+- [SwaggerClient::MapBackground](docs/MapBackground.md)
+- [SwaggerClient::MapDefinition](docs/MapDefinition.md)
+- [SwaggerClient::MapDevice](docs/MapDevice.md)
+- [SwaggerClient::MapIcon](docs/MapIcon.md)
+- [SwaggerClient::MapIconGroup](docs/MapIconGroup.md)
+- [SwaggerClient::MapItemGroupMember](docs/MapItemGroupMember.md)
+- [SwaggerClient::ModifiedEventSubscription](docs/ModifiedEventSubscription.md)
+- [SwaggerClient::ModifyDeviceGroupRequest](docs/ModifyDeviceGroupRequest.md)
+- [SwaggerClient::ModifyUserPreferences](docs/ModifyUserPreferences.md)
+- [SwaggerClient::NewEventSubscription](docs/NewEventSubscription.md)
+- [SwaggerClient::NewIncomingEvents](docs/NewIncomingEvents.md)
+- [SwaggerClient::NewQueuedTask](docs/NewQueuedTask.md)
+- [SwaggerClient::PagedEventSubscriptions](docs/PagedEventSubscriptions.md)
+- [SwaggerClient::PagedInstances](docs/PagedInstances.md)
+- [SwaggerClient::PartnerValuesBody](docs/PartnerValuesBody.md)
+- [SwaggerClient::PartnerValuesBody1](docs/PartnerValuesBody1.md)
+- [SwaggerClient::PasswordPolicySettings](docs/PasswordPolicySettings.md)
+- [SwaggerClient::PasswordPolicySettingsLimits](docs/PasswordPolicySettingsLimits.md)
+- [SwaggerClient::PropertyBulkUpdateBody](docs/PropertyBulkUpdateBody.md)
+- [SwaggerClient::QueuedTask](docs/QueuedTask.md)
+- [SwaggerClient::QueuedTasks](docs/QueuedTasks.md)
+- [SwaggerClient::QueuedTasksItemList](docs/QueuedTasksItemList.md)
+- [SwaggerClient::SegmentationSettings](docs/SegmentationSettings.md)
+- [SwaggerClient::Segments](docs/Segments.md)
+- [SwaggerClient::SegmentsSegmentList](docs/SegmentsSegmentList.md)
+- [SwaggerClient::SendIncomingEventsResponse](docs/SendIncomingEventsResponse.md)
+- [SwaggerClient::SendIncomingEventsResponseFailureList](docs/SendIncomingEventsResponseFailureList.md)
+- [SwaggerClient::SettingsVisitBody](docs/SettingsVisitBody.md)
+- [SwaggerClient::SharedResponseDefinition](docs/SharedResponseDefinition.md)
+- [SwaggerClient::Type](docs/Type.md)
+- [SwaggerClient::TypeDisplayAttributes](docs/TypeDisplayAttributes.md)
+- [SwaggerClient::TypeDisplayGroups](docs/TypeDisplayGroups.md)
+- [SwaggerClient::TypeInParameters](docs/TypeInParameters.md)
+- [SwaggerClient::TypeMethods](docs/TypeMethods.md)
+- [SwaggerClient::TypeProperties](docs/TypeProperties.md)
+- [SwaggerClient::Types](docs/Types.md)
+- [SwaggerClient::UpdateCardholderWithDirectoryAccountProperty](docs/UpdateCardholderWithDirectoryAccountProperty.md)
+- [SwaggerClient::UpdateCardholderWithDirectoryAccountPropertyBody](docs/UpdateCardholderWithDirectoryAccountPropertyBody.md)
+- [SwaggerClient::UserExtendedProperties](docs/UserExtendedProperties.md)
+- [SwaggerClient::UserExtendedPropertiesPut](docs/UserExtendedPropertiesPut.md)
+- [SwaggerClient::UserPasswordBody](docs/UserPasswordBody.md)
+- [SwaggerClient::UserPreference](docs/UserPreference.md)
+- [SwaggerClient::UserPreferencesBody](docs/UserPreferencesBody.md)
+- [SwaggerClient::UserPreferencesBody1](docs/UserPreferencesBody1.md)
+- [SwaggerClient::VideoOptions](docs/VideoOptions.md)
+- [SwaggerClient::VideoRecorderAuthenticationData](docs/VideoRecorderAuthenticationData.md)
+- [SwaggerClient::VideoRecorderCredentials](docs/VideoRecorderCredentials.md)
+- [SwaggerClient::VideoRecorders](docs/VideoRecorders.md)
+- [SwaggerClient::VisitEventStatus](docs/VisitEventStatus.md)
+- [SwaggerClient::VisitSettings](docs/VisitSettings.md)
 
 ## Documentation for Authorization
 

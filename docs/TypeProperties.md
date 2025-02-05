@@ -14,4 +14,3 @@ Name | Type | Description | Notes
 **possible_values** | **Array&lt;Object&gt;** |  | [optional] 
 **type** | **String** |  | [optional] 
 
-
