@@ -8,4 +8,3 @@ Name | Type | Description | Notes
 **email** | **String** |  | [optional] 
 **user_name** | **String** |  | [optional] 
 
-

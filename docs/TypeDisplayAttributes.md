@@ -8,4 +8,3 @@ Name | Type | Description | Notes
 **permission** | **String** |  | [optional] 
 **template** | **String** |  | [optional] 
 
-

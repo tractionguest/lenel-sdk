@@ -7,4 +7,3 @@ Name | Type | Description | Notes
 **mobile_device_description** | **String** |  | [optional] 
 **mobile_device_active** | **BOOLEAN** |  | [optional] 
 
-

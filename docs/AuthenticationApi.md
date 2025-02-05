@@ -1,6 +1,6 @@
 # SwaggerClient::AuthenticationApi
 
-All URIs are relative to *https://localhost/api/access/onguard/openaccess*
+All URIs are relative to */api/access/onguard/openaccess*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -10,9 +10,8 @@ Method | HTTP request | Description
 [**get_identity_provider_url**](AuthenticationApi.md#get_identity_provider_url) | **GET** /identity_provider_url | Get identity provider URL.
 [**get_session**](AuthenticationApi.md#get_session) | **GET** /session | Get the session data for a session token
 
-
 # **add_authentication**
-> Object add_authentication(credentials, version, opts)
+> InlineResponse2007 add_authentication(bodyversion, opts)
 
 Login
 
@@ -31,18 +30,17 @@ SwaggerClient.configure do |config|
 end
 
 api_instance = SwaggerClient::AuthenticationApi.new
-
-credentials = SwaggerClient::Credentials.new # Credentials | Either username and password must be present, or the oidc_token must be present.
-
+body = SwaggerClient::AuthenticationBody.new # AuthenticationBody | Either username and password must be present, or the oidc_token must be present.
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
-
 opts = { 
-  queue: false # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  queue: true # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  operation_guid: 'operation_guid_example' # String | This GUID, formatted as \"00000000-0000-0000-0000-000000000000\", can be used to indicate a correlation among multiple API calls so that they can be grouped together in the User Transaction Log reports, enhancing their readability. For more information please refer to OpenAccess documentation, section Operation GUID.
+  operation_description: 'operation_description_example' # String | Userfriendly free-form description for the operation being performed. Use this description to enhance the readability of the User Transaction Log reports. For more information please refer to OpenAccess documentation, section Operation Description.
 }
 
 begin
   #Login
-  result = api_instance.add_authentication(credentials, version, opts)
+  result = api_instance.add_authentication(bodyversion, opts)
   p result
 rescue SwaggerClient::ApiError => e
   puts "Exception when calling AuthenticationApi->add_authentication: #{e}"
@@ -53,13 +51,15 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **credentials** | [**Credentials**](Credentials.md)| Either username and password must be present, or the oidc_token must be present. | 
+ **body** | [**AuthenticationBody**](AuthenticationBody.md)| Either username and password must be present, or the oidc_token must be present. | 
  **version** | **String**| Used to maintain backward compatibility as the API is updated, in the format 1.0. | 
- **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] [default to false]
+ **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] 
+ **operation_guid** | **String**| This GUID, formatted as \&quot;00000000-0000-0000-0000-000000000000\&quot;, can be used to indicate a correlation among multiple API calls so that they can be grouped together in the User Transaction Log reports, enhancing their readability. For more information please refer to OpenAccess documentation, section Operation GUID. | [optional] 
+ **operation_description** | **String**| Userfriendly free-form description for the operation being performed. Use this description to enhance the readability of the User Transaction Log reports. For more information please refer to OpenAccess documentation, section Operation Description. | [optional] 
 
 ### Return type
 
-**Object**
+[**InlineResponse2007**](InlineResponse2007.md)
 
 ### Authorization
 
@@ -97,11 +97,9 @@ SwaggerClient.configure do |config|
 end
 
 api_instance = SwaggerClient::AuthenticationApi.new
-
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
-
 opts = { 
-  queue: false # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  queue: true # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
 }
 
 begin
@@ -118,7 +116,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **version** | **String**| Used to maintain backward compatibility as the API is updated, in the format 1.0. | 
- **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] [default to false]
+ **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] 
 
 ### Return type
 
@@ -130,7 +128,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 
@@ -160,11 +158,9 @@ SwaggerClient.configure do |config|
 end
 
 api_instance = SwaggerClient::AuthenticationApi.new
-
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
-
 opts = { 
-  queue: false # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  queue: true # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
 }
 
 begin
@@ -181,7 +177,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **version** | **String**| Used to maintain backward compatibility as the API is updated, in the format 1.0. | 
- **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] [default to false]
+ **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] 
 
 ### Return type
 
@@ -193,13 +189,13 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 
 
 # **get_identity_provider_url**
-> Object get_identity_provider_url(directory_id, redirect_url, response_mode, version, opts)
+> InlineResponse2005 get_identity_provider_url(directory_id, redirect_url, response_mode, version, opts)
 
 Get identity provider URL.
 
@@ -223,17 +219,12 @@ SwaggerClient.configure do |config|
 end
 
 api_instance = SwaggerClient::AuthenticationApi.new
-
 directory_id = 'directory_id_example' # String | The directory ID of the selected identity provider.
-
 redirect_url = 'redirect_url_example' # String | The URL to which the identity provider should send its response.
-
 response_mode = 'response_mode_example' # String | The mode the identity provider should use to respond. Valid values are \"form_post\" and \"fragment\". With \"form_post\", the identity provider responds with an HTTP POST to the redirect_url, with the content in the message body. With \"fragment\", the response is contained in the redirect URL.
-
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
-
 opts = { 
-  queue: false # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  queue: true # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
 }
 
 begin
@@ -253,11 +244,11 @@ Name | Type | Description  | Notes
  **redirect_url** | **String**| The URL to which the identity provider should send its response. | 
  **response_mode** | **String**| The mode the identity provider should use to respond. Valid values are \&quot;form_post\&quot; and \&quot;fragment\&quot;. With \&quot;form_post\&quot;, the identity provider responds with an HTTP POST to the redirect_url, with the content in the message body. With \&quot;fragment\&quot;, the response is contained in the redirect URL. | 
  **version** | **String**| Used to maintain backward compatibility as the API is updated, in the format 1.0. | 
- **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] [default to false]
+ **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] 
 
 ### Return type
 
-**Object**
+[**InlineResponse2005**](InlineResponse2005.md)
 
 ### Authorization
 
@@ -265,13 +256,13 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 
 
 # **get_session**
-> Object get_session(version, opts)
+> InlineResponse2008 get_session(version, opts)
 
 Get the session data for a session token
 
@@ -295,11 +286,10 @@ SwaggerClient.configure do |config|
 end
 
 api_instance = SwaggerClient::AuthenticationApi.new
-
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
-
 opts = { 
-  queue: false # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  queue: true, # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  do_not_reset_inactivity_timer: true # BOOLEAN | If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity.
 }
 
 begin
@@ -316,11 +306,12 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **version** | **String**| Used to maintain backward compatibility as the API is updated, in the format 1.0. | 
- **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] [default to false]
+ **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] 
+ **do_not_reset_inactivity_timer** | **BOOLEAN**| If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity. | [optional] 
 
 ### Return type
 
-**Object**
+[**InlineResponse2008**](InlineResponse2008.md)
 
 ### Authorization
 
@@ -328,7 +319,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 

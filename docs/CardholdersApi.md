@@ -1,6 +1,6 @@
 # SwaggerClient::CardholdersApi
 
-All URIs are relative to *https://localhost/api/access/onguard/openaccess*
+All URIs are relative to */api/access/onguard/openaccess*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -8,7 +8,6 @@ Method | HTTP request | Description
 [**get_cardholder_from_directory**](CardholdersApi.md#get_cardholder_from_directory) | **GET** /cardholder_from_directory | Get cardholder ID from their linked directory account
 [**get_directory_accounts_matching_cardholders**](CardholdersApi.md#get_directory_accounts_matching_cardholders) | **GET** /directory_accounts_matching_cardholders | Get directory accounts matching the given cardholders
 [**update_cardholder_with_directory_account_property**](CardholdersApi.md#update_cardholder_with_directory_account_property) | **PUT** /update_cardholder_with_directory_account_property | Update the cardholder with a directory account property
-
 
 # **get_active_directory_accounts**
 > DirectoryAccounts get_active_directory_accounts(directory_id, filter, version, opts)
@@ -35,15 +34,12 @@ SwaggerClient.configure do |config|
 end
 
 api_instance = SwaggerClient::CardholdersApi.new
-
 directory_id = 'directory_id_example' # String | Directory ID for the directory containing the active directory accounts you want to find.
-
 filter = 'filter_example' # String | Filter format -`<ADattr> <condition> '<value>'`. EX: `displayname has 'smith'` -  Support Conditions - `eq`, `has`. One specific case is `<ADattr> <eq> ''` which means AD attribute's value is empty.  EX: `displayname eq ''` -  Support negative conditions -    `not(<ADattr.> <has> '<value>')` means AD attribute's value does not contain the input value. EX: `not(samaccountname has 'smith')`   `not(<ADattr.> <eq> '')` means AD attribute's value is not empty.  
-
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
-
 opts = { 
-  queue: false # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  queue: true, # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  do_not_reset_inactivity_timer: true # BOOLEAN | If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity.
 }
 
 begin
@@ -60,9 +56,10 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **directory_id** | **String**| Directory ID for the directory containing the active directory accounts you want to find. | 
- **filter** | **String**| Filter format -&#x60;&lt;ADattr&gt; &lt;condition&gt; &#39;&lt;value&gt;&#39;&#x60;. EX: &#x60;displayname has &#39;smith&#39;&#x60; -  Support Conditions - &#x60;eq&#x60;, &#x60;has&#x60;. One specific case is &#x60;&lt;ADattr&gt; &lt;eq&gt; &#39;&#39;&#x60; which means AD attribute&#39;s value is empty.  EX: &#x60;displayname eq &#39;&#39;&#x60; -  Support negative conditions -    &#x60;not(&lt;ADattr.&gt; &lt;has&gt; &#39;&lt;value&gt;&#39;)&#x60; means AD attribute&#39;s value does not contain the input value. EX: &#x60;not(samaccountname has &#39;smith&#39;)&#x60;   &#x60;not(&lt;ADattr.&gt; &lt;eq&gt; &#39;&#39;)&#x60; means AD attribute&#39;s value is not empty.   | 
+ **filter** | **String**| Filter format -&#x60;&lt;ADattr&gt; &lt;condition&gt; &#x27;&lt;value&gt;&#x27;&#x60;. EX: &#x60;displayname has &#x27;smith&#x27;&#x60; -  Support Conditions - &#x60;eq&#x60;, &#x60;has&#x60;. One specific case is &#x60;&lt;ADattr&gt; &lt;eq&gt; &#x27;&#x27;&#x60; which means AD attribute&#x27;s value is empty.  EX: &#x60;displayname eq &#x27;&#x27;&#x60; -  Support negative conditions -    &#x60;not(&lt;ADattr.&gt; &lt;has&gt; &#x27;&lt;value&gt;&#x27;)&#x60; means AD attribute&#x27;s value does not contain the input value. EX: &#x60;not(samaccountname has &#x27;smith&#x27;)&#x60;   &#x60;not(&lt;ADattr.&gt; &lt;eq&gt; &#x27;&#x27;)&#x60; means AD attribute&#x27;s value is not empty.   | 
  **version** | **String**| Used to maintain backward compatibility as the API is updated, in the format 1.0. | 
- **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] [default to false]
+ **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] 
+ **do_not_reset_inactivity_timer** | **BOOLEAN**| If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity. | [optional] 
 
 ### Return type
 
@@ -74,7 +71,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 
@@ -104,17 +101,13 @@ SwaggerClient.configure do |config|
 end
 
 api_instance = SwaggerClient::CardholdersApi.new
-
 user_name = 'user_name_example' # String | Directory account username of the cardholder whose internal ID you want to look up in OnGuard.
-
 password = 'password_example' # String | Directory account password of the cardholder whose internal ID you want to look up in OnGuard.
-
 directory_id = 'directory_id_example' # String | Directory ID for the directory containing the cardholder's account that you want to look up.
-
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
-
 opts = { 
-  queue: false # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  queue: true, # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  do_not_reset_inactivity_timer: true # BOOLEAN | If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity.
 }
 
 begin
@@ -132,9 +125,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **user_name** | **String**| Directory account username of the cardholder whose internal ID you want to look up in OnGuard. | 
  **password** | **String**| Directory account password of the cardholder whose internal ID you want to look up in OnGuard. | 
- **directory_id** | **String**| Directory ID for the directory containing the cardholder&#39;s account that you want to look up. | 
+ **directory_id** | **String**| Directory ID for the directory containing the cardholder&#x27;s account that you want to look up. | 
  **version** | **String**| Used to maintain backward compatibility as the API is updated, in the format 1.0. | 
- **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] [default to false]
+ **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] 
+ **do_not_reset_inactivity_timer** | **BOOLEAN**| If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity. | [optional] 
 
 ### Return type
 
@@ -146,7 +140,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 
@@ -176,17 +170,13 @@ SwaggerClient.configure do |config|
 end
 
 api_instance = SwaggerClient::CardholdersApi.new
-
 directory_id = 'directory_id_example' # String | Directory ID for the directory containing the active directory accounts that you want to find.
-
 cardholder_ids = [56] # Array<Integer> | List of cardholder IDs in the format `[1,2,3,...]`.
-
 filter = 'filter_example' # String | Filter format -`<ADattr> <condition> '<CardholderAttr>'`. EX: `displayname has 'firstname' ` -  Support Condition - `eq`, `has`. The condition compares AD attribute's value with Cardholder attribute's value. -  Support negative condition -    `not(<ADattr.> <has> '<CardholderAttr>')` mean AD attribute's value doesn't contain the Cardholder attribute's value. EX: `not(displayname has 'lastname')`. 
-
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
-
 opts = { 
-  queue: false # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  queue: true, # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  do_not_reset_inactivity_timer: true # BOOLEAN | If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity.
 }
 
 begin
@@ -204,9 +194,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **directory_id** | **String**| Directory ID for the directory containing the active directory accounts that you want to find. | 
  **cardholder_ids** | [**Array&lt;Integer&gt;**](Integer.md)| List of cardholder IDs in the format &#x60;[1,2,3,...]&#x60;. | 
- **filter** | **String**| Filter format -&#x60;&lt;ADattr&gt; &lt;condition&gt; &#39;&lt;CardholderAttr&gt;&#39;&#x60;. EX: &#x60;displayname has &#39;firstname&#39; &#x60; -  Support Condition - &#x60;eq&#x60;, &#x60;has&#x60;. The condition compares AD attribute&#39;s value with Cardholder attribute&#39;s value. -  Support negative condition -    &#x60;not(&lt;ADattr.&gt; &lt;has&gt; &#39;&lt;CardholderAttr&gt;&#39;)&#x60; mean AD attribute&#39;s value doesn&#39;t contain the Cardholder attribute&#39;s value. EX: &#x60;not(displayname has &#39;lastname&#39;)&#x60;.  | 
+ **filter** | **String**| Filter format -&#x60;&lt;ADattr&gt; &lt;condition&gt; &#x27;&lt;CardholderAttr&gt;&#x27;&#x60;. EX: &#x60;displayname has &#x27;firstname&#x27; &#x60; -  Support Condition - &#x60;eq&#x60;, &#x60;has&#x60;. The condition compares AD attribute&#x27;s value with Cardholder attribute&#x27;s value. -  Support negative condition -    &#x60;not(&lt;ADattr.&gt; &lt;has&gt; &#x27;&lt;CardholderAttr&gt;&#x27;)&#x60; mean AD attribute&#x27;s value doesn&#x27;t contain the Cardholder attribute&#x27;s value. EX: &#x60;not(displayname has &#x27;lastname&#x27;)&#x60;.  | 
  **version** | **String**| Used to maintain backward compatibility as the API is updated, in the format 1.0. | 
- **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] [default to false]
+ **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] 
+ **do_not_reset_inactivity_timer** | **BOOLEAN**| If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity. | [optional] 
 
 ### Return type
 
@@ -218,13 +209,13 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 
 
 # **update_cardholder_with_directory_account_property**
-> UpdateCardholderWithDirectoryAccountProperty update_cardholder_with_directory_account_property(cardholder_id, parameter_name, version, opts)
+> UpdateCardholderWithDirectoryAccountProperty update_cardholder_with_directory_account_property(bodycardholder_idversion, opts)
 
 Update the cardholder with a directory account property
 
@@ -248,20 +239,17 @@ SwaggerClient.configure do |config|
 end
 
 api_instance = SwaggerClient::CardholdersApi.new
-
+body = SwaggerClient::UpdateCardholderWithDirectoryAccountPropertyBody.new # UpdateCardholderWithDirectoryAccountPropertyBody | 
 cardholder_id = 56 # Integer | cardholder ID.
-
-parameter_name = SwaggerClient::ParameterName1.new # ParameterName1 | 
-
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
-
 opts = { 
-  queue: false # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  queue: true # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  do_not_reset_inactivity_timer: true # BOOLEAN | If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity.
 }
 
 begin
   #Update the cardholder with a directory account property
-  result = api_instance.update_cardholder_with_directory_account_property(cardholder_id, parameter_name, version, opts)
+  result = api_instance.update_cardholder_with_directory_account_property(bodycardholder_idversion, opts)
   p result
 rescue SwaggerClient::ApiError => e
   puts "Exception when calling CardholdersApi->update_cardholder_with_directory_account_property: #{e}"
@@ -272,10 +260,11 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **body** | [**UpdateCardholderWithDirectoryAccountPropertyBody**](UpdateCardholderWithDirectoryAccountPropertyBody.md)|  | 
  **cardholder_id** | **Integer**| cardholder ID. | 
- **parameter_name** | [**ParameterName1**](ParameterName1.md)|  | 
  **version** | **String**| Used to maintain backward compatibility as the API is updated, in the format 1.0. | 
- **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] [default to false]
+ **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] 
+ **do_not_reset_inactivity_timer** | **BOOLEAN**| If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity. | [optional] 
 
 ### Return type
 
