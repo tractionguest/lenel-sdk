@@ -45,4 +45,5 @@ module LenelSDK
   Configuration = SwaggerClient::Configuration
   AuthenticationApi = SwaggerClient::AuthenticationApi
   ApiClient = SwaggerClient::ApiClient
+  SettingsApi = SwaggerClient::SettingsApi
 end
