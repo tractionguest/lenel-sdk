@@ -26,4 +26,3 @@ Name | Type | Description | Notes
 **is_inactivity_timeout_policy_enabled** | **BOOLEAN** | A flag indicating whether the inactivity timeout policy is enabled. | [optional] 
 **inactivity_timeout_in_minutes** | **Integer** | The authenticated token inactivity timeout, in minutes. | [optional] 
 
-

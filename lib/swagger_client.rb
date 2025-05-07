@@ -39,7 +39,7 @@ module LenelSDK
   Instance = SwaggerClient::LenelSdk::Instance
   ApiError = SwaggerClient::ApiError
   InstanceDefinition = SwaggerClient::InstanceDefinition
-  Credentials = SwaggerClient::Credentials
+  Credentials = SwaggerClient::AuthenticationBody
   UsersApi = SwaggerClient::UsersApi
   InstancesApi = SwaggerClient::InstancesApi
   Configuration = SwaggerClient::Configuration

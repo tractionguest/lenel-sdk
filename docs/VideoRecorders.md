@@ -18,4 +18,3 @@ Name | Type | Description | Notes
 **workstation** | **String** |  | [optional] 
 **world_timezone_id** | **Integer** |  | [optional] 
 
-

@@ -7,4 +7,3 @@ Name | Type | Description | Notes
 **display_name** | **String** |  | [optional] 
 **server_type** | **String** |  | [optional] 
 
-

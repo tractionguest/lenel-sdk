@@ -7,4 +7,3 @@ Name | Type | Description | Notes
 **printer_name** | **String** |  | [optional] 
 **workstation** | **String** |  | [optional] 
 
-

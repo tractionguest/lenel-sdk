@@ -1,6 +1,6 @@
 # SwaggerClient::UsersApi
 
-All URIs are relative to *https://localhost/api/access/onguard/openaccess*
+All URIs are relative to */api/access/onguard/openaccess*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -14,6 +14,7 @@ Method | HTTP request | Description
 [**get_logged_in_user**](UsersApi.md#get_logged_in_user) | **GET** /logged_in_user | Get logged in user
 [**get_managed_access_levels**](UsersApi.md#get_managed_access_levels) | **GET** /user/{id}/managed_access_levels | Get managed access levels
 [**get_managers_of_access_level**](UsersApi.md#get_managers_of_access_level) | **GET** /managers_of_access_level | Get managers of access level
+[**get_restricted_segments**](UsersApi.md#get_restricted_segments) | **GET** /restricted_segments | Get restricted segments
 [**get_user_preferences**](UsersApi.md#get_user_preferences) | **GET** /user_preferences | Get user preferences
 [**get_user_segments**](UsersApi.md#get_user_segments) | **GET** /user/{id}/segments | Get user segments
 [**getuser**](UsersApi.md#getuser) | **GET** /user/{id} | Get extended properties for a user
@@ -21,9 +22,8 @@ Method | HTTP request | Description
 [**modify_user_preferences**](UsersApi.md#modify_user_preferences) | **PUT** /user_preferences | Modify user preference
 [**modifyuser**](UsersApi.md#modifyuser) | **PUT** /user/{id} | Sets the extended properties for a user
 
-
 # **add_managed_access_levels**
-> SharedResponseDefinition add_managed_access_levels(id, levels, version, opts)
+> SharedResponseDefinition add_managed_access_levels(bodyversionid, opts)
 
 Add managed access levels
 
@@ -47,20 +47,19 @@ SwaggerClient.configure do |config|
 end
 
 api_instance = SwaggerClient::UsersApi.new
-
-id = 'id_example' # String | ID of user to which access level management will be added.
-
-levels = SwaggerClient::Levels.new # Levels | A list of access level IDs the user can manage.
-
+body = SwaggerClient::IdManagedAccessLevelsBody.new # IdManagedAccessLevelsBody | A list of access level IDs the user can manage.
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
-
+id = 'id_example' # String | ID of user to which access level management will be added.
 opts = { 
-  queue: false # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  queue: true # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  do_not_reset_inactivity_timer: true # BOOLEAN | If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity.
+  operation_guid: 'operation_guid_example' # String | This GUID, formatted as \"00000000-0000-0000-0000-000000000000\", can be used to indicate a correlation among multiple API calls so that they can be grouped together in the User Transaction Log reports, enhancing their readability. For more information please refer to OpenAccess documentation, section Operation GUID.
+  operation_description: 'operation_description_example' # String | Userfriendly free-form description for the operation being performed. Use this description to enhance the readability of the User Transaction Log reports. For more information please refer to OpenAccess documentation, section Operation Description.
 }
 
 begin
   #Add managed access levels
-  result = api_instance.add_managed_access_levels(id, levels, version, opts)
+  result = api_instance.add_managed_access_levels(bodyversionid, opts)
   p result
 rescue SwaggerClient::ApiError => e
   puts "Exception when calling UsersApi->add_managed_access_levels: #{e}"
@@ -71,10 +70,13 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **String**| ID of user to which access level management will be added. | 
- **levels** | [**Levels**](Levels.md)| A list of access level IDs the user can manage. | 
+ **body** | [**IdManagedAccessLevelsBody**](IdManagedAccessLevelsBody.md)| A list of access level IDs the user can manage. | 
  **version** | **String**| Used to maintain backward compatibility as the API is updated, in the format 1.0. | 
- **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] [default to false]
+ **id** | **String**| ID of user to which access level management will be added. | 
+ **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] 
+ **do_not_reset_inactivity_timer** | **BOOLEAN**| If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity. | [optional] 
+ **operation_guid** | **String**| This GUID, formatted as \&quot;00000000-0000-0000-0000-000000000000\&quot;, can be used to indicate a correlation among multiple API calls so that they can be grouped together in the User Transaction Log reports, enhancing their readability. For more information please refer to OpenAccess documentation, section Operation GUID. | [optional] 
+ **operation_description** | **String**| Userfriendly free-form description for the operation being performed. Use this description to enhance the readability of the User Transaction Log reports. For more information please refer to OpenAccess documentation, section Operation Description. | [optional] 
 
 ### Return type
 
@@ -92,7 +94,7 @@ Name | Type | Description  | Notes
 
 
 # **add_user_preferences**
-> AddUserPreferences add_user_preferences(user_preferences, version, opts)
+> AddUserPreferences add_user_preferences(bodyversion, opts)
 
 Add user preference
 
@@ -116,18 +118,18 @@ SwaggerClient.configure do |config|
 end
 
 api_instance = SwaggerClient::UsersApi.new
-
-user_preferences = SwaggerClient::UserPreferences1.new # UserPreferences1 | 
-
+body = SwaggerClient::UserPreferencesBody1.new # UserPreferencesBody1 | 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
-
 opts = { 
-  queue: false # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  queue: true # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  do_not_reset_inactivity_timer: true # BOOLEAN | If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity.
+  operation_guid: 'operation_guid_example' # String | This GUID, formatted as \"00000000-0000-0000-0000-000000000000\", can be used to indicate a correlation among multiple API calls so that they can be grouped together in the User Transaction Log reports, enhancing their readability. For more information please refer to OpenAccess documentation, section Operation GUID.
+  operation_description: 'operation_description_example' # String | Userfriendly free-form description for the operation being performed. Use this description to enhance the readability of the User Transaction Log reports. For more information please refer to OpenAccess documentation, section Operation Description.
 }
 
 begin
   #Add user preference
-  result = api_instance.add_user_preferences(user_preferences, version, opts)
+  result = api_instance.add_user_preferences(bodyversion, opts)
   p result
 rescue SwaggerClient::ApiError => e
   puts "Exception when calling UsersApi->add_user_preferences: #{e}"
@@ -138,9 +140,12 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user_preferences** | [**UserPreferences1**](UserPreferences1.md)|  | 
+ **body** | [**UserPreferencesBody1**](UserPreferencesBody1.md)|  | 
  **version** | **String**| Used to maintain backward compatibility as the API is updated, in the format 1.0. | 
- **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] [default to false]
+ **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] 
+ **do_not_reset_inactivity_timer** | **BOOLEAN**| If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity. | [optional] 
+ **operation_guid** | **String**| This GUID, formatted as \&quot;00000000-0000-0000-0000-000000000000\&quot;, can be used to indicate a correlation among multiple API calls so that they can be grouped together in the User Transaction Log reports, enhancing their readability. For more information please refer to OpenAccess documentation, section Operation GUID. | [optional] 
+ **operation_description** | **String**| Userfriendly free-form description for the operation being performed. Use this description to enhance the readability of the User Transaction Log reports. For more information please refer to OpenAccess documentation, section Operation Description. | [optional] 
 
 ### Return type
 
@@ -158,7 +163,7 @@ Name | Type | Description  | Notes
 
 
 # **add_user_segments**
-> SharedResponseDefinition add_user_segments(id, segments, version, opts)
+> SharedResponseDefinition add_user_segments(bodyversionid, opts)
 
 Add user segments
 
@@ -182,20 +187,17 @@ SwaggerClient.configure do |config|
 end
 
 api_instance = SwaggerClient::UsersApi.new
-
-id = 'id_example' # String | ID of the user to which segment assignment will be added.
-
-segments = SwaggerClient::Segments.new # Segments | A list of segment IDs that indicate which segments to assign to the user.
-
+body = SwaggerClient::IdSegmentsBody.new # IdSegmentsBody | A list of segment IDs that indicate which segments to assign to the user.
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
-
+id = 'id_example' # String | ID of the user to which segment assignment will be added.
 opts = { 
-  queue: false # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  queue: true # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  do_not_reset_inactivity_timer: true # BOOLEAN | If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity.
 }
 
 begin
   #Add user segments
-  result = api_instance.add_user_segments(id, segments, version, opts)
+  result = api_instance.add_user_segments(bodyversionid, opts)
   p result
 rescue SwaggerClient::ApiError => e
   puts "Exception when calling UsersApi->add_user_segments: #{e}"
@@ -206,10 +208,11 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **String**| ID of the user to which segment assignment will be added. | 
- **segments** | [**Segments**](Segments.md)| A list of segment IDs that indicate which segments to assign to the user. | 
+ **body** | [**IdSegmentsBody**](IdSegmentsBody.md)| A list of segment IDs that indicate which segments to assign to the user. | 
  **version** | **String**| Used to maintain backward compatibility as the API is updated, in the format 1.0. | 
- **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] [default to false]
+ **id** | **String**| ID of the user to which segment assignment will be added. | 
+ **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] 
+ **do_not_reset_inactivity_timer** | **BOOLEAN**| If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity. | [optional] 
 
 ### Return type
 
@@ -227,7 +230,7 @@ Name | Type | Description  | Notes
 
 
 # **delete_managed_access_levels**
-> SharedResponseDefinition delete_managed_access_levels(id, levels, version, opts)
+> SharedResponseDefinition delete_managed_access_levels(bodyversionid, opts)
 
 Delete managed access levels
 
@@ -251,20 +254,19 @@ SwaggerClient.configure do |config|
 end
 
 api_instance = SwaggerClient::UsersApi.new
-
-id = 'id_example' # String | ID of user from which to remove access level management.
-
-levels = SwaggerClient::Levels1.new # Levels1 | A list of access level IDs the user cannot manage.
-
+body = SwaggerClient::IdManagedAccessLevelsBody1.new # IdManagedAccessLevelsBody1 | A list of access level IDs the user cannot manage.
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
-
+id = 'id_example' # String | ID of user from which to remove access level management.
 opts = { 
-  queue: false # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  queue: true # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  do_not_reset_inactivity_timer: true # BOOLEAN | If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity.
+  operation_guid: 'operation_guid_example' # String | This GUID, formatted as \"00000000-0000-0000-0000-000000000000\", can be used to indicate a correlation among multiple API calls so that they can be grouped together in the User Transaction Log reports, enhancing their readability. For more information please refer to OpenAccess documentation, section Operation GUID.
+  operation_description: 'operation_description_example' # String | Userfriendly free-form description for the operation being performed. Use this description to enhance the readability of the User Transaction Log reports. For more information please refer to OpenAccess documentation, section Operation Description.
 }
 
 begin
   #Delete managed access levels
-  result = api_instance.delete_managed_access_levels(id, levels, version, opts)
+  result = api_instance.delete_managed_access_levels(bodyversionid, opts)
   p result
 rescue SwaggerClient::ApiError => e
   puts "Exception when calling UsersApi->delete_managed_access_levels: #{e}"
@@ -275,10 +277,13 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **String**| ID of user from which to remove access level management. | 
- **levels** | [**Levels1**](Levels1.md)| A list of access level IDs the user cannot manage. | 
+ **body** | [**IdManagedAccessLevelsBody1**](IdManagedAccessLevelsBody1.md)| A list of access level IDs the user cannot manage. | 
  **version** | **String**| Used to maintain backward compatibility as the API is updated, in the format 1.0. | 
- **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] [default to false]
+ **id** | **String**| ID of user from which to remove access level management. | 
+ **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] 
+ **do_not_reset_inactivity_timer** | **BOOLEAN**| If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity. | [optional] 
+ **operation_guid** | **String**| This GUID, formatted as \&quot;00000000-0000-0000-0000-000000000000\&quot;, can be used to indicate a correlation among multiple API calls so that they can be grouped together in the User Transaction Log reports, enhancing their readability. For more information please refer to OpenAccess documentation, section Operation GUID. | [optional] 
+ **operation_description** | **String**| Userfriendly free-form description for the operation being performed. Use this description to enhance the readability of the User Transaction Log reports. For more information please refer to OpenAccess documentation, section Operation Description. | [optional] 
 
 ### Return type
 
@@ -320,13 +325,13 @@ SwaggerClient.configure do |config|
 end
 
 api_instance = SwaggerClient::UsersApi.new
-
 preference_id = 56 # Integer | ID of user preference to be deleted.
-
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
-
 opts = { 
-  queue: false # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  queue: true, # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  do_not_reset_inactivity_timer: true, # BOOLEAN | If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity.
+  operation_guid: 'operation_guid_example', # String | This GUID, formatted as \"00000000-0000-0000-0000-000000000000\", can be used to indicate a correlation among multiple API calls so that they can be grouped together in the User Transaction Log reports, enhancing their readability. For more information please refer to OpenAccess documentation, section Operation GUID.
+  operation_description: 'operation_description_example' # String | Userfriendly free-form description for the operation being performed. Use this description to enhance the readability of the User Transaction Log reports. For more information please refer to OpenAccess documentation, section Operation Description.
 }
 
 begin
@@ -344,7 +349,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **preference_id** | **Integer**| ID of user preference to be deleted. | 
  **version** | **String**| Used to maintain backward compatibility as the API is updated, in the format 1.0. | 
- **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] [default to false]
+ **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] 
+ **do_not_reset_inactivity_timer** | **BOOLEAN**| If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity. | [optional] 
+ **operation_guid** | **String**| This GUID, formatted as \&quot;00000000-0000-0000-0000-000000000000\&quot;, can be used to indicate a correlation among multiple API calls so that they can be grouped together in the User Transaction Log reports, enhancing their readability. For more information please refer to OpenAccess documentation, section Operation GUID. | [optional] 
+ **operation_description** | **String**| Userfriendly free-form description for the operation being performed. Use this description to enhance the readability of the User Transaction Log reports. For more information please refer to OpenAccess documentation, section Operation Description. | [optional] 
 
 ### Return type
 
@@ -356,13 +364,13 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 
 
 # **delete_user_segments**
-> SharedResponseDefinition delete_user_segments(id, segments, version, opts)
+> SharedResponseDefinition delete_user_segments(bodyversionid, opts)
 
 Delete user segments
 
@@ -386,20 +394,17 @@ SwaggerClient.configure do |config|
 end
 
 api_instance = SwaggerClient::UsersApi.new
-
-id = 'id_example' # String | ID of user from which to remove segment assignment.
-
-segments = SwaggerClient::Segments1.new # Segments1 | A list of segment IDs that indicate which segments to remove from the user.
-
+body = SwaggerClient::IdSegmentsBody1.new # IdSegmentsBody1 | A list of segment IDs that indicate which segments to remove from the user.
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
-
+id = 'id_example' # String | ID of user from which to remove segment assignment.
 opts = { 
-  queue: false # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  queue: true # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  do_not_reset_inactivity_timer: true # BOOLEAN | If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity.
 }
 
 begin
   #Delete user segments
-  result = api_instance.delete_user_segments(id, segments, version, opts)
+  result = api_instance.delete_user_segments(bodyversionid, opts)
   p result
 rescue SwaggerClient::ApiError => e
   puts "Exception when calling UsersApi->delete_user_segments: #{e}"
@@ -410,10 +415,11 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **String**| ID of user from which to remove segment assignment. | 
- **segments** | [**Segments1**](Segments1.md)| A list of segment IDs that indicate which segments to remove from the user. | 
+ **body** | [**IdSegmentsBody1**](IdSegmentsBody1.md)| A list of segment IDs that indicate which segments to remove from the user. | 
  **version** | **String**| Used to maintain backward compatibility as the API is updated, in the format 1.0. | 
- **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] [default to false]
+ **id** | **String**| ID of user from which to remove segment assignment. | 
+ **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] 
+ **do_not_reset_inactivity_timer** | **BOOLEAN**| If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity. | [optional] 
 
 ### Return type
 
@@ -455,11 +461,10 @@ SwaggerClient.configure do |config|
 end
 
 api_instance = SwaggerClient::UsersApi.new
-
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
-
 opts = { 
-  queue: false # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  queue: true, # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  do_not_reset_inactivity_timer: true # BOOLEAN | If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity.
 }
 
 begin
@@ -476,7 +481,8 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **version** | **String**| Used to maintain backward compatibility as the API is updated, in the format 1.0. | 
- **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] [default to false]
+ **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] 
+ **do_not_reset_inactivity_timer** | **BOOLEAN**| If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity. | [optional] 
 
 ### Return type
 
@@ -488,7 +494,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 
@@ -518,11 +524,12 @@ SwaggerClient.configure do |config|
 end
 
 api_instance = SwaggerClient::UsersApi.new
-
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
-
 opts = { 
-  queue: false # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  queue: true, # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  do_not_reset_inactivity_timer: true, # BOOLEAN | If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity.
+  operation_guid: 'operation_guid_example', # String | This GUID, formatted as \"00000000-0000-0000-0000-000000000000\", can be used to indicate a correlation among multiple API calls so that they can be grouped together in the User Transaction Log reports, enhancing their readability. For more information please refer to OpenAccess documentation, section Operation GUID.
+  operation_description: 'operation_description_example' # String | Userfriendly free-form description for the operation being performed. Use this description to enhance the readability of the User Transaction Log reports. For more information please refer to OpenAccess documentation, section Operation Description.
 }
 
 begin
@@ -539,7 +546,10 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **version** | **String**| Used to maintain backward compatibility as the API is updated, in the format 1.0. | 
- **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] [default to false]
+ **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] 
+ **do_not_reset_inactivity_timer** | **BOOLEAN**| If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity. | [optional] 
+ **operation_guid** | **String**| This GUID, formatted as \&quot;00000000-0000-0000-0000-000000000000\&quot;, can be used to indicate a correlation among multiple API calls so that they can be grouped together in the User Transaction Log reports, enhancing their readability. For more information please refer to OpenAccess documentation, section Operation GUID. | [optional] 
+ **operation_description** | **String**| Userfriendly free-form description for the operation being performed. Use this description to enhance the readability of the User Transaction Log reports. For more information please refer to OpenAccess documentation, section Operation Description. | [optional] 
 
 ### Return type
 
@@ -551,7 +561,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 
@@ -581,13 +591,13 @@ SwaggerClient.configure do |config|
 end
 
 api_instance = SwaggerClient::UsersApi.new
-
 id = 'id_example' # String | ID of user for whom you want a list of access levels the user can manage. If this parameter is not provided, the access level list is provided for the logged in user.
-
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
-
 opts = { 
-  queue: false # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  queue: true, # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  do_not_reset_inactivity_timer: true, # BOOLEAN | If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity.
+  operation_guid: 'operation_guid_example', # String | This GUID, formatted as \"00000000-0000-0000-0000-000000000000\", can be used to indicate a correlation among multiple API calls so that they can be grouped together in the User Transaction Log reports, enhancing their readability. For more information please refer to OpenAccess documentation, section Operation GUID.
+  operation_description: 'operation_description_example' # String | Userfriendly free-form description for the operation being performed. Use this description to enhance the readability of the User Transaction Log reports. For more information please refer to OpenAccess documentation, section Operation Description.
 }
 
 begin
@@ -605,7 +615,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **String**| ID of user for whom you want a list of access levels the user can manage. If this parameter is not provided, the access level list is provided for the logged in user. | 
  **version** | **String**| Used to maintain backward compatibility as the API is updated, in the format 1.0. | 
- **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] [default to false]
+ **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] 
+ **do_not_reset_inactivity_timer** | **BOOLEAN**| If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity. | [optional] 
+ **operation_guid** | **String**| This GUID, formatted as \&quot;00000000-0000-0000-0000-000000000000\&quot;, can be used to indicate a correlation among multiple API calls so that they can be grouped together in the User Transaction Log reports, enhancing their readability. For more information please refer to OpenAccess documentation, section Operation GUID. | [optional] 
+ **operation_description** | **String**| Userfriendly free-form description for the operation being performed. Use this description to enhance the readability of the User Transaction Log reports. For more information please refer to OpenAccess documentation, section Operation Description. | [optional] 
 
 ### Return type
 
@@ -617,7 +630,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 
@@ -647,13 +660,13 @@ SwaggerClient.configure do |config|
 end
 
 api_instance = SwaggerClient::UsersApi.new
-
 access_level_id = 56 # Integer | ID of the access level for which to retrieve users who can manage that access level.
-
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
-
 opts = { 
-  queue: false # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  queue: true, # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  do_not_reset_inactivity_timer: true, # BOOLEAN | If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity.
+  operation_guid: 'operation_guid_example', # String | This GUID, formatted as \"00000000-0000-0000-0000-000000000000\", can be used to indicate a correlation among multiple API calls so that they can be grouped together in the User Transaction Log reports, enhancing their readability. For more information please refer to OpenAccess documentation, section Operation GUID.
+  operation_description: 'operation_description_example' # String | Userfriendly free-form description for the operation being performed. Use this description to enhance the readability of the User Transaction Log reports. For more information please refer to OpenAccess documentation, section Operation Description.
 }
 
 begin
@@ -671,7 +684,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **access_level_id** | **Integer**| ID of the access level for which to retrieve users who can manage that access level. | 
  **version** | **String**| Used to maintain backward compatibility as the API is updated, in the format 1.0. | 
- **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] [default to false]
+ **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] 
+ **do_not_reset_inactivity_timer** | **BOOLEAN**| If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity. | [optional] 
+ **operation_guid** | **String**| This GUID, formatted as \&quot;00000000-0000-0000-0000-000000000000\&quot;, can be used to indicate a correlation among multiple API calls so that they can be grouped together in the User Transaction Log reports, enhancing their readability. For more information please refer to OpenAccess documentation, section Operation GUID. | [optional] 
+ **operation_description** | **String**| Userfriendly free-form description for the operation being performed. Use this description to enhance the readability of the User Transaction Log reports. For more information please refer to OpenAccess documentation, section Operation Description. | [optional] 
 
 ### Return type
 
@@ -683,7 +699,70 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+
+# **get_restricted_segments**
+> Segments get_restricted_segments(version, opts)
+
+Get restricted segments
+
+Returns a list of segments related to access levels which the logged-in user is allowed to assign to badges, if segmentation and \"allow levels to be assignable by other segments\" feature are enabled.
+
+### Example
+```ruby
+# load the gem
+require 'swagger_client'
+# setup authorization
+SwaggerClient.configure do |config|
+  # Configure API key authorization: ApplicationId
+  config.api_key['Application-Id'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Application-Id'] = 'Bearer'
+
+  # Configure API key authorization: SessionToken
+  config.api_key['Session-Token'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['Session-Token'] = 'Bearer'
+end
+
+api_instance = SwaggerClient::UsersApi.new
+version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
+opts = { 
+  queue: true, # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  do_not_reset_inactivity_timer: true # BOOLEAN | If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity.
+}
+
+begin
+  #Get restricted segments
+  result = api_instance.get_restricted_segments(version, opts)
+  p result
+rescue SwaggerClient::ApiError => e
+  puts "Exception when calling UsersApi->get_restricted_segments: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **version** | **String**| Used to maintain backward compatibility as the API is updated, in the format 1.0. | 
+ **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] 
+ **do_not_reset_inactivity_timer** | **BOOLEAN**| If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity. | [optional] 
+
+### Return type
+
+[**Segments**](Segments.md)
+
+### Authorization
+
+[ApplicationId](../README.md#ApplicationId), [SessionToken](../README.md#SessionToken)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 
@@ -713,15 +792,15 @@ SwaggerClient.configure do |config|
 end
 
 api_instance = SwaggerClient::UsersApi.new
-
 client_name = 'client_name_example' # String | The application client name
-
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
-
 opts = { 
   setting_type: 'setting_type_example', # String | Type of settings to be queried
   is_global: true, # BOOLEAN | A flag indicating whether the preference is global
-  queue: false # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  queue: true, # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  do_not_reset_inactivity_timer: true, # BOOLEAN | If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity.
+  operation_guid: 'operation_guid_example', # String | This GUID, formatted as \"00000000-0000-0000-0000-000000000000\", can be used to indicate a correlation among multiple API calls so that they can be grouped together in the User Transaction Log reports, enhancing their readability. For more information please refer to OpenAccess documentation, section Operation GUID.
+  operation_description: 'operation_description_example' # String | Userfriendly free-form description for the operation being performed. Use this description to enhance the readability of the User Transaction Log reports. For more information please refer to OpenAccess documentation, section Operation Description.
 }
 
 begin
@@ -741,7 +820,10 @@ Name | Type | Description  | Notes
  **version** | **String**| Used to maintain backward compatibility as the API is updated, in the format 1.0. | 
  **setting_type** | **String**| Type of settings to be queried | [optional] 
  **is_global** | **BOOLEAN**| A flag indicating whether the preference is global | [optional] 
- **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] [default to false]
+ **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] 
+ **do_not_reset_inactivity_timer** | **BOOLEAN**| If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity. | [optional] 
+ **operation_guid** | **String**| This GUID, formatted as \&quot;00000000-0000-0000-0000-000000000000\&quot;, can be used to indicate a correlation among multiple API calls so that they can be grouped together in the User Transaction Log reports, enhancing their readability. For more information please refer to OpenAccess documentation, section Operation GUID. | [optional] 
+ **operation_description** | **String**| Userfriendly free-form description for the operation being performed. Use this description to enhance the readability of the User Transaction Log reports. For more information please refer to OpenAccess documentation, section Operation Description. | [optional] 
 
 ### Return type
 
@@ -753,7 +835,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 
@@ -783,13 +865,11 @@ SwaggerClient.configure do |config|
 end
 
 api_instance = SwaggerClient::UsersApi.new
-
 id = 'id_example' # String | ID of the user for whom you want to retrieve segments.
-
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
-
 opts = { 
-  queue: false # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  queue: true, # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  do_not_reset_inactivity_timer: true # BOOLEAN | If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity.
 }
 
 begin
@@ -807,7 +887,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **String**| ID of the user for whom you want to retrieve segments. | 
  **version** | **String**| Used to maintain backward compatibility as the API is updated, in the format 1.0. | 
- **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] [default to false]
+ **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] 
+ **do_not_reset_inactivity_timer** | **BOOLEAN**| If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity. | [optional] 
 
 ### Return type
 
@@ -819,7 +900,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 
@@ -849,13 +930,11 @@ SwaggerClient.configure do |config|
 end
 
 api_instance = SwaggerClient::UsersApi.new
-
 id = 'id_example' # String | ID of user for which to retrieve the extended properties.
-
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
-
 opts = { 
-  queue: false # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  queue: true, # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  do_not_reset_inactivity_timer: true # BOOLEAN | If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity.
 }
 
 begin
@@ -873,7 +952,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **String**| ID of user for which to retrieve the extended properties. | 
  **version** | **String**| Used to maintain backward compatibility as the API is updated, in the format 1.0. | 
- **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] [default to false]
+ **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] 
+ **do_not_reset_inactivity_timer** | **BOOLEAN**| If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity. | [optional] 
 
 ### Return type
 
@@ -885,13 +965,13 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 
 
 # **modify_user_password**
-> SharedResponseDefinition modify_user_password(parameter_name, version, opts)
+> SharedResponseDefinition modify_user_password(bodyversion, opts)
 
 Modify user password
 
@@ -915,18 +995,18 @@ SwaggerClient.configure do |config|
 end
 
 api_instance = SwaggerClient::UsersApi.new
-
-parameter_name = SwaggerClient::ParameterName.new # ParameterName | 
-
+body = SwaggerClient::UserPasswordBody.new # UserPasswordBody | 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
-
 opts = { 
-  queue: false # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  queue: true # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  do_not_reset_inactivity_timer: true # BOOLEAN | If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity.
+  operation_guid: 'operation_guid_example' # String | This GUID, formatted as \"00000000-0000-0000-0000-000000000000\", can be used to indicate a correlation among multiple API calls so that they can be grouped together in the User Transaction Log reports, enhancing their readability. For more information please refer to OpenAccess documentation, section Operation GUID.
+  operation_description: 'operation_description_example' # String | Userfriendly free-form description for the operation being performed. Use this description to enhance the readability of the User Transaction Log reports. For more information please refer to OpenAccess documentation, section Operation Description.
 }
 
 begin
   #Modify user password
-  result = api_instance.modify_user_password(parameter_name, version, opts)
+  result = api_instance.modify_user_password(bodyversion, opts)
   p result
 rescue SwaggerClient::ApiError => e
   puts "Exception when calling UsersApi->modify_user_password: #{e}"
@@ -937,9 +1017,12 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **parameter_name** | [**ParameterName**](ParameterName.md)|  | 
+ **body** | [**UserPasswordBody**](UserPasswordBody.md)|  | 
  **version** | **String**| Used to maintain backward compatibility as the API is updated, in the format 1.0. | 
- **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] [default to false]
+ **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] 
+ **do_not_reset_inactivity_timer** | **BOOLEAN**| If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity. | [optional] 
+ **operation_guid** | **String**| This GUID, formatted as \&quot;00000000-0000-0000-0000-000000000000\&quot;, can be used to indicate a correlation among multiple API calls so that they can be grouped together in the User Transaction Log reports, enhancing their readability. For more information please refer to OpenAccess documentation, section Operation GUID. | [optional] 
+ **operation_description** | **String**| Userfriendly free-form description for the operation being performed. Use this description to enhance the readability of the User Transaction Log reports. For more information please refer to OpenAccess documentation, section Operation Description. | [optional] 
 
 ### Return type
 
@@ -957,7 +1040,7 @@ Name | Type | Description  | Notes
 
 
 # **modify_user_preferences**
-> ModifyUserPreferences modify_user_preferences(user_preferences, version, opts)
+> ModifyUserPreferences modify_user_preferences(bodyversion, opts)
 
 Modify user preference
 
@@ -981,18 +1064,18 @@ SwaggerClient.configure do |config|
 end
 
 api_instance = SwaggerClient::UsersApi.new
-
-user_preferences = SwaggerClient::UserPreferences.new # UserPreferences | 
-
+body = SwaggerClient::UserPreferencesBody.new # UserPreferencesBody | 
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
-
 opts = { 
-  queue: false # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  queue: true # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  do_not_reset_inactivity_timer: true # BOOLEAN | If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity.
+  operation_guid: 'operation_guid_example' # String | This GUID, formatted as \"00000000-0000-0000-0000-000000000000\", can be used to indicate a correlation among multiple API calls so that they can be grouped together in the User Transaction Log reports, enhancing their readability. For more information please refer to OpenAccess documentation, section Operation GUID.
+  operation_description: 'operation_description_example' # String | Userfriendly free-form description for the operation being performed. Use this description to enhance the readability of the User Transaction Log reports. For more information please refer to OpenAccess documentation, section Operation Description.
 }
 
 begin
   #Modify user preference
-  result = api_instance.modify_user_preferences(user_preferences, version, opts)
+  result = api_instance.modify_user_preferences(bodyversion, opts)
   p result
 rescue SwaggerClient::ApiError => e
   puts "Exception when calling UsersApi->modify_user_preferences: #{e}"
@@ -1003,9 +1086,12 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user_preferences** | [**UserPreferences**](UserPreferences.md)|  | 
+ **body** | [**UserPreferencesBody**](UserPreferencesBody.md)|  | 
  **version** | **String**| Used to maintain backward compatibility as the API is updated, in the format 1.0. | 
- **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] [default to false]
+ **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] 
+ **do_not_reset_inactivity_timer** | **BOOLEAN**| If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity. | [optional] 
+ **operation_guid** | **String**| This GUID, formatted as \&quot;00000000-0000-0000-0000-000000000000\&quot;, can be used to indicate a correlation among multiple API calls so that they can be grouped together in the User Transaction Log reports, enhancing their readability. For more information please refer to OpenAccess documentation, section Operation GUID. | [optional] 
+ **operation_description** | **String**| Userfriendly free-form description for the operation being performed. Use this description to enhance the readability of the User Transaction Log reports. For more information please refer to OpenAccess documentation, section Operation Description. | [optional] 
 
 ### Return type
 
@@ -1023,7 +1109,7 @@ Name | Type | Description  | Notes
 
 
 # **modifyuser**
-> SharedResponseDefinition modifyuser(id, version, opts)
+> SharedResponseDefinition modifyuser(versionid, opts)
 
 Sets the extended properties for a user
 
@@ -1047,19 +1133,17 @@ SwaggerClient.configure do |config|
 end
 
 api_instance = SwaggerClient::UsersApi.new
-
-id = 'id_example' # String | ID of user for which to set the extended properties.
-
 version = 'version_example' # String | Used to maintain backward compatibility as the API is updated, in the format 1.0.
-
+id = 'id_example' # String | ID of user for which to set the extended properties.
 opts = { 
-  properties: SwaggerClient::UserExtendedPropertiesPut.new, # UserExtendedPropertiesPut | The updated properties
-  queue: false # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  body: SwaggerClient::UserExtendedPropertiesPut.new # UserExtendedPropertiesPut | The updated properties
+  queue: true # BOOLEAN | Queues the request as a task and returns a response identical to `GET /queue/{id}`.
+  do_not_reset_inactivity_timer: true # BOOLEAN | If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity.
 }
 
 begin
   #Sets the extended properties for a user
-  result = api_instance.modifyuser(id, version, opts)
+  result = api_instance.modifyuser(versionid, opts)
   p result
 rescue SwaggerClient::ApiError => e
   puts "Exception when calling UsersApi->modifyuser: #{e}"
@@ -1070,10 +1154,11 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **String**| ID of user for which to set the extended properties. | 
  **version** | **String**| Used to maintain backward compatibility as the API is updated, in the format 1.0. | 
- **properties** | [**UserExtendedPropertiesPut**](UserExtendedPropertiesPut.md)| The updated properties | [optional] 
- **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] [default to false]
+ **id** | **String**| ID of user for which to set the extended properties. | 
+ **body** | [**UserExtendedPropertiesPut**](UserExtendedPropertiesPut.md)| The updated properties | [optional] 
+ **queue** | **BOOLEAN**| Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;. | [optional] 
+ **do_not_reset_inactivity_timer** | **BOOLEAN**| If true, this request does not affect the inactivity timer - that is, the timer is not reset to zero, and continues counting from the point of the last recorded OpenAccess activity. | [optional] 
 
 ### Return type
 
