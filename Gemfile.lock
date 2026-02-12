@@ -3,8 +3,9 @@ PATH
   specs:
     lenel_sdk (1.1.0)
       json (~> 2.1, >= 2.1.0)
-      typhoeus (~> 1.0, >= 1.0.1)
-      zeitwerk (~> 2.6)
+      logger
+      typhoeus (~> 1.4)
+      zeitwerk (~> 2.7)
 
 GEM
   remote: https://rubygems.org/
@@ -38,6 +39,7 @@ GEM
     ffi (1.17.3-x86_64-linux-musl)
     hashdiff (1.2.1)
     json (2.18.1)
+    logger (1.7.0)
     memoist3 (1.0.0)
     public_suffix (7.0.2)
     rake (13.3.1)
@@ -60,7 +62,7 @@ GEM
       memoist3 (~> 1.0.0)
     typhoeus (1.5.0)
       ethon (>= 0.9.0, < 0.16.0)
-    vcr (3.0.3)
+    vcr (6.4.0)
     webmock (3.26.1)
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
@@ -88,7 +90,7 @@ DEPENDENCIES
   lenel_sdk!
   rake (~> 13.0)
   rspec (~> 3.6, >= 3.6.0)
-  vcr (~> 3.0, >= 3.0.1)
+  vcr (~> 6.0)
   webmock (~> 3.25)
 
 BUNDLED WITH

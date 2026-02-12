@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 =begin
 #OpenAccess
 
@@ -143,7 +145,7 @@ module SwaggerClient
     end
 
     # Calculates hash code according to all attributes.
-    # @return [Fixnum] Hash code
+    # @return [Integer] Hash code
     def hash
       [version, allow_access_levels_to_be_configured_as_assignable_by_other_segments, allow_segment_to_belong_to_multiple_groups, segment_badge_types, segment_card_formats, segment_cardholders, segment_non_system_list_builder_lists, segment_visitors, segmentation_enabled].hash
     end

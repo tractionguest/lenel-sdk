@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 =begin
 #OpenAccess
 
@@ -161,7 +163,7 @@ module SwaggerClient
     end
 
     # Calculates hash code according to all attributes.
-    # @return [Fixnum] Hash code
+    # @return [Integer] Hash code
     def hash
       [version, activate_deactivate_dates_use_time, badge_pin_properties, create_photo_thumbnails, max_accesslevels_per_badge_standard, max_accesslevels_per_badge_temporary, max_accesslevels_per_badge_total, max_active_badges, max_badge_id_length, max_extended_id_length, temporary_accesslevel_granularity].hash
     end

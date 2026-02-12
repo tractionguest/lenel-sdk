@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 =begin
 #OpenAccess
 
@@ -39,7 +41,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(SharedResponseDefinition, Fixnum, Hash)>] SharedResponseDefinition data, response status code and response headers
+    # @return [Array<(SharedResponseDefinition, Integer, Hash)>] SharedResponseDefinition data, response status code and response headers
     def add_managed_access_levels_with_http_info(id, levels, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: UsersApi.add_managed_access_levels ...'
@@ -107,7 +109,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(AddUserPreferences, Fixnum, Hash)>] AddUserPreferences data, response status code and response headers
+    # @return [Array<(AddUserPreferences, Integer, Hash)>] AddUserPreferences data, response status code and response headers
     def add_user_preferences_with_http_info(user_preferences, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: UsersApi.add_user_preferences ...'
@@ -173,7 +175,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(SharedResponseDefinition, Fixnum, Hash)>] SharedResponseDefinition data, response status code and response headers
+    # @return [Array<(SharedResponseDefinition, Integer, Hash)>] SharedResponseDefinition data, response status code and response headers
     def add_user_segments_with_http_info(id, segments, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: UsersApi.add_user_segments ...'
@@ -243,7 +245,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(SharedResponseDefinition, Fixnum, Hash)>] SharedResponseDefinition data, response status code and response headers
+    # @return [Array<(SharedResponseDefinition, Integer, Hash)>] SharedResponseDefinition data, response status code and response headers
     def delete_managed_access_levels_with_http_info(id, levels, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: UsersApi.delete_managed_access_levels ...'
@@ -311,7 +313,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(SharedResponseDefinition, Fixnum, Hash)>] SharedResponseDefinition data, response status code and response headers
+    # @return [Array<(SharedResponseDefinition, Integer, Hash)>] SharedResponseDefinition data, response status code and response headers
     def delete_user_preferences_with_http_info(preference_id, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: UsersApi.delete_user_preferences ...'
@@ -378,7 +380,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(SharedResponseDefinition, Fixnum, Hash)>] SharedResponseDefinition data, response status code and response headers
+    # @return [Array<(SharedResponseDefinition, Integer, Hash)>] SharedResponseDefinition data, response status code and response headers
     def delete_user_segments_with_http_info(id, segments, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: UsersApi.delete_user_segments ...'
@@ -444,7 +446,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(Segments, Fixnum, Hash)>] Segments data, response status code and response headers
+    # @return [Array<(Segments, Integer, Hash)>] Segments data, response status code and response headers
     def get_editable_segments_with_http_info(version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: UsersApi.get_editable_segments ...'
@@ -502,7 +504,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(LoggedInUser, Fixnum, Hash)>] LoggedInUser data, response status code and response headers
+    # @return [Array<(LoggedInUser, Integer, Hash)>] LoggedInUser data, response status code and response headers
     def get_logged_in_user_with_http_info(version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: UsersApi.get_logged_in_user ...'
@@ -562,7 +564,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(ManagedAccessLevels, Fixnum, Hash)>] ManagedAccessLevels data, response status code and response headers
+    # @return [Array<(ManagedAccessLevels, Integer, Hash)>] ManagedAccessLevels data, response status code and response headers
     def get_managed_access_levels_with_http_info(id, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: UsersApi.get_managed_access_levels ...'
@@ -626,7 +628,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(AccessLevelManagerIds, Fixnum, Hash)>] AccessLevelManagerIds data, response status code and response headers
+    # @return [Array<(AccessLevelManagerIds, Integer, Hash)>] AccessLevelManagerIds data, response status code and response headers
     def get_managers_of_access_level_with_http_info(access_level_id, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: UsersApi.get_managers_of_access_level ...'
@@ -695,7 +697,7 @@ module SwaggerClient
     # @option opts [String] :setting_type Type of settings to be queried
     # @option opts [BOOLEAN] :is_global A flag indicating whether the preference is global
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(GetUserPreferences, Fixnum, Hash)>] GetUserPreferences data, response status code and response headers
+    # @return [Array<(GetUserPreferences, Integer, Hash)>] GetUserPreferences data, response status code and response headers
     def get_user_preferences_with_http_info(client_name, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: UsersApi.get_user_preferences ...'
@@ -762,7 +764,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(Segments, Fixnum, Hash)>] Segments data, response status code and response headers
+    # @return [Array<(Segments, Integer, Hash)>] Segments data, response status code and response headers
     def get_user_segments_with_http_info(id, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: UsersApi.get_user_segments ...'
@@ -826,7 +828,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(UserExtendedProperties, Fixnum, Hash)>] UserExtendedProperties data, response status code and response headers
+    # @return [Array<(UserExtendedProperties, Integer, Hash)>] UserExtendedProperties data, response status code and response headers
     def getuser_with_http_info(id, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: UsersApi.getuser ...'
@@ -890,7 +892,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(SharedResponseDefinition, Fixnum, Hash)>] SharedResponseDefinition data, response status code and response headers
+    # @return [Array<(SharedResponseDefinition, Integer, Hash)>] SharedResponseDefinition data, response status code and response headers
     def modify_user_password_with_http_info(parameter_name, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: UsersApi.modify_user_password ...'
@@ -954,7 +956,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(ModifyUserPreferences, Fixnum, Hash)>] ModifyUserPreferences data, response status code and response headers
+    # @return [Array<(ModifyUserPreferences, Integer, Hash)>] ModifyUserPreferences data, response status code and response headers
     def modify_user_preferences_with_http_info(user_preferences, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: UsersApi.modify_user_preferences ...'
@@ -1020,7 +1022,7 @@ module SwaggerClient
     # @param [Hash] opts the optional parameters
     # @option opts [UserExtendedPropertiesPut] :properties The updated properties
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(SharedResponseDefinition, Fixnum, Hash)>] SharedResponseDefinition data, response status code and response headers
+    # @return [Array<(SharedResponseDefinition, Integer, Hash)>] SharedResponseDefinition data, response status code and response headers
     def modifyuser_with_http_info(id, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: UsersApi.modifyuser ...'

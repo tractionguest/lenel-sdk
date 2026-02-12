@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 =begin
 #OpenAccess
 
@@ -282,7 +284,7 @@ module SwaggerClient
     end
 
     # Calculates hash code according to all attributes.
-    # @return [Fixnum] Hash code
+    # @return [Integer] Hash code
     def hash
       [is_lockout_policy_enabled, login_attempt_threshold, login_attempt_reset_interval_in_minutes, lockout_interval_in_minutes, disable_lockout_for_sa, is_expiration_policy_enabled, expiration_days, is_expiration_reminders_enabled, expiration_first_reminder_days, expiration_reminder_days, is_minimum_length_required, minimum_length, is_numeric_characters_required, is_special_characters_required, is_upper_and_lower_case_required, can_be_same_as_user_name, is_history_policy_enabled, history_password_count, minimum_password_age, is_prohibited_password_policy_enabled, is_inactivity_timeout_policy_enabled, inactivity_timeout_in_minutes].hash
     end
