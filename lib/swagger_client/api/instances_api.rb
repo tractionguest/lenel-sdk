@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 =begin
 #OpenAccess
 
@@ -39,7 +41,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(Instance, Fixnum, Hash)>] Instance data, response status code and response headers
+    # @return [Array<(Instance, Integer, Hash)>] Instance data, response status code and response headers
     def add_instance_with_http_info(type_name, instance, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: InstancesApi.add_instance ...'
@@ -110,7 +112,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(SharedResponseDefinition, Fixnum, Hash)>] SharedResponseDefinition data, response status code and response headers
+    # @return [Array<(SharedResponseDefinition, Integer, Hash)>] SharedResponseDefinition data, response status code and response headers
     def delete_instance_with_http_info(type_name, instance, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: InstancesApi.delete_instance ...'
@@ -181,7 +183,7 @@ module SwaggerClient
     # @param [Hash] opts the optional parameters
     # @option opts [Object] :request_body Pass an empty request body.
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def delete_print_request_with_http_info(badge_print_request_id, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: InstancesApi.delete_print_request ...'
@@ -248,7 +250,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(ExecuteMethodResults, Fixnum, Hash)>] ExecuteMethodResults data, response status code and response headers
+    # @return [Array<(ExecuteMethodResults, Integer, Hash)>] ExecuteMethodResults data, response status code and response headers
     def execute_method_with_http_info(type_name, method_name, execute_method_parameters, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: InstancesApi.execute_method ...'
@@ -322,7 +324,7 @@ module SwaggerClient
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :badge_type_id The ID associated with a given badge type.
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(BadgePrinters, Fixnum, Hash)>] BadgePrinters data, response status code and response headers
+    # @return [Array<(BadgePrinters, Integer, Hash)>] BadgePrinters data, response status code and response headers
     def get_badge_printers_with_http_info(version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: InstancesApi.get_badge_printers ...'
@@ -403,7 +405,7 @@ module SwaggerClient
     # @option opts [Integer] :page_size The number of items to be returned per page.
     # @option opts [String] :order_by The field(s) to use when sorting the results.
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(PagedInstances, Fixnum, Hash)>] PagedInstances data, response status code and response headers
+    # @return [Array<(PagedInstances, Integer, Hash)>] PagedInstances data, response status code and response headers
     def get_cardholder_search_with_http_info(version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: InstancesApi.get_cardholder_search ...'
@@ -491,7 +493,7 @@ module SwaggerClient
     # @param [Hash] opts the optional parameters
     # @option opts [String] :filter 
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(Object, Fixnum, Hash)>] Object data, response status code and response headers
+    # @return [Array<(Object, Integer, Hash)>] Object data, response status code and response headers
     def get_count_with_http_info(type_name, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: InstancesApi.get_count ...'
@@ -565,7 +567,7 @@ module SwaggerClient
     # @option opts [Integer] :page_size The number of items to be returned per page.
     # @option opts [String] :order_by The field(s) to use when sorting the results.
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(PagedInstances, Fixnum, Hash)>] PagedInstances data, response status code and response headers
+    # @return [Array<(PagedInstances, Integer, Hash)>] PagedInstances data, response status code and response headers
     def get_instances_with_http_info(type_name, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: InstancesApi.get_instances ...'
@@ -652,7 +654,7 @@ module SwaggerClient
     # @option opts [Integer] :page_size The number of items to be returned per page.
     # @option opts [String] :order_by The field(s) to use when sorting the results.
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(GetLoggedEvents, Fixnum, Hash)>] GetLoggedEvents data, response status code and response headers
+    # @return [Array<(GetLoggedEvents, Integer, Hash)>] GetLoggedEvents data, response status code and response headers
     def get_logged_events_with_http_info(filter, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: InstancesApi.get_logged_events ...'
@@ -732,7 +734,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(BadgeMobileDevices, Fixnum, Hash)>] BadgeMobileDevices data, response status code and response headers
+    # @return [Array<(BadgeMobileDevices, Integer, Hash)>] BadgeMobileDevices data, response status code and response headers
     def get_mobile_devices_with_http_info(badgekey, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: InstancesApi.get_mobile_devices ...'
@@ -796,7 +798,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(BadgePrintRequestResponse, Fixnum, Hash)>] BadgePrintRequestResponse data, response status code and response headers
+    # @return [Array<(BadgePrintRequestResponse, Integer, Hash)>] BadgePrintRequestResponse data, response status code and response headers
     def get_print_request_with_http_info(badge_print_request_id, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: InstancesApi.get_print_request ...'
@@ -860,7 +862,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(Type, Fixnum, Hash)>] Type data, response status code and response headers
+    # @return [Array<(Type, Integer, Hash)>] Type data, response status code and response headers
     def get_type_with_http_info(type_name, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: InstancesApi.get_type ...'
@@ -923,7 +925,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(Types, Fixnum, Hash)>] Types data, response status code and response headers
+    # @return [Array<(Types, Integer, Hash)>] Types data, response status code and response headers
     def get_types_with_http_info(version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: InstancesApi.get_types ...'
@@ -983,7 +985,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(VideoRecorderAuthenticationData, Fixnum, Hash)>] VideoRecorderAuthenticationData data, response status code and response headers
+    # @return [Array<(VideoRecorderAuthenticationData, Integer, Hash)>] VideoRecorderAuthenticationData data, response status code and response headers
     def get_video_recorder_authentication_data_with_http_info(id, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: InstancesApi.get_video_recorder_authentication_data ...'
@@ -1051,7 +1053,7 @@ module SwaggerClient
     # @option opts [Integer] :page_size The number of items to be returned per page.
     # @option opts [String] :order_by The field(s) to use when sorting the results.
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(GetVideoRecorders, Fixnum, Hash)>] GetVideoRecorders data, response status code and response headers
+    # @return [Array<(GetVideoRecorders, Integer, Hash)>] GetVideoRecorders data, response status code and response headers
     def get_video_recorders_with_http_info(version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: InstancesApi.get_video_recorders ...'
@@ -1128,7 +1130,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(IssueMobileCredential, Fixnum, Hash)>] IssueMobileCredential data, response status code and response headers
+    # @return [Array<(IssueMobileCredential, Integer, Hash)>] IssueMobileCredential data, response status code and response headers
     def issue_mobile_credential_with_http_info(badgekey, in_parameter_value_map, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: InstancesApi.issue_mobile_credential ...'
@@ -1198,7 +1200,7 @@ module SwaggerClient
     # @param [Hash] opts the optional parameters
     # @option opts [AccessLevel] :modified_access_level The modified access level.
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(SharedResponseDefinition, Fixnum, Hash)>] SharedResponseDefinition data, response status code and response headers
+    # @return [Array<(SharedResponseDefinition, Integer, Hash)>] SharedResponseDefinition data, response status code and response headers
     def modify_access_level_with_http_info(id, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: InstancesApi.modify_access_level ...'
@@ -1264,7 +1266,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(Instance, Fixnum, Hash)>] Instance data, response status code and response headers
+    # @return [Array<(Instance, Integer, Hash)>] Instance data, response status code and response headers
     def modify_instance_with_http_info(type_name, instance, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: InstancesApi.modify_instance ...'
@@ -1337,7 +1339,7 @@ module SwaggerClient
     # @param [Hash] opts the optional parameters
     # @option opts [Array<Integer>] :id_list List of instance IDs in the format &#x60;[1,2,3,...]&#x60;. If no list is provided, all instances will be affected.
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(SharedResponseDefinition, Fixnum, Hash)>] SharedResponseDefinition data, response status code and response headers
+    # @return [Array<(SharedResponseDefinition, Integer, Hash)>] SharedResponseDefinition data, response status code and response headers
     def modify_property_bulk_update_with_http_info(type_name, parameter_name, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: InstancesApi.modify_property_bulk_update ...'
@@ -1409,7 +1411,7 @@ module SwaggerClient
     # @param [Hash] opts the optional parameters
     # @option opts [PrintRequest] :print_request Additional parameters associated with a badge print request.
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(BadgePrintRequestResponse, Fixnum, Hash)>] BadgePrintRequestResponse data, response status code and response headers
+    # @return [Array<(BadgePrintRequestResponse, Integer, Hash)>] BadgePrintRequestResponse data, response status code and response headers
     def print_request_with_http_info(badgekey, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: InstancesApi.print_request ...'

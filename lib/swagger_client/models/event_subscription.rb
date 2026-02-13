@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 =begin
 #OpenAccess
 
@@ -188,7 +190,7 @@ module SwaggerClient
     end
 
     # Calculates hash code according to all attributes.
-    # @return [Fixnum] Hash code
+    # @return [Integer] Hash code
     def hash
       [version, binding_key, created_date, description, exchange_name, filter, id, is_durable, last_updated_date, message_broker_hostname, message_broker_port, queue_name, requires_secure_connection, user_id].hash
     end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 =begin
 #OpenAccess
 
@@ -35,7 +37,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(Object, Fixnum, Hash)>] Object data, response status code and response headers
+    # @return [Array<(Object, Integer, Hash)>] Object data, response status code and response headers
     def get_authorization_warning_settings_with_http_info(version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: SettingsApi.get_authorization_warning_settings ...'
@@ -95,7 +97,7 @@ module SwaggerClient
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :segment_id ID of the segment from which to get badge-related information, if segmentation is enabled.
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(CardholderOptions, Fixnum, Hash)>] CardholderOptions data, response status code and response headers
+    # @return [Array<(CardholderOptions, Integer, Hash)>] CardholderOptions data, response status code and response headers
     def get_cardholder_settings_with_http_info(version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: SettingsApi.get_cardholder_settings ...'
@@ -154,7 +156,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(EnterpriseOptions, Fixnum, Hash)>] EnterpriseOptions data, response status code and response headers
+    # @return [Array<(EnterpriseOptions, Integer, Hash)>] EnterpriseOptions data, response status code and response headers
     def get_enterprise_settings_with_http_info(version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: SettingsApi.get_enterprise_settings ...'
@@ -212,7 +214,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(PasswordPolicySettings, Fixnum, Hash)>] PasswordPolicySettings data, response status code and response headers
+    # @return [Array<(PasswordPolicySettings, Integer, Hash)>] PasswordPolicySettings data, response status code and response headers
     def get_password_policy_settings_with_http_info(version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: SettingsApi.get_password_policy_settings ...'
@@ -270,7 +272,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(SegmentationSettings, Fixnum, Hash)>] SegmentationSettings data, response status code and response headers
+    # @return [Array<(SegmentationSettings, Integer, Hash)>] SegmentationSettings data, response status code and response headers
     def get_segmentation_settings_with_http_info(version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: SettingsApi.get_segmentation_settings ...'
@@ -328,7 +330,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(VisitSettings, Fixnum, Hash)>] VisitSettings data, response status code and response headers
+    # @return [Array<(VisitSettings, Integer, Hash)>] VisitSettings data, response status code and response headers
     def get_visit_settings_with_http_info(version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: SettingsApi.get_visit_settings ...'
@@ -388,7 +390,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(SharedResponseDefinition, Fixnum, Hash)>] SharedResponseDefinition data, response status code and response headers
+    # @return [Array<(SharedResponseDefinition, Integer, Hash)>] SharedResponseDefinition data, response status code and response headers
     def modify_password_policy_settings_with_http_info(modified_password_policy_settings, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: SettingsApi.modify_password_policy_settings ...'
@@ -452,7 +454,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(SharedResponseDefinition, Fixnum, Hash)>] SharedResponseDefinition data, response status code and response headers
+    # @return [Array<(SharedResponseDefinition, Integer, Hash)>] SharedResponseDefinition data, response status code and response headers
     def modify_visit_setting_with_http_info(visit_settings, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: SettingsApi.modify_visit_setting ...'

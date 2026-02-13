@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 =begin
 #OpenAccess
 
@@ -37,7 +39,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(nil, Fixnum, Hash)>] nil, response status code and response headers
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
     def delete_queued_task_with_http_info(id, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ApiApi.delete_queued_task ...'
@@ -98,7 +100,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(Object, Fixnum, Hash)>] Object data, response status code and response headers
+    # @return [Array<(Object, Integer, Hash)>] Object data, response status code and response headers
     def get_feature_availability_with_http_info(version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ApiApi.get_feature_availability ...'
@@ -158,7 +160,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(QueuedTask, Fixnum, Hash)>] QueuedTask data, response status code and response headers
+    # @return [Array<(QueuedTask, Integer, Hash)>] QueuedTask data, response status code and response headers
     def get_queued_task_with_http_info(id, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ApiApi.get_queued_task ...'
@@ -220,7 +222,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(QueuedTasks, Fixnum, Hash)>] QueuedTasks data, response status code and response headers
+    # @return [Array<(QueuedTasks, Integer, Hash)>] QueuedTasks data, response status code and response headers
     def get_queued_tasks_with_http_info(version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ApiApi.get_queued_tasks ...'
@@ -278,7 +280,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(Object, Fixnum, Hash)>] Object data, response status code and response headers
+    # @return [Array<(Object, Integer, Hash)>] Object data, response status code and response headers
     def get_version_with_http_info(version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ApiApi.get_version ...'
@@ -334,7 +336,7 @@ module SwaggerClient
     # Used to prevent idle session timeout.
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
-    # @return [Array<(SharedResponseDefinition, Fixnum, Hash)>] SharedResponseDefinition data, response status code and response headers
+    # @return [Array<(SharedResponseDefinition, Integer, Hash)>] SharedResponseDefinition data, response status code and response headers
     def keepalive_with_http_info(version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ApiApi.keepalive ...'
@@ -393,7 +395,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(Object, Fixnum, Hash)>] Object data, response status code and response headers
+    # @return [Array<(Object, Integer, Hash)>] Object data, response status code and response headers
     def post_partner_values_with_http_info(partner_values, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ApiApi.post_partner_values ...'
@@ -457,7 +459,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(Object, Fixnum, Hash)>] Object data, response status code and response headers
+    # @return [Array<(Object, Integer, Hash)>] Object data, response status code and response headers
     def put_partner_values_with_http_info(partner_values, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ApiApi.put_partner_values ...'

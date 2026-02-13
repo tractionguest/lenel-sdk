@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 =begin
 #OpenAccess
 
@@ -10,6 +12,7 @@ Swagger Codegen version: 2.4.8
 
 =end
 
+require 'cgi'
 require 'uri'
 
 module SwaggerClient
@@ -175,7 +178,7 @@ module SwaggerClient
 
     def base_url
       url = "#{scheme}://#{[host, base_path].join('/').gsub(/\/+/, '/')}".sub(/\/+\z/, '')
-      URI::DEFAULT_PARSER.escape(url)
+      CGI.escape(url).gsub('%2F', '/').gsub('%3A', ':')
     end
 
     # Gets API key (with prefix if set).

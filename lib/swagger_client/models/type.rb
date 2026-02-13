@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 =begin
 #OpenAccess
 
@@ -131,7 +133,7 @@ module SwaggerClient
     end
 
     # Calculates hash code according to all attributes.
-    # @return [Fixnum] Hash code
+    # @return [Integer] Hash code
     def hash
       [version, access, type_name, display_groups, display_name, methods, properties].hash
     end

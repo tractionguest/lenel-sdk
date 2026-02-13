@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 =begin
 #OpenAccess
 
@@ -368,7 +370,7 @@ module SwaggerClient
     end
 
     # Calculates hash code according to all attributes.
-    # @return [Fixnum] Hash code
+    # @return [Integer] Hash code
     def hash
       [serial_number, timestamp, description, controller_id, device_id, subdevice_id, segment_id, event_type, event_subtype, event_text, badge_id, badge_id_str, badge_extended_id, badge_issue_code, asset_id, cardholder_key, alarm_priority, alarm_ack_blue_channel, alarm_ack_green_channel, alarm_ack_red_channel, alarm_blue_channel, alarm_green_channel, alarm_red_channel, access_result, cardholder_entered, duress, controller_name, event_source_name, cardholder_first_name, cardholder_last_name, device_name, subdevice_name, must_acknowledge, must_mark_in_progress].hash
     end

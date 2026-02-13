@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 =begin
 #OpenAccess
 
@@ -37,7 +39,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(ConsoleCard, Fixnum, Hash)>] ConsoleCard data, response status code and response headers
+    # @return [Array<(ConsoleCard, Integer, Hash)>] ConsoleCard data, response status code and response headers
     def add_or_modify_console_card_with_http_info(console_card, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ConsoleApi.add_or_modify_console_card ...'
@@ -101,7 +103,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(SharedResponseDefinition, Fixnum, Hash)>] SharedResponseDefinition data, response status code and response headers
+    # @return [Array<(SharedResponseDefinition, Integer, Hash)>] SharedResponseDefinition data, response status code and response headers
     def delete_console_card_with_http_info(card_id, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ConsoleApi.delete_console_card ...'
@@ -166,7 +168,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(ConsoleLayout, Fixnum, Hash)>] ConsoleLayout data, response status code and response headers
+    # @return [Array<(ConsoleLayout, Integer, Hash)>] ConsoleLayout data, response status code and response headers
     def get_console_layout_with_http_info(layout_id, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ConsoleApi.get_console_layout ...'
@@ -231,7 +233,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(AddConsoleLayout, Fixnum, Hash)>] AddConsoleLayout data, response status code and response headers
+    # @return [Array<(AddConsoleLayout, Integer, Hash)>] AddConsoleLayout data, response status code and response headers
     def modify_console_layout_with_http_info(console_layout, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ConsoleApi.modify_console_layout ...'

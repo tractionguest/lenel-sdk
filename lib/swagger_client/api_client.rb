@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 =begin
 #OpenAccess
 
@@ -10,6 +12,7 @@ Swagger Codegen version: 2.4.8
 
 =end
 
+require 'cgi'
 require 'date'
 require 'json'
 require 'logger'
@@ -44,7 +47,7 @@ module SwaggerClient
 
     # Call an API with given options.
     #
-    # @return [Array<(Object, Fixnum, Hash)>] an array of 3 elements:
+    # @return [Array<(Object, Integer, Hash)>] an array of 3 elements:
     #   the data deserialized from response body (could be nil), response status code and response headers.
     def call_api(http_method, path, opts = {})
       request = build_request(http_method, path, opts)
@@ -63,7 +66,7 @@ module SwaggerClient
                             :message => response.return_message)
         else
           # When status message is not present the logger is not printing the ApiError. This conditional allows the error to be captured.
-          if response.status_message.present?
+          if response.status_message && !response.status_message.to_s.empty?
             fail ApiError.new(:code => response.code,
                               :response_headers => response.headers,
                               :response_body => response.body),
@@ -271,7 +274,7 @@ module SwaggerClient
     def build_request_url(path)
       # Add leading and trailing slashes to path
       path = "/#{path}".gsub(/\/+/, '/')
-      URI::DEFAULT_PARSER.escape(@config.base_url + path)
+      CGI.escape(@config.base_url + path).gsub('%2F', '/').gsub('%3A', ':')
     end
 
     # Builds the HTTP request body

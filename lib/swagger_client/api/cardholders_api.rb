@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 =begin
 #OpenAccess
 
@@ -39,7 +41,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(DirectoryAccounts, Fixnum, Hash)>] DirectoryAccounts data, response status code and response headers
+    # @return [Array<(DirectoryAccounts, Integer, Hash)>] DirectoryAccounts data, response status code and response headers
     def get_active_directory_accounts_with_http_info(directory_id, filter, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CardholdersApi.get_active_directory_accounts ...'
@@ -113,7 +115,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(CardholderFromDirectory, Fixnum, Hash)>] CardholderFromDirectory data, response status code and response headers
+    # @return [Array<(CardholderFromDirectory, Integer, Hash)>] CardholderFromDirectory data, response status code and response headers
     def get_cardholder_from_directory_with_http_info(user_name, password, directory_id, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CardholdersApi.get_cardholder_from_directory ...'
@@ -192,7 +194,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(DirectoryAccountsMatchingCardholders, Fixnum, Hash)>] DirectoryAccountsMatchingCardholders data, response status code and response headers
+    # @return [Array<(DirectoryAccountsMatchingCardholders, Integer, Hash)>] DirectoryAccountsMatchingCardholders data, response status code and response headers
     def get_directory_accounts_matching_cardholders_with_http_info(directory_id, cardholder_ids, filter, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CardholdersApi.get_directory_accounts_matching_cardholders ...'
@@ -269,7 +271,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(UpdateCardholderWithDirectoryAccountProperty, Fixnum, Hash)>] UpdateCardholderWithDirectoryAccountProperty data, response status code and response headers
+    # @return [Array<(UpdateCardholderWithDirectoryAccountProperty, Integer, Hash)>] UpdateCardholderWithDirectoryAccountProperty data, response status code and response headers
     def update_cardholder_with_directory_account_property_with_http_info(cardholder_id, parameter_name, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CardholdersApi.update_cardholder_with_directory_account_property ...'

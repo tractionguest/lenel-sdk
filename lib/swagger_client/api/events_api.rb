@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 =begin
 #OpenAccess
 
@@ -37,7 +39,7 @@ module SwaggerClient
     # @param [Hash] opts the optional parameters
     # @option opts [NewEventSubscription] :new_event_subscription The new event subscription.
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(EventSubscription, Fixnum, Hash)>] EventSubscription data, response status code and response headers
+    # @return [Array<(EventSubscription, Integer, Hash)>] EventSubscription data, response status code and response headers
     def add_event_subscription_with_http_info(version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: EventsApi.add_event_subscription ...'
@@ -97,7 +99,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(EventSubscription, Fixnum, Hash)>] EventSubscription data, response status code and response headers
+    # @return [Array<(EventSubscription, Integer, Hash)>] EventSubscription data, response status code and response headers
     def disable_event_subscription_with_http_info(id, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: EventsApi.disable_event_subscription ...'
@@ -161,7 +163,7 @@ module SwaggerClient
     # @param version Used to maintain backward compatibility as the API is updated, in the format 1.0.
     # @param [Hash] opts the optional parameters
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(EventSubscription, Fixnum, Hash)>] EventSubscription data, response status code and response headers
+    # @return [Array<(EventSubscription, Integer, Hash)>] EventSubscription data, response status code and response headers
     def get_event_subscription_with_http_info(id, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: EventsApi.get_event_subscription ...'
@@ -229,7 +231,7 @@ module SwaggerClient
     # @option opts [Integer] :page_size The number of items to be returned per page.
     # @option opts [String] :order_by The field(s) to use when sorting the results.
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(PagedEventSubscriptions, Fixnum, Hash)>] PagedEventSubscriptions data, response status code and response headers
+    # @return [Array<(PagedEventSubscriptions, Integer, Hash)>] PagedEventSubscriptions data, response status code and response headers
     def get_event_subscriptions_with_http_info(version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: EventsApi.get_event_subscriptions ...'
@@ -306,7 +308,7 @@ module SwaggerClient
     # @param [Hash] opts the optional parameters
     # @option opts [ModifiedEventSubscription] :modified_event_subscription The modified event subscription.
     # @option opts [BOOLEAN] :queue Queues the request as a task and returns a response identical to &#x60;GET /queue/{id}&#x60;.
-    # @return [Array<(EventSubscription, Fixnum, Hash)>] EventSubscription data, response status code and response headers
+    # @return [Array<(EventSubscription, Integer, Hash)>] EventSubscription data, response status code and response headers
     def modify_event_subscription_with_http_info(id, version, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: EventsApi.modify_event_subscription ...'
